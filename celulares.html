@@ -6,11 +6,80 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Celulares</title>
     <link rel="shortcut icon" href="IMG/logonovo.png" />
+
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
     <link rel="stylesheet" href="styles.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <link rel="stylesheet" href=" https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
     <style>
-        /* Estilos para el navbar y las cards */
+        .carousel-control-prev,
+        .carousel-control-next {
+            background-color: rgba(0,0,0,0.5);
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+        
+        .carousel-control-prev {
+            left: -20px;
+        }
+        
+        .carousel-control-next {
+            right: -20px;
+        }
+
+        .button {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 10px 15px;
+            gap: 15px;
+            background-color: #2ecc71; /* Color verde */
+            outline: 3px #2ecc71 solid;
+            outline-offset: -3px;
+            border-radius: 5px;
+            border: none;
+            cursor: pointer;
+            transition: 400ms;
+        }
+
+        .button .text {
+            color: white;
+            font-weight: 700;
+            font-size: 1em;
+            transition: 400ms;
+            margin-bottom: 0;
+        }
+
+        .button svg path {
+            transition: 400ms;
+        }
+
+        .button:hover {
+            background-color: transparent;
+        }
+
+        .button:hover .text {
+            color: #2ecc71; /* Color verde */
+        }
+
+        .button:hover svg path {
+            fill: #2ecc71; /* Color verde */
+        }
+
+        .section-title {
+            margin: 40px 0 20px;
+            text-align: center;
+            font-size: 2em;
+            font-weight: bold;
+        }
+
+        .carousel-control-prev:hover,
+        .carousel-control-next:hover {
+            background-color: gold; /* Color dorado */
+        }
+
     </style>
 </head>
 <body>
@@ -19,7 +88,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-12 text-center">
-                    <a href="index.html"> <img src="IMG/logonovo.png" style="width: 300px; margin: 20px auto;"></a>
+                   <a href="index.html"> <img src="IMG/logonovo.png" style="width: 300px; margin: 20px auto;"></a>
                 </div>
             </div>
             <div class="row">
@@ -30,7 +99,7 @@
                         </button>
                         <div class="collapse navbar-collapse" id="navbarSupportedContent">
                             <ul class="navbar-nav mx-auto">
-                                <li class="nav-item">
+                                <li class="nav-item active">
                                     <a class="nav-link" href="index.html">Inicio</a>
                                 </li>
                                 <li class="nav-item dropdown">
@@ -53,67 +122,271 @@
             </div>
         </div>
     </header>
-<br>
-    <!-- Sección de Celulares -->
-    <h2 class="section-title"style="text-align:center">Celulares</h2>
-    <section class="featured">
-        <div id="celularesCarousel" class="carousel slide" data-ride="carousel" data-interval="5000">
-            <div class="carousel-inner">
-                <div class="carousel-item active">
-                    <div class="row">
-                        <div class="col-md-4">
-                            <div class="card">
-                                <img src="celular1.jpg" alt="Celular Samsung" class="card-img-top">
-                                <div class="card-body">
-                                    <h3>Celular Samsung</h3>
-                                    <p>Pantalla de 6.1 pulgadas, procesador Exynos 990</p>
-                                    <p class="price">$799.99</p>
-                                    <button class="button">
-                                        <svg viewBox="0 0  24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                            <path d="M3 3h18v18H3V3z M19 19H5V5h14v14z M15 5v2h4v-2H15z M7 7v2h10V7H7z M7 11v2h10V11H7z M7 15v2h10v-2H7z"></path>
-                                        </svg>
-                                        <span class="text">Comprar</span>
-                                    </button>
-                                </div>
+
+ <!-- Sección de Celulares -->
+<h2 class="section-title">Smartphones</h2>
+<section class="featured">
+    <div id="smartphonesCarousel" class="carousel slide" data-ride="carousel" data-interval="5000">
+        <div class="carousel-inner">
+            <div class="carousel-item active">
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="card">
+                            <img src="IMG/iphone13.jpg" alt="iPhone 13" class="card-img-top" style="height: 200px; object-fit: cover;">
+                            <div class="card-body">
+                                <h3> iPhone 13</h3>
+                                <p>128GB, Super Retina XDR display</p>
+                                <p class="price">$799.99</p>
+                                <button class="button">
+                                    <svg viewBox="0 0  24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <path d="M3 3h18v18H3V3z M19 19H5V5h14v14z M15 5v2h4v-2H15z M7 7v2h10V7H7z M7 11v2h10V11H7z M7 15v2h10v-2H7z"></path>
+                                    </svg>
+                                    <span class="text">Comprar</span>
+                                </button>
+                                <br>
+                                <button class="btn " data-toggle="modal" data-target="#imagen1Modal">
+                                    <img src="IMG/image.png" style="width: 40px" >
+                                </button>
                             </div>
                         </div>
-                        <div class="col-md-4">
-                            <div class="card">
-                                <img src="celular2.jpg" alt="Celular Apple" class="card-img-top">
-                                <div class="card-body">
-                                    <h3>Celular Apple</h3>
-                                    <p>Pantalla de 6.1 pulgadas, procesador A14 Bionic</p>
-                                    <p class="price">$999.99</p>
-                                    <button class="button">
-                                        <svg viewBox="0 0  24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                            <path d="M3 3h18v18H3V3z M19 19H5V5h14v14z M15 5v2h4v-2H15z M7 7v2h10V7H7z M7 11v2h10V11H7z M7 15v2h10v-2H7z"></path>
-                                        </svg>
-                                        <span class="text">Comprar</span>
-                                    </button>
-                                </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card">
+                            <img src="IMG/s22.jpg" alt="Samsung Galaxy S22" class="card-img-top" style="height: 200px; object-fit: cover;">
+                            <div class="card-body">
+                                <h3>Samsung Galaxy S22</h3>
+                                <p>128GB, Dynamic AMOLED display</p>
+                                <p class="price">$899.99</p>
+                                <button class="button">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <path d="M3 3h18v18H3V3z M19 19H5V5h14v14z M15 5v2h4v-2H15z M7 7v2h10V7H7z M7 11v2h10V11H7z M7 15v2h10v-2H7z"></path>
+                                    </svg>
+                                    <span class="text">Comprar</span>
+                                </button>
+                                <br>
+                                <button class="btn " data-toggle="modal" data-target="#imagen2Modal">
+                                    <img src="IMG/image.png" style="width: 40px" >
+                                </button>
                             </div>
                         </div>
-                        <div class="col-md-4">
-                            <div class="card">
-                                <img src="celular3.jpg" alt="Celular Xiaomi" class="card-img-top">
-                                <div class="card-body">
-                                    <h3>Celular Xiaomi</h3>
-                                    <p>Pantalla de 6.3 pulgadas, procesador Qualcomm Snapdragon 888</p>
-                                    <p class="price">$699.99</p>
-                                    <button class="button">
-                                        <svg viewBox="0 0  24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                            <path d="M3 3h18v18H3V3z M19 19H5V5h14v14z M15 5v2h4v-2H15z M7 7v2h10V7H7z M7 11v2h10V11H7z M7 15v2h10v-2H7z"></path>
-                                        </svg>
-                                        <span class="text">Comprar</span>
-                                    </button>
-                                </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card">
+                            <img src="IMG/pixel6.jpg" alt="Google Pixel 6" class="card-img-top" style="height: 200px; object-fit: cover;">
+                            <div class="card-body">
+                                <h3>Google Pixel 6</h3>
+                                <p>128GB, OLED display</p>
+                                <p class="price">$699.99</p>
+                                <button class="button">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <path d="M3 3h18v18H3V3z M19 19H5V5h14v14z M15 5v2h4v-2H15z M7 7v2h10V7H7z M7 11v2h10V11H7z M7 15v2h10v-2H7z"></path>
+                                    </svg>
+                                    <span class="text">Comprar</span>
+                                </button>
+                                <br>
+                                <button class="btn " data-toggle="modal" data-target="#imagen3Modal">
+                                    <img src="IMG/image.png" style="width: 40px" >
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="carousel-item">
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="card">
+                            <img src="IMG/oneplus9.jpg" alt="OnePlus 9" class="card-img -top" style="height: 200px; object-fit: cover;">
+                            <div class="card-body">
+                                <h3>OnePlus 9</h3>
+                                <p>128GB, AMOLED display</p>
+                                <p class="price">$799.99</p>
+                                <button class="button">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <path d="M3 3h18v18H3V3z M19 19H5V5h14v14z M15 5v2h4v-2H15z M7 7v2h10V7H7z M7 11v2h10V11H7z M7 15v2h10v-2H7z"></path>
+                                    </svg>
+                                    <span class="text">Comprar</span>
+                                </button>
+                                <br>
+                                <button class="btn " data-toggle="modal" data-target="#imagen4Modal">
+                                    <img src="IMG/image.png" style="width: 40px" >
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card">
+                            <img src="IMG/p40pro.jpg" alt="Huawei P40" class="card-img-top" style="height: 200px; object-fit: cover;">
+                            <div class="card-body">
+                                <h3>Huawei P40</h3>
+                                <p>128GB, OLED display</p>
+                                <p class="price">$699.99</p>
+                                <button class="button">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <path d="M3 3h18v18H3V3z M19 19H5V5h14v14z M15 5v2h4v-2H15z M7 7v2h10V7H7z M7 11v2h10V11H7z M7 15v2h10v-2H7z"></path>
+                                    </svg>
+                                    <span class="text">Comprar</span>
+                                </button>
+                                <br>
+                                <button class="btn " data-toggle="modal" data-target="#imagen5Modal">
+                                    <img src="IMG/image.png" style="width: 40px" >
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card">
+                            <img src="IMG/mi11.png" alt="Xiaomi Mi 11" class="card-img-top" style="height: 200px; object-fit: cover;">
+                            <div class="card-body">
+                                <h3>Xiaomi Mi 11</h3>
+                                <p>128GB, AMOLED display</p>
+                                <p class="price">$599.99</p>
+                                <button class="button">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <path d="M3 3h18v18H3V3z M19 19H5V5h14v14z M15 5v2h4v-2H15z M7 7v2h10V7H7z M7 11v2h10V11H7z M7 15v2h10v-2H7z"></path>
+                                    </svg>
+                                    <span class="text">Comprar</span>
+                                </button>
+                                <br>
+                                <button class="btn " data-toggle="modal" data-target="#imagen6Modal">
+                                    <img src="IMG/image.png" style="width: 40px" >
+                                </button>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </section>
+        <a class="carousel-control-prev" href="#smartphonesCarousel" role="button" data-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="sr-only">Anterior</span>
+        </a>
+        <a class="carousel-control-next" href="#smartphonesCarousel" role="button" data-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="sr-only">Siguiente</span>
+        </a>
+    </div>
+</section>
+
+<!-- Modal para la imagen 1 -->
+<div class="modal fade" id="imagen1Modal" tabindex="-1" role="dialog" aria-labelledby="imagen1ModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="imagen1ModalLabel">Imagen 1</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <img src="IMG/iphone13.jpg" alt="iPhone 13" class="img-fluid">
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal para la imagen 2 -->
+<div class="modal fade" id="imagen2Modal" tabindex="-1" role="dialog" aria-labelledby="imagen2ModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="imagen2ModalLabel">Imagen 2</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <img src="IMG/s22.jpg" alt="Samsung Galaxy S22" class="img-fluid">
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal para la imagen 3 -->
+<div class="modal fade" id="imagen3Modal" tabindex="-1" role="dialog" aria-labelledby="imagen3ModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="imagen3ModalLabel">Imagen 3</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <img src="IMG/pixel6.jpg" alt="Google Pixel 6" class="img-fluid">
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal para la imagen 4 -->
+<div class="modal fade" id="imagen4Modal" tabindex="-1" role="dialog" aria-labelledby="imagen4ModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="imagen4ModalLabel">Imagen 4</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <img src="IMG/oneplus9.jpg" alt="OnePlus 9" class="img-fluid">
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal para la imagen 5 -->
+<div class="modal fade" id="imagen5Modal" tabindex="-1" role="dialog" aria-labelledby="imagen5ModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="imagen5ModalLabel">Imagen 5</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <img src="IMG/p40pro.jpg" alt="Huawei P40" class="img-fluid">
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal para la imagen 6 -->
+<div class="modal fade" id="imagen6Modal" tabindex="-1" role="dialog" aria-labelledby="imagen6ModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="imagen6ModalLabel">Imagen 6</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <img src="IMG/mi11.png" alt="Xiaomi Mi 11" class="img-fluid">
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+            </div>
+        </div>
+    </div>
+</div>
    
    <!-- Footer -->
     <center>
