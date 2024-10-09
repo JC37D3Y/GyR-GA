@@ -3,13 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Electrodomésticos</title>
+    <title>Ferretería</title>
     <link rel="shortcut icon" href="IMG/logonovo.png" />
-
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
     <link rel="stylesheet" href="styles.css">
-    <link rel="stylesheet" href=" https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
     <style>
+        /* Estilos para el carrusel y botones */
         .carousel-control-prev,
         .carousel-control-next {
             background-color: rgba(0,0,0,0.5);
@@ -19,14 +19,9 @@
             top: 50%;
             transform: translateY(-50%);
         }
-        
-        .carousel-control-prev {
-            left: -20px;
-        }
-        
-        .carousel-control-next {
-            right: -20px;
-        }
+
+        .carousel-control-prev { left: -20px; }
+        .carousel-control-next { right: -20px; }
 
         .button {
             display: flex;
@@ -51,20 +46,12 @@
             margin-bottom: 0;
         }
 
-        .button svg path {
-            transition: 400ms;
-        }
-
         .button:hover {
             background-color: transparent;
         }
 
         .button:hover .text {
             color: #2ecc71; /* Color verde */
-        }
-
-        .button:hover svg path {
-            fill: #2ecc71; /* Color verde */
         }
 
         .section-title {
@@ -78,7 +65,6 @@
         .carousel-control-next:hover {
             background-color: gold; /* Color dorado */
         }
-
     </style>
 </head>
 <body>
@@ -87,7 +73,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-12 text-center">
-                   <a href="index.html"> <img src="IMG/logonovo.png" style="width: 300px; margin: 20px auto;"></a>
+                    <a href="index.html"><img src="IMG/logonovo.png" style="width: 300px; margin: 20px auto;"></a>
                 </div>
             </div>
             <div class="row">
@@ -125,27 +111,21 @@
         </div>
     </header>
 
-
-    <!-- Sección de Electrodomésticos -->
-     <br>
-    <!-- Sección de Electrodomésticos -->
-    <h2 class="section-title">Electrodomésticos</h2>
+    <!-- Sección de Ferretería -->
+    <h2 class="section-title">Ferretería</h2>
     <section class="featured">
-        <div id="electrodomesticosCarousel" class="carousel slide" data-ride="carousel" data-interval="5000">
+        <div id="ferreteriaCarousel" class="carousel slide" data-ride="carousel" data-interval="5000">
             <div class="carousel-inner">
                 <div class="carousel-item active">
                     <div class="row">
                         <div class="col-md-4">
                             <div class="card">
-                                <img src="electrodomestico1.jpg" alt="Lavadora" class="card-img-top">
+                                <img src="ferreteria1.jpg" alt="Martillo" class="card-img-top">
                                 <div class="card-body">
-                                    <h3>Lavadora</h3>
-                                    <p>Capacidad de 10 kg, tecnología de lavado inteligente</p>
-                                    <p class="price">$499.99</p>
+                                    <h3>Martillo</h3>
+                                    <p>Martillo de acero forjado, 16 oz.</p>
+                                    <p class="price">$19.99</p>
                                     <button class="button">
-                                        <svg viewBox="0 0  24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                            <path d="M3 3h18v18H3V3z M19 19H5V5h14v14z M15 5v2h4v-2H15z M7 7v2h10V7H7z M7 11v2h10V11H7z M7 15v2h10v-2H7z"></path>
-                                        </svg>
                                         <span class="text">Comprar</span>
                                     </button>
                                 </div>
@@ -153,15 +133,12 @@
                         </div>
                         <div class="col-md-4">
                             <div class="card">
-                                <img src="electrodomestico2.jpg" alt="Refrigerador" class="card-img-top">
+                                <img src="ferreteria2.jpg" alt="Destornillador" class="card-img-top">
                                 <div class="card-body">
-                                    <h3>Refrigerador</h3>
-                                    <p>Capacidad de 300 litros, tecnología de enfriamiento avanzada</p>
-                                    <p class="price">$799.99</p>
+                                    <h3>Destornillador</h3>
+                                    <p>Juego de destornilladores, 6 piezas.</p>
+                                    <p class="price">$9.99</p>
                                     <button class="button">
-                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                            <path d="M3 3h18v18H3V3z M19 19H5V 5h14v14z M15 5v2h4v-2H15z M7 7v2h10V7H7z M7 11v2h10V11H7z M7 15v2h10v-2H7z"></path>
-                                        </svg>
                                         <span class="text">Comprar</span>
                                     </button>
                                 </div>
@@ -169,15 +146,12 @@
                         </div>
                         <div class="col-md-4">
                             <div class="card">
-                                <img src="electrodomestico3.jpg" alt="Microondas" class="card-img-top">
+                                <img src="ferreteria3.jpg" alt="Llave inglesa" class="card-img-top">
                                 <div class="card-body">
-                                    <h3>Microondas</h3>
-                                    <p>Potencia de 800W, tecnología de cocción rápida</p>
-                                    <p class="price">$199.99</p>
+                                    <h3>Llave Inglesa</h3>
+                                    <p>Llave ajustable de 12 pulgadas.</p>
+                                    <p class="price">$15.99</p>
                                     <button class="button">
-                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                            <path d="M3 3h18v18H3V3z M19 19H5V5h14v14z M15 5v2h4v-2H15z M7 7v2h10V7H7z M7 11v2h10V11H7z M7 15v2h10v-2H7z"></path>
-                                        </svg>
                                         <span class="text">Comprar</span>
                                     </button>
                                 </div>
@@ -189,15 +163,12 @@
                     <div class="row">
                         <div class="col-md-4">
                             <div class="card">
-                                <img src="electrodomestico4.jpg" alt="Licuadora" class="card-img-top">
+                                <img src="ferreteria4.jpg" alt="Cinta métrica" class="card-img-top">
                                 <div class="card-body">
-                                    <h3>Licuadora</h3>
-                                    <p>Potencia de 500W, tecnología de licuado avanzada</p>
-                                    <p class="price">$299.99</p>
+                                    <h3>Cinta Métrica</h3>
+                                    <p>Cinta métrica de 25 pies con gancho magnético.</p>
+                                    <p class="price">$12.99</p>
                                     <button class="button">
-                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                            <path d="M 3 3h18v18H3V3z M19 19H5V5h14v14z M15 5v2h4v-2H15z M7 7v2h10V7H7z M7 11v2h10V11H7z M7 15v2h10v-2H7z"></path>
-                                        </svg>
                                         <span class="text">Comprar</span>
                                     </button>
                                 </div>
@@ -205,15 +176,12 @@
                         </div>
                         <div class="col-md-4">
                             <div class="card">
-                                <img src="electrodomestico5.jpg" alt="Cafetera" class="card-img-top">
+                                <img src="ferreteria5.jpg" alt="Taladro" class="card-img-top">
                                 <div class="card-body">
-                                    <h3>Cafetera</h3>
-                                    <p>Potencia de 1000W, tecnología de cocción rápida</p>
-                                    <p class="price">$399.99</p>
+                                    <h3>Taladro Inalámbrico</h3>
+                                    <p>Taladro de 20V, incluye baterías y cargador.</p>
+                                    <p class="price">$89.99</p>
                                     <button class="button">
-                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                            <path d="M3 3h18v18H3V3z M19 19H5V5h14v14z M15 5v2h4v-2H15z M7 7v2h10V7H7z M7 11v2h10V11H7z M7 15v2h10v-2H7z"></path>
-                                        </svg>
                                         <span class="text">Comprar</span>
                                     </button>
                                 </div>
@@ -221,15 +189,12 @@
                         </div>
                         <div class="col-md-4">
                             <div class="card">
-                                <img src="electrodomestico6.jpg" alt="Tostadora" class="card-img-top">
+                                <img src="ferreteria6.jpg" alt="Sierra" class="card-img-top">
                                 <div class="card-body">
-                                    <h3>Tostadora</h3>
-                                    <p>Potencia de 800W, tecnología de tostado avanzada</p>
-                                    <p class="price">$249.99</p>
+                                    <h3>Sierra Circular</h3>
+                                    <p>Sierra circular de 7 1/4 pulgadas, potente motor.</p>
+                                    <p class="price">$129.99</p>
                                     <button class="button">
-                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                            <path d="M3 3h18v18H3V3z M19 19H5 V5h14v14z M15 5v2h4v-2H15z M7 7v2h10V7H7z M7 11v2h10V11H7z M7 15v2h10v-2H7z"></path>
-                                        </svg>
                                         <span class="text">Comprar</span>
                                     </button>
                                 </div>
@@ -238,17 +203,16 @@
                     </div>
                 </div>
             </div>
-            <a class="carousel-control-prev" href="#electrodomesticosCarousel" role="button" data-slide="prev">
+            <a class="carousel-control-prev" href="#ferreteriaCarousel" role="button" data-slide="prev">
                 <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                 <span class="sr-only">Anterior</span>
             </a>
-            <a class="carousel-control-next" href="#electrodomesticosCarousel" role="button" data-slide="next">
+            <a class="carousel-control-next" href="#ferreteriaCarousel" role="button" data-slide="next">
                 <span class="carousel-control-next-icon" aria-hidden="true"></span>
                 <span class="sr-only">Siguiente</span>
             </a>
         </div>
     </section>
-
 
     <!-- Footer -->
     <center>
@@ -265,16 +229,8 @@
                         <a href="https://www.facebook.com/GYR-GRUPO-ASESOR-SA-103434441845111/" target="_blank">
                             <button class="Btn">
                                 <span class="svgContainer">
-                                    <svg
-                                        viewBox="0 0 320 512"
-                                        height="1.3em"
-                                        xmlns="http://www.w3.org/2000/svg"
-                                        class="svgIcon"
-                                        fill="white"
-                                    >
-                                        <path
-                                            d="M80 299.3V512H196V299.3h86.5l18-97.8H196V166.9c0-51.7 20.3-71.5 72.7-71.5c16.3 0 29.4 .4 37 1.2V7.9C291.4 4 256.4 0 236.2 0C129.3 0 80 50.5 80 159.4v42.1H14v97.8H80z"
-                                        ></path>
+                                    <svg viewBox="0 0 320 512" height="1.3em" xmlns="http://www.w3.org/2000/svg" class="svgIcon" fill="white">
+                                        <path d="M80 299.3V512H196V299.3h86.5l18-97.8H196V166.9c0-51.7 20.3-71.5 72.7-71.5c16.3 0 29.4 .4 37 1.2V7.9C291.4 4 256.4 0 236.2 0C129.3 0 80 50.5 80 159.4v42.1H14v97.8H80z"></path>
                                     </svg>
                                 </span>
                                 <span class="BG"></span>
@@ -284,19 +240,9 @@
                         <a href="https://www.bing.com/maps?osid=ad899003-b955-482c-aa45-2541d786e9ad&cp=9.930998~-84.059358&lvl=17&pi=0&v=2&sV=2&form=S00027" target="_blank">
                             <button class="Btn Btn-ubicacion">
                                 <span class="svgContainer">
-                                    <svg
-                                        viewBox="0 0 24 24"
-                                        height="1.3em"
-                                        xmlns="http://www.w3.org/2000/svg"
-                                        class="svgIcon"
-                                        fill="white"
-                                    >
-                                        <path
-                                            d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-2-5.13z"
-                                        ></path>
-                                        <path
-                                            d="M12 12a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7z"
-                                        ></path>
+                                    <svg viewBox="0 0 24 24" height="1.3em" xmlns="http://www.w3.org/2000/svg" class="svgIcon" fill="white">
+                                        <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-2-5.13z"></path>
+                                        <path d="M12 12a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7z"></path>
                                     </svg>
                                 </span>
                                 <span class="BG"></span>
