@@ -79,7 +79,48 @@
         .carousel-control-next:hover {
             background-color: gold; /* Color dorado */
         }
+        .cart-icon {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 1000;
+            cursor: pointer;
+        }
 
+        .cart-count {
+            position: absolute;
+            top: -10px;
+            right: -10px;
+            background-color: #2ecc71;
+            color: white;
+            border-radius: 50%;
+            padding: 4px 8px;
+            font-size: 12px;
+        }
+
+        #cartModal .modal-body {
+            max-height: 400px;
+            overflow-y: auto;
+        }
+
+        .cart-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #eee;
+        }
+
+        .cart-item-remove {
+            color: red;
+            cursor: pointer;
+        }
+
+        #cartTotal {
+            font-weight: bold;
+            margin-top: 10px;
+        }
     </style>
 </head>
 <body>
@@ -156,6 +197,64 @@ searchForm.addEventListener('submit', (e) => {
         }
     });
 });
+        </script>
+        <script>
+            let cart = [];
+    
+            function addToCart(name, price) {
+                cart.push({name, price});
+                updateCartDisplay();
+            }
+    
+            function removeFromCart(index) {
+                cart.splice(index, 1);
+                updateCartDisplay();
+            }
+    
+            function updateCartDisplay() {
+                const cartCount = document.querySelector('.cart-count');
+                const cartItems = document.getElementById('cartItems');
+                const cartTotal = document.getElementById('cartTotal');
+                
+                cartCount.textContent = cart.length;
+                
+                cartItems.innerHTML = cart.map((item, index) => `
+                    <div class="cart-item">
+                        <span>${item.name}</span>
+                        <span>$${item.price}</span>
+                        <span class="cart-item-remove" onclick="removeFromCart(${index})">
+                            <i class="fas fa-trash"></i>
+                        </span>
+                    </div>
+                `).join('');
+                
+                const total = cart.reduce((sum, item) => sum + item.price, 0);
+                cartTotal.textContent = `Total: $${total.toFixed(2)}`;
+            }
+    
+            function checkout() {
+                if (cart.length === 0) {
+                    alert('Your cart is empty!');
+                    return;
+                }
+                alert('Thank you for your purchase!');
+                cart = [];
+                updateCartDisplay();
+                $('#cartModal').modal('hide');
+            }
+    
+            // Modify all "Comprar" buttons to add items to cart
+            document.addEventListener('DOMContentLoaded', function() {
+                const buyButtons = document.querySelectorAll('.button');
+                buyButtons.forEach(button => {
+                    button.onclick = function() {
+                        const card = this.closest('.card');
+                        const name = card.querySelector('h3').textContent;
+                        const price = parseFloat(card.querySelector('.price').textContent.replace('$', ''));
+                        addToCart(name, price);
+                    }
+                });
+            });
         </script>
     </div>
 </nav>
@@ -425,6 +524,33 @@ searchForm.addEventListener('submit', (e) => {
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="cart-icon" data-toggle="modal" data-target="#cartModal">
+    <i class="fas fa-shopping-cart fa-2x"></i>
+    <span class="cart-count">0</span>
+</div>
+
+<!-- Shopping Cart Modal -->
+<div class="modal fade" id="cartModal" tabindex="-1" role="dialog" aria-labelledby="cartModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="cartModalLabel">Shopping Cart</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div id="cartItems"></div>
+                <div id="cartTotal"></div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" onclick="checkout()">Checkout</button>
             </div>
         </div>
     </div>

@@ -65,6 +65,49 @@
         .carousel-control-next:hover {
             background-color: gold; /* Color dorado */
         }
+
+        .cart-icon {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 1000;
+            cursor: pointer;
+        }
+
+        .cart-count {
+            position: absolute;
+            top: -10px;
+            right: -10px;
+            background-color: #2ecc71;
+            color: white;
+            border-radius: 50%;
+            padding: 4px 8px;
+            font-size: 12px;
+        }
+
+        #cartModal .modal-body {
+            max-height: 400px;
+            overflow-y: auto;
+        }
+
+        .cart-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #eee;
+        }
+
+        .cart-item-remove {
+            color: red;
+            cursor: pointer;
+        }
+
+        #cartTotal {
+            font-weight: bold;
+            margin-top: 10px;
+        }
     </style>
 </head>
 <body>
@@ -78,34 +121,130 @@
             </div>
             <div class="row">
                 <div class="col-md-12">
-                    <nav class="navbar navbar-expand-lg navbar-light bg-light static" style="border-radius:50px">
-                        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                            <span class="navbar-toggler-icon"></span>
-                        </button>
-                        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                            <ul class="navbar-nav mx-auto">
-                                <li class="nav-item active">
-                                    <a class="nav-link" href="index.html">Inicio</a>
-                                </li>
-                                <li class="nav-item dropdown">
-                                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                        Artículos
-                                    </a>
-                                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                        <a class="dropdown-item" href="electrodomesticos.html">Electrodomésticos</a>
-                                        <a class="dropdown-item" href="linea_blanca.html">Artículos de Línea Blanca</a>
-                                        <a class="dropdown-item" href="celulares.html">Celulares</a>
-                                        <a class="dropdown-item" href="oficina.html">Equipo de Oficina</a>
-                                        <a class="dropdown-item" href="ferreteria.html">Ferretería</a>
-                                        <a class="dropdown-item" href="informatica.html">Equipo de Informática</a>
-                                    </div>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="contact.html">Contacto</a>
-                                </li>
-                            </ul>
-                        </div>
-                    </nav>
+<!-- Navigation Bar -->
+<nav class="navbar navbar-expand-lg navbar-light bg-light static" style="border-radius:50px">
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mx-auto">
+            <li class="nav-item active">
+                <a class="nav-link" href="index.html">Inicio</a>
+            </li>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Artículos
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item" href="electrodomesticos.html">Electrodomésticos</a>
+                    <a class="dropdown-item" href="linea_blanca.html">Artículos de Línea Blanca</a>
+                    <a class="dropdown-item" href="celulares.html">Celulares</a>
+                    <a class="dropdown-item" href="oficina.html">Equipo de Oficina</a>
+                    <a class="dropdown-item" href="ferreteria.html">Ferretería</a>
+                    <a class="dropdown-item" href="informatica.html">Equipo de Informática</a>
+                </div>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="contact.html">Contacto</a>
+            </li>
+        </ul>
+
+        <!-- Search Form -->
+        <form class="form-inline my-2 my-lg-0" id="search-form">
+            <input class="form-control mr-sm-2" type="search" id="search-input" placeholder="Buscar" aria-label="Buscar">
+            <button class="btn btn-outline-success my-2 my-sm-0" id="search-button" type="submit">Buscar</button>
+        </form>
+        <script>
+            // Obtener el formulario de búsqueda y el input de búsqueda
+const searchForm = document.getElementById('search-form');
+const searchInput = document.getElementById('search-input');
+
+// Agregar un evento de submit al formulario de búsqueda
+searchForm.addEventListener('submit', (e) => {
+    e.preventDefault(); // Evitar que el formulario se envíe
+
+    // Obtener el valor del input de búsqueda
+    const searchTerm = searchInput.value.trim().toLowerCase();
+
+    // Buscar los elementos que coinciden con la búsqueda
+    const searchResults = document.querySelectorAll('.card');
+
+    // Ocultar todos los elementos
+    searchResults.forEach((result) => {
+        result.style.display = 'none';
+    });
+
+    // Mostrar solo los elementos que coinciden con la búsqueda
+    searchResults.forEach((result) => {
+        const title = result.querySelector('h3').textContent.toLowerCase();
+        const description = result.querySelector('p').textContent.toLowerCase();
+
+        if (title.includes(searchTerm) || description.includes(searchTerm)) {
+            result.style.display = 'block';
+        }
+    });
+});
+        </script>
+        <script>
+            let cart = [];
+    
+            function addToCart(name, price) {
+                cart.push({name, price});
+                updateCartDisplay();
+            }
+    
+            function removeFromCart(index) {
+                cart.splice(index, 1);
+                updateCartDisplay();
+            }
+    
+            function updateCartDisplay() {
+                const cartCount = document.querySelector('.cart-count');
+                const cartItems = document.getElementById('cartItems');
+                const cartTotal = document.getElementById('cartTotal');
+                
+                cartCount.textContent = cart.length;
+                
+                cartItems.innerHTML = cart.map((item, index) => `
+                    <div class="cart-item">
+                        <span>${item.name}</span>
+                        <span>$${item.price}</span>
+                        <span class="cart-item-remove" onclick="removeFromCart(${index})">
+                            <i class="fas fa-trash"></i>
+                        </span>
+                    </div>
+                `).join('');
+                
+                const total = cart.reduce((sum, item) => sum + item.price, 0);
+                cartTotal.textContent = `Total: $${total.toFixed(2)}`;
+            }
+    
+            function checkout() {
+                if (cart.length === 0) {
+                    alert('Your cart is empty!');
+                    return;
+                }
+                alert('Thank you for your purchase!');
+                cart = [];
+                updateCartDisplay();
+                $('#cartModal').modal('hide');
+            }
+    
+            // Modify all "Comprar" buttons to add items to cart
+            document.addEventListener('DOMContentLoaded', function() {
+                const buyButtons = document.querySelectorAll('.button');
+                buyButtons.forEach(button => {
+                    button.onclick = function() {
+                        const card = this.closest('.card');
+                        const name = card.querySelector('h3').textContent;
+                        const price = parseFloat(card.querySelector('.price').textContent.replace('$', ''));
+                        addToCart(name, price);
+                    }
+                });
+            });
+        </script>
+    </div>
+</nav>
                 </div>
             </div>
         </div>
@@ -128,6 +267,10 @@
                                     <button class="button">
                                         <span class="text">Comprar</span>
                                     </button>
+                                    <br>
+                                    <button class="btn " data-toggle="modal" data-target="#imagen1Modal">
+                                        <img src="IMG/image.png" style="width: 40px" >
+                                    </button>
                                 </div>
                             </div>
                         </div>
@@ -141,6 +284,10 @@
                                     <button class="button">
                                         <span class="text">Comprar</span>
                                     </button>
+                                    <br>
+                                    <button class="btn " data-toggle="modal" data-target="#imagen2Modal">
+                                        <img src="IMG/image.png" style="width: 40px" >
+                                    </button>
                                 </div>
                             </div>
                         </div>
@@ -153,6 +300,10 @@
                                     <p class="price">$89.99</p>
                                     <button class="button">
                                         <span class="text">Comprar</span>
+                                    </button>
+                                    <br>
+                                    <button class="btn " data-toggle="modal" data-target="#imagen3Modal">
+                                        <img src="IMG/image.png" style="width: 40px" >
                                     </button>
                                 </div>
                             </div>
@@ -171,6 +322,10 @@
                                     <button class="button">
                                         <span class="text">Comprar</span>
                                     </button>
+                                    <br>
+                                    <button class="btn " data-toggle="modal" data-target="#imagen4Modal">
+                                        <img src="IMG/image.png" style="width: 40px" >
+                                    </button>
                                 </div>
                             </div>
                         </div>
@@ -184,6 +339,10 @@
                                     <button class="button">
                                         <span class="text">Comprar</span>
                                     </button>
+                                    <br>
+                                    <button class="btn " data-toggle="modal" data-target="#imagen5Modal">
+                                        <img src="IMG/image.png" style="width: 40px" >
+                                    </button>
                                 </div>
                             </div>
                         </div>
@@ -196,6 +355,10 @@
                                     <p class="price">$59.99</p>
                                     <button class="button">
                                         <span class="text">Comprar</span>
+                                    </button>
+                                    <br>
+                                    <button class="btn " data-toggle="modal" data-target="#imagen6Modal">
+                                        <img src="IMG/image.png" style="width: 40px" >
                                     </button>
                                 </div>
                             </div>
@@ -214,6 +377,213 @@
         </div>
     </section>
 
+    <!-- Modal para la imagen 1 -->
+    <div class="modal fade" id="imagen1Modal" tabindex="-1" role="dialog" aria-labelledby="imagen1ModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="imagen1ModalLabel">Imagen 1</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <img src="informatica1.jpg" alt="Laptop" class="img-fluid">
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal para la imagen 2 -->
+    <div class="modal fade" id="imagen2Modal" tabindex="-1" role="dialog" aria-labelledby="imagen2ModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="imagen2ModalLabel">Imagen 2</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <img src="informatica2.jpg" alt="Monitor" class="img-fluid">
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal para la imagen 3 -->
+    <div class="modal fade" id="imagen3Modal" tabindex="-1" role="dialog" aria-labelledby="imagen3ModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="imagen3ModalLabel">Imagen 3</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">& times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <img src="informatica3.jpg" alt="Teclado Mecánico" class="img-fluid">
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal para la imagen 4 -->
+    <div class="modal fade" id="imagen4Modal" tabindex="-1" role="dialog" aria-labelledby="imagen4ModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="imagen4ModalLabel">Imagen 4</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <img src="informatica4.jpg" alt="Mouse Inalámbrico" class="img-fluid">
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal para la imagen 5 -->
+    <div class="modal fade" id="imagen5Modal" tabindex="-1" role="dialog" aria-labelledby="imagen5ModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="imagen5ModalLabel">Imagen 5</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <img src="informatica5.jpg" alt="Webcam" class="img-fluid">
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal para la imagen 6 -->
+    <div class="modal fade" id="imagen6Modal" tabindex="-1" role="dialog" aria-labelledby="imagen6ModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="imagen6ModalLabel">Imagen 6</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <img src="informatica6.jpg" alt="Altavoces" class="img-fluid">
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Shopping Cart Modal -->
+    <div class="modal fade" id="cartModal" tabindex="-1" role="dialog" aria-labelledby="cartModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="cartModalLabel">Shopping Cart</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div id="cartItems"></div>
+                    <div id="cartTotal"></div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" onclick="checkout()">Checkout</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Cart Icon -->
+    <div class="cart-icon" data-toggle="modal" data-target="#cartModal">
+        <i class="fas fa-shopping-cart fa-2x"></i>
+        <span class="cart-count">0 </span>
+    </div>
+
+    <script>
+        let cart = [];
+
+        function addToCart(name, price) {
+            cart.push({name, price});
+            updateCartDisplay();
+        }
+
+        function removeFromCart(index) {
+            cart.splice(index, 1);
+            updateCartDisplay();
+        }
+
+        function updateCartDisplay() {
+            const cartCount = document.querySelector('.cart-count');
+            const cartItems = document.getElementById('cartItems');
+            const cartTotal = document.getElementById('cartTotal');
+            
+            cartCount.textContent = cart.length;
+            
+            cartItems.innerHTML = cart.map((item, index) => `
+                <div class="cart-item">
+                    <span>${item.name}</span>
+                    <span>$${item.price}</span>
+                    <span class="cart-item-remove" onclick="removeFromCart(${index})">
+                        <i class="fas fa-trash"></i>
+                    </span>
+                </div>
+            `).join('');
+            
+            const total = cart.reduce((sum, item) => sum + item.price, 0);
+            cartTotal.textContent = `Total: $${total.toFixed(2)}`;
+        }
+
+        function checkout() {
+            if (cart.length === 0) {
+                alert('Your cart is empty!');
+                return;
+            }
+            alert('Thank you for your purchase!');
+            cart = [];
+            updateCartDisplay();
+            $('#cartModal').modal('hide');
+        }
+
+        // Modify all "Comprar" buttons to add items to cart
+        document.addEventListener('DOMContentLoaded', function() {
+            const buyButtons = document.querySelectorAll('.button');
+            buyButtons.forEach(button => {
+                button.onclick = function() {
+                    const card = this.closest('.card');
+                    const name = card.querySelector('h3').textContent;
+                    const price = parseFloat(card.querySelector('.price').textContent.replace('$', ''));
+                    addToCart(name, price);
+                }
+            });
+        });
+    </script>
+
     <!-- Footer -->
     <footer>
         <div class="container">
@@ -225,49 +595,48 @@
             <div class="row">
                 <div class="col-md-12 text-center">
                     <center>
-    
-
-                    <a href="https://www.facebook.com/GYR-GRUPO-ASESOR-SA-103434441845111/" target="_blank">
-                        <button class="Btn">
-                            <span class="svgContainer">
-                                <svg
-                                    viewBox="0 0 320 512"
-                                    height="1.3em"
-                                    xmlns="http://www.w3.org/2000/svg"
-                                    class="svgIcon"
-                                    fill="white"
-                                >
-                                    <path
-                                        d="M80 299.3V512H196V299.3h86.5l18-97.8H196V166.9c0-51.7 20.3-71.5 72.7-71.5c16.3 0 29.4 .4 37 1.2V7.9C291.4 4 256.4 0 236.2 0C129.3 0 80 50.5 80 159.4v42.1H14v97.8H80z"
-                                    ></path>
-                                </svg>
-                            </span>
-                            <span class="BG"></span>
-                        </button>
-                    </a>
-                    <span class="text-facebook">Nuestro Facebook</span>
-                    <a href="https://www.bing.com/maps?osid=ad899003-b955-482c-aa45-2541d786e9ad&cp=9.930998~-84.059358&lvl=17&pi=0&v=2&sV=2&form=S00027" target="_blank">
-                        <button class="Btn Btn-ubicacion">
-                            <span class="svgContainer">
-                                <svg
-                                    viewBox="0 0 24 24"
-                                    height="1.3em"
-                                    xmlns="http://www.w3.org/2000/svg"
-                                    class="svgIcon"
-                                    fill="white"
-                                >
-                                    <path
-                                        d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-2-5.13z"
-                                    ></path>
-                                    <path
-                                        d="M12 12a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7z"
-                                    ></path>
-                                </svg>
-                            </span>
-                            <span class="BG"></span>
-                        </button>
-                    </a>
-                    <span class="text-ubicacion">Nuestra ubicación</span>
+                        <a href="https://www.facebook.com/GYR-GRUPO-ASESOR-SA-103434441845111/" target="_blank">
+                            <button class="Btn">
+                                <span class="svgContainer">
+                                    <svg
+                                        viewBox="0 0 320 512"
+                                        height="1.3em"
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        class="svgIcon"
+                                        fill="white"
+                                    >
+                                        <path
+                                            d="M80 299.3V512H196V299.3h86.5l18-97.8H196V166.9c0-51.7 20.3-71.5 72.7-71.5c16.3 0 29.4 .4 37 1.2V7.9C291.4 4 256.4 0 236.2 0C129.3 0 80 50.5 80 159.4v42.1H14v97.8H80z"
+                                        ></path>
+                                    </svg>
+                                </span>
+                                <span class="BG"></span>
+                            </button>
+                        </a>
+                        <span class="text-facebook">Nuestro Facebook</span>
+                        <a href="https://www.bing.com/maps?osid=ad899003-b955-482c-aa45-2541d786e9ad&cp=9.930998~-84.059358&lvl=17&pi=0&v=2&sV=2&form=S00027" target="_blank">
+                            <button class="Btn Btn-ubicacion">
+                                <span class="svgContainer">
+                                    <svg
+                                        viewBox="0 0 24 24"
+                                        height="1.3em"
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        class="svgIcon"
+                                        fill="white"
+                                    >
+                                        <path
+                                            d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-2-5.13z"
+                                        ></path>
+                                        <path
+                                            d="M12 12a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7z"
+                                        ></path>
+                                    </svg>
+                                </span>
+ <span class="BG"></span>
+                            </button>
+                        </a>
+                        <span class="text-ubicacion">Nuestra ubicación</span>
+                    </div>
                 </div>
             </div>
         </div>

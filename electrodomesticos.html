@@ -92,34 +92,130 @@
             </div>
             <div class="row">
                 <div class="col-md-12">
-                    <nav class="navbar navbar-expand-lg navbar-light bg-light static" style="border-radius:50px">
-                        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                            <span class="navbar-toggler-icon"></span>
-                        </button>
-                        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                            <ul class="navbar-nav mx-auto">
-                                <li class="nav-item active">
-                                    <a class="nav-link" href="index.html">Inicio</a>
-                                </li>
-                                <li class="nav-item dropdown">
-                                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                        Artículos
-                                    </a>
-                                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                        <a class="dropdown-item" href="electrodomesticos.html">Electrodomésticos</a>
-                                        <a class="dropdown-item" href="linea_blanca.html">Artículos de Línea Blanca</a>
-                                        <a class="dropdown-item" href="celulares.html">Celulares</a>
-                                        <a class="dropdown-item" href="oficina.html">Equipo de Oficina</a>
-                                        <a class="dropdown-item" href="ferreteria.html">Ferretería</a>
-                                        <a class="dropdown-item" href="informatica.html">Equipo de Informática</a>
-                                    </div>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="contact.html">Contacto</a>
-                                </li>
-                            </ul>
-                        </div>
-                    </nav>
+<!-- Navigation Bar -->
+<nav class="navbar navbar-expand-lg navbar-light bg-light static" style="border-radius:50px">
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mx-auto">
+            <li class="nav-item active">
+                <a class="nav-link" href="index.html">Inicio</a>
+            </li>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Artículos
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item" href="electrodomesticos.html">Electrodomésticos</a>
+                    <a class="dropdown-item" href="linea_blanca.html">Artículos de Línea Blanca</a>
+                    <a class="dropdown-item" href="celulares.html">Celulares</a>
+                    <a class="dropdown-item" href="oficina.html">Equipo de Oficina</a>
+                    <a class="dropdown-item" href="ferreteria.html">Ferretería</a>
+                    <a class="dropdown-item" href="informatica.html">Equipo de Informática</a>
+                </div>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="contact.html">Contacto</a>
+            </li>
+        </ul>
+
+        <!-- Search Form -->
+        <form class="form-inline my-2 my-lg-0" id="search-form">
+            <input class="form-control mr-sm-2" type="search" id="search-input" placeholder="Buscar" aria-label="Buscar">
+            <button class="btn btn-outline-success my-2 my-sm-0" id="search-button" type="submit">Buscar</button>
+        </form>
+        <script>
+            // Obtener el formulario de búsqueda y el input de búsqueda
+const searchForm = document.getElementById('search-form');
+const searchInput = document.getElementById('search-input');
+
+// Agregar un evento de submit al formulario de búsqueda
+searchForm.addEventListener('submit', (e) => {
+    e.preventDefault(); // Evitar que el formulario se envíe
+
+    // Obtener el valor del input de búsqueda
+    const searchTerm = searchInput.value.trim().toLowerCase();
+
+    // Buscar los elementos que coinciden con la búsqueda
+    const searchResults = document.querySelectorAll('.card');
+
+    // Ocultar todos los elementos
+    searchResults.forEach((result) => {
+        result.style.display = 'none';
+    });
+
+    // Mostrar solo los elementos que coinciden con la búsqueda
+    searchResults.forEach((result) => {
+        const title = result.querySelector('h3').textContent.toLowerCase();
+        const description = result.querySelector('p').textContent.toLowerCase();
+
+        if (title.includes(searchTerm) || description.includes(searchTerm)) {
+            result.style.display = 'block';
+        }
+    });
+});
+        </script>
+        <script>
+            let cart = [];
+    
+            function addToCart(name, price) {
+                cart.push({name, price});
+                updateCartDisplay();
+            }
+    
+            function removeFromCart(index) {
+                cart.splice(index, 1);
+                updateCartDisplay();
+            }
+    
+            function updateCartDisplay() {
+                const cartCount = document.querySelector('.cart-count');
+                const cartItems = document.getElementById('cartItems');
+                const cartTotal = document.getElementById('cartTotal');
+                
+                cartCount.textContent = cart.length;
+                
+                cartItems.innerHTML = cart.map((item, index) => `
+                    <div class="cart-item">
+                        <span>${item.name}</span>
+                        <span>$${item.price}</span>
+                        <span class="cart-item-remove" onclick="removeFromCart(${index})">
+                            <i class="fas fa-trash"></i>
+                        </span>
+                    </div>
+                `).join('');
+                
+                const total = cart.reduce((sum, item) => sum + item.price, 0);
+                cartTotal.textContent = `Total: $${total.toFixed(2)}`;
+            }
+    
+            function checkout() {
+                if (cart.length === 0) {
+                    alert('Your cart is empty!');
+                    return;
+                }
+                alert('Thank you for your purchase!');
+                cart = [];
+                updateCartDisplay();
+                $('#cartModal').modal('hide');
+            }
+    
+            // Modify all "Comprar" buttons to add items to cart
+            document.addEventListener('DOMContentLoaded', function() {
+                const buyButtons = document.querySelectorAll('.button');
+                buyButtons.forEach(button => {
+                    button.onclick = function() {
+                        const card = this.closest('.card');
+                        const name = card.querySelector('h3').textContent;
+                        const price = parseFloat(card.querySelector('.price').textContent.replace('$', ''));
+                        addToCart(name, price);
+                    }
+                });
+            });
+        </script>
+    </div>
+</nav>
                 </div>
             </div>
         </div>
