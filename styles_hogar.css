@@ -1,0 +1,74 @@
+h1{
+    text-align: auto;
+    margin-top: 100px;
+    width: 50%;
+    margin-left: 350px;
+    margin: auto;
+    font-size: 80px;
+}
+
+.navhogar{
+text-align: center;
+font-size: 25px;
+font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+ background:gray;
+ border-radius: 30px;
+color: white;
+}
+.logo2{
+    background: #8d8c8b;
+border-radius: 10px;
+box-shadow:black 10px 10px 5px;
+}
+
+.ofertas{
+    text-align: center;
+  
+}
+.ofertas img {
+   margin-left: 0px; 
+    transition: transform 0.3s;
+    border-radius: 50px;
+}
+.ofertas img:hover{
+    transform: scale(1.2);
+}
+
+figcaption {
+    font-family:Verdana, Geneva, Tahoma, sans-serif;
+    font-size: 15px;
+    margin-left: 20px;
+}
+figure img {
+    padding: 4px;
+    margin-left: 25px;
+    transition: transform 0.3s;
+    background:white;
+    border-radius: 10px;
+box-shadow:gray 5px 5px 5px 5px;
+
+}
+figure {
+    float: left;
+}
+.pagos img{
+right: 100px;
+top: 30px; left: 30px;
+}
+#pagos{
+    
+margin-right: 300px;
+margin-left: 300px;
+padding:50px;
+
+}
+#video{
+    margin-right: 120px;
+    margin-left: 180px;
+    box-shadow:gray 5px 5px 5px  ;
+    
+}
+#aside{
+float: left;
+
+}
