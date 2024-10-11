@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
+    <title>Document</title>
+</head>
+<body>
+    <div x-data="{ showLoginModal: false, showRegisterModal: false }">
+        <header class="bg-white shadow-md">
+            <div class="container mx-auto px-4 py-4 flex justify-between items-center">
+                <div class="space-x-4">
+                    <button
+                        @click="showLoginModal = true"
+                        class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-full inline-flex items-center transition duration-300"
+                    >
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 16l-4-4m0 0l4-4m-4 4h14m-5 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h7a3 3 0 013 3v1" />
+                        </svg>
+                        Login
+                    </button>
+                    <button
+                        @click="showRegisterModal = true"
+                        class="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded-full inline-flex items-center transition duration-300"
+                    >
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18 9v3m0 0v3m0-3h3m-3 0h-3m-2-5a4 4 0 11-8 0 4 4 0 018 0zM3 20a6 6 0 0112 0v1H3v-1z" />
+                        </svg>
+                        Register
+                    </button>
+                </div>
+            </div>
+        </header>
+<!-- Login Modal -->
+<div x-show="showLoginModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4">
+    <div class="bg-white rounded-lg p-8 max-w-md w-full" @click.away="showLoginModal = false">
+        <div class="flex justify-between items-center mb-6">
+            <h2 class="text-2xl font-bold">Login</h2>
+            <button @click="showLoginModal = false" class="text-gray-500 hover:text-gray-700">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                </svg>
+            </button>
+        </div>
+        <form @submit.prevent="console.log('Login submitted')">
+            <div class="mb-4">
+                <label for="loginEmail" class="block text-gray-700 text-sm font-bold mb-2">
+                    Email
+                </label>
+                <input
+                    type="email"
+                    id="loginEmail"
+                    class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                    required
+                />
+            </div>
+            <div class="mb-6">
+                <label for="loginPassword" class="block text-gray-700 text-sm font-bold mb-2">
+                    Password
+                </label>
+                <input
+                    type="password"
+                    id="loginPassword"
+                    class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
+                    required
+                />
+            </div>
+            <div class="flex items-center justify-between">
+                <button
+                    type="submit"
+                    class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+                >
+                    Sign In
+                </button>
+                <a class="inline-block align-baseline font-bold text-sm text-blue-500 hover:text-blue-800" href="#">
+                    Forgot Password?
+                </a>
+            </div>
+        </form>
+    </div>
+</div>
+
+<!-- Register Modal -->
+<div x-show="showRegisterModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4">
+    <div class="bg-white rounded-lg p-8 max-w-md w-full" @click.away="showRegisterModal = false">
+        <div class="flex justify-between items-center mb-6">
+            <h2 class="text-2xl font-bold">Register</h2>
+            <button @click="showRegisterModal = false" class="text-gray-500 hover:text-gray-700">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                </svg>
+            </button>
+        </div>
+        <form @submit.prevent="console.log('Registration submitted')">
+            <div class="mb-4">
+                <label for="registerName" class="block text-gray-700 text-sm font-bold mb-2">
+                    Name
+                </label>
+                <input
+                    type="text"
+                    id="registerName"
+                    class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                    required
+                />
+            </div>
+            <div class="mb-4">
+                <label for="registerEmail" class="block text-gray-700 text-sm font-bold mb-2">
+                    Email
+                </label>
+                <input
+                    type="email"
+                    id="registerEmail"
+                    class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                    required
+                />
+            </div>
+            <div class="mb-4">
+                <label for="registerPassword" class="block text-gray-700 text-sm font-bold mb-2">
+                    Password
+                </label>
+                <input
+                    type="password"
+                    id="registerPassword"
+                    class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                    required
+                />
+            </div>
+            <div class="mb-6">
+                <label for="registerConfirmPassword" class="block text-gray-700 text-sm font-bold mb-2">
+                    Confirm Password
+                </label>
+                <input
+                    type="password"
+                    id="registerConfirmPassword"
+                    class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                    required
+                />
+            </div>
+            <div class="flex items-center justify-between">
+                <button
+                    type="submit"
+                    class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+                >
+                    Sign Up
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+</body>
+</html>
