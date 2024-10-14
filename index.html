@@ -160,9 +160,84 @@
             font-weight: bold;
             margin-top: 10px;
         }
+
+        /* Modal styles */
+        .modal {
+            display: none;
+            position: fixed;
+ top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            z-index: 1000;
+            background-color: rgba(0, 0, 0, 0.5);
+        }
+
+        .modal.show {
+            display: block;
+        }
+
+        .modal-dialog {
+            max-width: 400px;
+            margin: 40px auto;
+        }
+
+        .modal-content {
+            background-color: #f9f9f9;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            padding: 20px;
+        }
+
+        .modal-header {
+            background-color: #f8f9fa;
+            border-bottom: 1px solid #dee2e6;
+            padding: 10px;
+        }
+
+        .modal-title {
+            font-weight: bold;
+        }
+
+        .modal-body {
+            padding: 20px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        input[type="email"],
+        input[type="password"],
+        input[type="text"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+        }
+
+        button[type="submit"] {
+            width: 100%;
+            padding: 10px;
+            background-color: #4CAF50;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button[type="submit"]:hover {
+            background-color: #3e8e41;
+        }
     </style>
 </head>
 <body>
+
     <div x-data="{ showLoginModal: false, showRegisterModal: false }">
         <!-- Header -->
         <header>
@@ -214,71 +289,133 @@
             </div>
         </header>
 
-        <!-- Login Modal -->
-        <div x-show="showLoginModal" class="modal fade show" style="display: block;" tabindex="-1" role="dialog">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title">Iniciar Sesión</h5>
-                        <button type="button" class="close" @click="showLoginModal = false">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <div class="modal-body">
-                        <form @submit.prevent="console.log('Login submitted')">
-                            <div class="form-group">
-                                <label for="loginEmail">Correo Electrónico</label>
-                                <input type="email" class="form-control" id="loginEmail" required>
-                            </div>
-                            <div class="form-group">
-                                <label for="loginPassword">Contraseña</label>
-                                <input type="password" class="form-control" id="loginPassword" required>
-                            </div>
-                            <button type="submit" class="btn btn-primary">Iniciar Sesión</button>
-                        </form>
-                    </div>
-                </div>
-            </div>
+ <!-- Login Modal -->
+<div x-show="showLoginModal" class="modal fade show" style="display: block;" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Iniciar Sesión</h5>
+          <button type="button" class="close" @click="showLoginModal = false">
+            <span aria-hidden="true">&times;</span>
+          </button>
         </div>
-
-        <!-- Register Modal -->
-        <div x-show="showRegisterModal" class="modal fade show" style="display: block;" tabindex="-1" role="dialog">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title">Registrarse</h5>
-                        <button type="button" class="close" @click="showRegisterModal = false">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <div class="modal-body">
-                        <form @submit.prevent="console.log('Registration submitted')">
-                            <div class="form-group">
-                                <label for="registerName">Nombre</label>
-                                <input type="text" class="form-control" id="registerName" required>
-                            </div>
-                            <div class="form-group">
-                                <label for="registerEmail">Correo Electrónico</label>
-                                <input type="email" class="form-control" id="registerEmail" required>
-                            </div>
-                            <div class="form-group">
-                                <label for="registerPassword">Contraseña</label>
-                                <input type="password" class="form-control" id="registerPassword" required>
-                            </div>
-                            <div class="form-group">
-                                <label for="registerConfirmPassword">Confirmar Contraseña</label>
-                                <input type="password" class="form-control" id="registerConfirmPassword" required>
-                            </div>
-                            <button type="submit" class="btn btn-success">Registrarse</button>
-                        </form>
-                    </div>
-                </div>
+        <div class="modal-body">
+          <form id="loginForm" action="login.php" method="post">
+            <div class="form-group">
+              <label for="loginEmail">Correo Electrónico</label>
+              <input type="email" class="form-control" id="loginEmail" required>
             </div>
+            <div class="form-group">
+              <label for="loginPassword">Contraseña</label>
+              <input type="password" class="form-control" id="loginPassword" required>
+            </div>
+            <button type="submit" class="btn btn-primary">Iniciar Sesión</button>
+          </form>
         </div>
-
-        <!-- ... (rest of your existing content) ... -->
-
+      </div>
     </div>
+  </div>
+  
+  <!-- Register Modal -->
+  <div x-show="showRegisterModal" class="modal fade show" style="display: block;" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Registrarse</h5>
+          <button type="button" class="close" @click="showRegisterModal = false">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form id="registerForm">
+            <div class="form-group">
+              <label for ="registerName">Nombre</label>
+              <input type="text" class="form-control" id="registerName" required>
+            </div>
+            <div class="form-group">
+              <label for="registerEmail">Correo Electrónico</label>
+              <input type="email" class="form-control" id="registerEmail" required>
+            </div>
+            <div class="form-group">
+              <label for="registerPassword">Contraseña</label>
+              <input type="password" class="form-control" id="registerPassword" required>
+            </div>
+            <div class="form-group">
+              <label for="registerConfirmPassword">Confirmar Contraseña</label>
+              <input type="password" class="form-control" id="registerConfirmPassword" required>
+            </div>
+            <button type="submit" class="btn btn-success">Registrarse</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <script>
+    // Get the form elements
+    const loginForm = document.getElementById('loginForm');
+    const registerForm = document.getElementById('registerForm');
+  
+    // Add event listeners to the forms
+    loginForm.addEventListener('submit', handleLoginSubmit);
+    registerForm.addEventListener('submit', handleRegisterSubmit);
+  
+    // Function to handle login form submission
+    function handleLoginSubmit(event) {
+      event.preventDefault();
+      const email = document.getElementById('loginEmail').value;
+      const password = document.getElementById('loginPassword').value;
+  
+      // Send request to server
+      fetch('login.php', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ email, password })
+      })
+      .then(response => response.json())
+      .then(data => {
+        if (data.success) {
+          // Save token to local storage
+          localStorage.setItem('token', data.token);
+          // Close the modal
+          loginModal.style.display = 'none';
+        } else {
+          alert('Credenciales incorrectas');
+        }
+      })
+      .catch(error => console.error('Error:', error));
+    }
+  
+    // Function to handle register form submission
+    function handleRegisterSubmit(event) {
+      event.preventDefault();
+      const name = document.getElementById('registerName').value;
+      const email = document.getElementById('registerEmail').value;
+      const password = document.getElementById('registerPassword').value;
+      const confirmPassword = document.getElementById('registerConfirmPassword').value;
+  
+      // Send request to server
+      fetch('register.php', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ name, email, password, confirmPassword })
+      })
+      .then(response => response.json())
+      .then(data => {
+        if (data.success) {
+          // Close the modal
+          registerModal.style.display = 'none';
+        } else {
+          alert('Error al registrar usuario');
+        }
+      })
+      .catch(error => console.error('Error:', error));
+    }
+  </script>
 
   <!-- Sección de Celulares -->
 <h2 class="section-title">Smartphones</h2>
