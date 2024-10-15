@@ -262,16 +262,64 @@
                                         <a class="nav-link" href="index.html">Inicio</a>
                                     </li>
                                     <li class="nav-item dropdown">
-                                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                            Artículos
+                                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownCategorias" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            Categorías
                                         </a>
-                                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                            <a class="dropdown-item" href="electrodomesticos.html">Electrodomésticos</a>
-                                            <a class="dropdown-item" href="linea_blanca.html">Artículos de Línea Blanca</a>
-                                            <a class="dropdown-item" href="celulares.html">Celulares</a>
-                                            <a class="dropdown-item" href="oficina.html">Equipo de Oficina</a>
-                                            <a class="dropdown-item" href="ferreteria.html">Ferretería</a>
-                                            <a class="dropdown-item" href="informatica.html">Equipo de Informática</a>
+                                        <div class="dropdown-menu" aria-labelledby="navbarDropdownCategorias">
+                                            <div class="dropdown-submenu">
+                                                <a class="dropdown-item dropdown-toggle" href="#">Electrodomésticos</a>
+                                                <div class="dropdown-menu">
+                                                    <a class="dropdown-item" href="electrodomesticos.html">Ver todo</a>
+                                                    <a class="dropdown-item" href="#">Licuadoras</a>
+                                                    <a class="dropdown-item" href="#">Microondas</a>
+                                                    <a class="dropdown-item" href="#">Aspiradoras</a>
+                                                </div>
+                                            </div>
+                                            <div class="dropdown-submenu">
+                                                <a class="dropdown-item dropdown-toggle" href="#">Línea Blanca</a>
+                                                <div class="dropdown-menu">
+                                                    <a class="dropdown-item" href="linea_blanca.html">Ver todo</a>
+                                                    <a class="dropdown-item" href="#">Refrigeradores</a>
+                                                    <a class="dropdown-item" href="#">Lavadoras</a>
+                                                    <a class="dropdown-item" href="#">Estufas</a>
+                                                </div>
+                                            </div>
+                                            <div class="dropdown-submenu">
+                                                <a class="dropdown-item dropdown-toggle" href="#">Celulares</a>
+                                                <div class="dropdown-menu">
+                                                    <a class="dropdown-item" href="celulares.html">Ver todo</a>
+                                                    <a class="dropdown-item" href="#">iPhone</a>
+                                                    <a class="dropdown-item" href="#">Samsung</a>
+                                                    <a class="dropdown-item" href="#">Xiaomi</a>
+                                                </div>
+                                            </div>
+                                            <div class="dropdown-submenu">
+                                                <a class="dropdown-item dropdown-toggle" href="#">Equipo de Oficina</a>
+                                                <div class="dropdown-menu">
+                                                    <a class="dropdown-item" href="oficina.html">Ver todo</a>
+                                                    <a class="dropdown-item" href="#">Impresoras</a>
+                                                    <a class="dropdown-item" href="#">Escritorios</a>
+                                                    <a class="dropdown-item" href="#">Sillas ergonómicas</a>
+                                                </div>
+                                            </div>
+                                            <div class="dropdown-submenu">
+                                                <a class="dropdown-item dropdown-toggle" href="#">Ferretería</a>
+                                                <div class="dropdown-menu">
+                                                    <a class="dropdown-item" href="ferreteria.html">Ver todo</a>
+                                                    <a class="dropdown-item" href="#">Taladros</a>
+                                                    <a class="dropdown-item" href="#">Sierras eléctricas</a>
+                                                    <a class="dropdown-item" href="#">Llaves</a>
+                                                </div>
+                                            </div>
+                                            <div class="dropdown-submenu">
+                                                <a class="dropdown-item dropdown-toggle" href="#">Equipo de Informática</a>
+                                                <div class="dropdown-menu">
+                                                    <a class="dropdown-item" href="informatica.html">Ver todo</a>
+                                                    <a class="dropdown-item" href="#">Laptops</a>
+                                                    <a class="dropdown-item" href="#">Monitores</a>
+                                                    <a class="dropdown-item" href="#">Teclados</a>
+                                                </div>
+                                            </div>
                                         </div>
                                     </li>
                                     <li class="nav-item">
@@ -284,6 +332,34 @@
                                 </div>
                             </div>
                         </nav>
+                        
+                        <!-- JavaScript to enable submenus -->
+                        <script>
+                            document.addEventListener('DOMContentLoaded', function () {
+                                // Enable submenus on hover and click
+                                document.querySelectorAll('.dropdown-submenu a.dropdown-toggle').forEach(function (element) {
+                                    element.addEventListener('click', function (e) {
+                                        if (!this.nextElementSibling.classList.contains('show')) {
+                                            let dropdowns = document.querySelectorAll('.dropdown-submenu .dropdown-menu');
+                                            dropdowns.forEach(function (dropdown) {
+                                                dropdown.classList.remove('show');
+                                            });
+                                        }
+                                        this.nextElementSibling.classList.toggle('show');
+                                        e.stopPropagation();
+                                    });
+                                });
+                        
+                                // Close submenus when clicking outside
+                                document.addEventListener('click', function () {
+                                    let dropdowns = document.querySelectorAll('.dropdown-submenu .dropdown-menu');
+                                    dropdowns.forEach(function (dropdown) {
+                                        dropdown.classList.remove('show');
+                                    });
+                                });
+                            });
+                        </script>
+                        
                     </div>
                 </div>
             </div>
