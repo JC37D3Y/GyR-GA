@@ -146,17 +146,91 @@
                 <a class="nav-link" href="index.html">Inicio</a>
             </li>
             <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    Artículos
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownCategorias" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Categorías
                 </a>
-                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <a class="dropdown-item" href="electrodomesticos.html">Electrodomésticos</a>
-                    <a class="dropdown-item" href="linea_blanca.html">Artículos de Línea Blanca</a>
-                    <a class="dropdown-item" href="celulares.html">Celulares</a>
-                    <a class="dropdown-item" href="oficina.html">Equipo de Oficina</a>
-                    <a class="dropdown-item" href="ferreteria.html">Ferretería</a>
-                    <a class="dropdown-item" href="informatica.html">Equipo de Informática</a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdownCategorias">
+                    <div class="dropdown-submenu">
+                        <a class="dropdown-item dropdown-toggle" href="#">Electrodomésticos</a>
+                        <div class="dropdown-menu">
+                            <a class="dropdown-item" href="electrodomesticos.html">Ver todo</a>
+                            <a class="dropdown-item" href="#">Licuadoras</a>
+                            <a class="dropdown-item" href="#">Microondas</a>
+                            <a class="dropdown-item" href="#">Aspiradoras</a>
+                        </div>
+                    </div>
+                    <div class="dropdown-submenu">
+                        <a class="dropdown-item dropdown-toggle" href="#">Línea Blanca</a>
+                        <div class="dropdown-menu">
+                            <a class="dropdown-item" href="linea_blanca.html">Ver todo</a>
+                            <a class="dropdown-item" href="#">Refrigeradores</a>
+                            <a class="dropdown-item" href="#">Lavadoras</a>
+                            <a class="dropdown-item" href="#">Estufas</a>
+                        </div>
+                    </div>
+                    <div class="dropdown-submenu">
+                        <a class="dropdown-item dropdown-toggle" href="#">Celulares</a>
+                        <div class="dropdown-menu">
+                            <a class="dropdown-item" href="celulares.html">Ver todo</a>
+                            <a class="dropdown-item" href="#">iPhone</a>
+                            <a class="dropdown-item" href="#">Samsung</a>
+                            <a class="dropdown-item" href="#">Xiaomi</a>
+                        </div>
+                    </div>
+                    <div class="dropdown-submenu">
+                        <a class="dropdown-item dropdown-toggle" href="#">Equipo de Oficina</a>
+                        <div class="dropdown-menu">
+                            <a class="dropdown-item" href="oficina.html">Ver todo</a>
+                            <a class="dropdown-item" href="#">Impresoras</a>
+                            <a class="dropdown-item" href="#">Escritorios</a>
+                            <a class="dropdown-item" href="#">Sillas ergonómicas</a>
+                        </div>
+                    </div>
+                    <div class="dropdown-submenu">
+                        <a class="dropdown-item dropdown-toggle" href="#">Ferretería</a>
+                        <div class="dropdown-menu">
+                            <a class="dropdown-item" href="ferreteria.html">Ver todo</a>
+                            <a class="dropdown-item" href="#">Taladros</a>
+                            <a class="dropdown-item" href="#">Sierras eléctricas</a>
+                            <a class="dropdown-item" href="#">Llaves</a>
+                        </div>
+                    </div>
+                    <div class="dropdown-submenu">
+                        <a class="dropdown-item dropdown-toggle" href="#">Equipo de Informática</a>
+                        <div class="dropdown-menu">
+                            <a class="dropdown-item" href="informatica.html">Ver todo</a>
+                            <a class="dropdown-item" href="#">Laptops</a>
+                            <a class="dropdown-item" href="#">Monitores</a>
+                            <a class="dropdown-item" href="#">Teclados</a>
+                        </div>
+                    </div>
                 </div>
+                                        <!-- JavaScript to enable submenus -->
+                                        <script>
+                                            document.addEventListener('DOMContentLoaded', function () {
+                                                // Enable submenus on hover and click
+                                                document.querySelectorAll('.dropdown-submenu a.dropdown-toggle').forEach(function (element) {
+                                                    element.addEventListener('click', function (e) {
+                                                        if (!this.nextElementSibling.classList.contains('show')) {
+                                                            let dropdowns = document.querySelectorAll('.dropdown-submenu .dropdown-menu');
+                                                            dropdowns.forEach(function (dropdown) {
+                                                                dropdown.classList.remove('show');
+                                                            });
+                                                        }
+                                                        this.nextElementSibling.classList.toggle('show');
+                                                        e.stopPropagation();
+                                                    });
+                                                });
+                                        
+                                                // Close submenus when clicking outside
+                                                document.addEventListener('click', function () {
+                                                    let dropdowns = document.querySelectorAll('.dropdown-submenu .dropdown-menu');
+                                                    dropdowns.forEach(function (dropdown) {
+                                                        dropdown.classList.remove('show');
+                                                    });
+                                                });
+                                            });
+                                        </script>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="contact.html">Contacto</a>
@@ -168,97 +242,100 @@
             <input class="form-control mr-sm-2" type="search" id="search-input" placeholder="Buscar" aria-label="Buscar">
             <button class="btn btn-outline-success my-2 my-sm-0" id="search-button" type="submit">Buscar</button>
         </form>
-        <script>
-            // Obtener el formulario de búsqueda y el input de búsqueda
-const searchForm = document.getElementById('search-form');
-const searchInput = document.getElementById('search-input');
-
-// Agregar un evento de submit al formulario de búsqueda
-searchForm.addEventListener('submit', (e) => {
-    e.preventDefault(); // Evitar que el formulario se envíe
-
-    // Obtener el valor del input de búsqueda
-    const searchTerm = searchInput.value.trim().toLowerCase();
-
-    // Buscar los elementos que coinciden con la búsqueda
-    const searchResults = document.querySelectorAll('.card');
-
-    // Ocultar todos los elementos
-    searchResults.forEach((result) => {
-        result.style.display = 'none';
-    });
-
-    // Mostrar solo los elementos que coinciden con la búsqueda
-    searchResults.forEach((result) => {
-        const title = result.querySelector('h3').textContent.toLowerCase();
-        const description = result.querySelector('p').textContent.toLowerCase();
-
-        if (title.includes(searchTerm) || description.includes(searchTerm)) {
-            result.style.display = 'block';
-        }
-    });
-});
-        </script>
-        <script>
-            let cart = [];
-    
-            function addToCart(name, price) {
-                cart.push({name, price});
-                updateCartDisplay();
-            }
-    
-            function removeFromCart(index) {
-                cart.splice(index, 1);
-                updateCartDisplay();
-            }
-    
-            function updateCartDisplay() {
-                const cartCount = document.querySelector('.cart-count');
-                const cartItems = document.getElementById('cartItems');
-                const cartTotal = document.getElementById('cartTotal');
-                
-                cartCount.textContent = cart.length;
-                
-                cartItems.innerHTML = cart.map((item, index) => `
-                    <div class="cart-item">
-                        <span>${item.name}</span>
-                        <span>$${item.price}</span>
-                        <span class="cart-item-remove" onclick="removeFromCart(${index})">
-                            <i class="fas fa-trash"></i>
-                        </span>
-                    </div>
-                `).join('');
-                
-                const total = cart.reduce((sum, item) => sum + item.price, 0);
-                cartTotal.textContent = `Total: $${total.toFixed(2)}`;
-            }
-    
-            function checkout() {
-                if (cart.length === 0) {
-                    alert('Your cart is empty!');
-                    return;
-                }
-                alert('Thank you for your purchase!');
-                cart = [];
-                updateCartDisplay();
-                $('#cartModal').modal('hide');
-            }
-    
-            // Modify all "Comprar" buttons to add items to cart
-            document.addEventListener('DOMContentLoaded', function() {
-                const buyButtons = document.querySelectorAll('.button');
-                buyButtons.forEach(button => {
-                    button.onclick = function() {
-                        const card = this.closest('.card');
-                        const name = card.querySelector('h3').textContent;
-                        const price = parseFloat(card.querySelector('.price').textContent.replace('$', ''));
-                        addToCart(name, price);
-                    }
-                });
-            });
-        </script>
     </div>
 </nav>
+
+<script>
+    // Obtener el formulario de búsqueda y el input de búsqueda
+    const searchForm = document.getElementById('search-form');
+    const searchInput = document.getElementById('search-input');
+
+    // Agregar un evento de submit al formulario de búsqueda
+    searchForm.addEventListener('submit', (e) => {
+        e.preventDefault(); // Evitar que el formulario se envíe
+
+        // Obtener el valor del input de búsqueda
+        const searchTerm = searchInput.value.trim().toLowerCase();
+
+        // Buscar los elementos que coinciden con la búsqueda
+        const searchResults = document.querySelectorAll('.card');
+
+        // Ocultar todos los elementos
+        searchResults.forEach((result) => {
+            result.style.display = 'none';
+        });
+
+        // Mostrar solo los elementos que coinciden con la búsqueda
+        searchResults.forEach((result) => {
+            const title = result.querySelector('h3').textContent.toLowerCase();
+            const description = result.querySelector('p').textContent.toLowerCase();
+
+            if (title.includes(searchTerm) || description.includes(searchTerm)) {
+                result.style.display = 'block';
+            }
+        });
+    });
+</script>
+
+<script>
+    let cart = [];
+
+    function addToCart(name, price) {
+        cart.push({name, price});
+        updateCartDisplay();
+    }
+
+    function removeFromCart(index) {
+        cart.splice(index, 1);
+        updateCartDisplay();
+    }
+
+    function updateCartDisplay() {
+        const cartCount = document.querySelector('.cart-count');
+        const cartItems = document.getElementById('cartItems');
+        const cartTotal = document.getElementById('cartTotal');
+        
+        cartCount.textContent = cart.length;
+        
+        cartItems.innerHTML = cart.map((item, index) => `
+            <div class="cart-item">
+                <span>${item.name}</span>
+                <span>$${item.price}</span>
+                <span class="cart-item-remove" onclick="removeFromCart(${index})">
+                    <i class="fas fa-trash"></i>
+                </span>
+            </div>
+        `).join('');
+        
+        const total = cart.reduce((sum, item) => sum + item.price, 0);
+        cartTotal.textContent = `Total: $${total.toFixed(2)}`;
+    }
+
+    function checkout() {
+        if (cart.length === 0) {
+            alert('Your cart is empty!');
+            return;
+        }
+        alert('Thank you for your purchase!');
+        cart = [];
+        updateCartDisplay();
+        $('#cartModal').modal('hide');
+    }
+
+    // Modify all "Comprar" buttons to add items to cart
+    document.addEventListener('DOMContentLoaded', function() {
+        const buyButtons = document.querySelectorAll('.button');
+        buyButtons.forEach(button => {
+            button.onclick = function() {
+                const card = this.closest('.card');
+                const name = card.querySelector('h3').textContent;
+                const price = parseFloat(card.querySelector('.price').textContent.replace('$', ''));
+                addToCart(name, price);
+            }
+        });
+    });
+</script>
+
 
                 </div>
             </div>
