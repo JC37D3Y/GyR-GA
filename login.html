@@ -3,164 +3,243 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Your Store Name - Login and Register</title>
-    <link rel="shortcut icon" href="IMG/Logo-prueba2.0.jpg"/>
-    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
+    <title>Login-prueba</title>
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-auth-compat.js"></script>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: sans-serif;
+            background: #ffffff;
+            min-height: 100vh;
+        }
+
+        .login-box {
+            position: absolute;
+            top: 40%;
+            left: 50%;
+            width: 400px;
+            padding: 40px;
+            transform: translate(-50%, -50%);
+            background: #333333;
+            box-sizing: border-box;
+            box-shadow: 0 15px 25px rgba(0, 0, 0, 0.2);
+            border-radius: 10px;
+            text-align: center;
+        }
+
+        .login-box h2 {
+            margin: 0 0 30px;
+            padding: 0;
+            color: #fff;
+        }
+
+        .user-box {
+            position: relative;
+            margin-bottom: 30px;
+        }
+
+        .user-box input {
+            width: 100%;
+            padding: 10px 0;
+            font-size: 16px;
+            color: #fff;
+            border: none;
+            border-bottom: 1px solid #fff;
+            outline: none;
+            background: transparent;
+            margin-bottom: 20px;
+        }
+
+        .user-box label {
+            position: absolute;
+            top: 0;
+            left: 0;
+            padding: 10px 0;
+            font-size: 16px;
+            color: #fff;
+            pointer-events: none;
+            transition: .5s;
+        }
+
+        .user-box input:focus ~ label,
+        .user-box input:valid ~ label {
+            top: -20px;
+            left: 0;
+            color: #03e9f4;
+            font-size: 12px;
+        }
+
+        form a {
+            position: relative;
+            display: inline-block;
+            padding: 10px 20px;
+            color: #03e9f4;
+            font-size: 16px;
+            text-decoration: none;
+            text-transform: uppercase;
+            overflow: hidden;
+            transition: .5s;
+            margin-top: 20px;
+            letter-spacing: 4px;
+            cursor: pointer;
+        }
+
+        form a:hover {
+            background: #c7ffea;
+            color: #fff;
+            border-radius: 5px;
+            box-shadow: 0 0 5px #03e9f4,
+                        0 0 25px #03e9f4,
+                        0 0 50px #03e9f4,
+                        0 0 100px #03e9f4;
+        }
+
+        .social-login {
+            position: absolute;
+            top: 75%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            width: 300px;
+        }
+
+        .social-button {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            padding: 12px 20px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-size: 14px;
+            transition: opacity 0.3s;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            cursor: pointer;
+        }
+
+        .social-button:hover {
+            opacity: 0.9;
+        }
+
+        .social-button img {
+            width: 20px;
+            height: 20px;
+        }
+
+        .google {
+            background-color: #ffffff;
+            color: #757575;
+            border: 1px solid #dadce0;
+        }
+
+        .facebook {
+            background-color: #1877f2;
+            color: #ffffff;
+        }
+        
+        #error-message {
+            color: #ff4444;
+            margin-top: 10px;
+            text-align: center;
+        }
+    </style>
 </head>
-<body class="bg-gray-100">
-    <div x-data="{ showLoginModal: false, showRegisterModal: false }">
-        <header class="bg-white shadow-md">
-            <div class="container mx-auto px-4 py-4 flex justify-between items-center">
-                <h1 class="text-2xl font-bold text-gray-800">Your Store Name</h1>
-                <div class="space-x-4">
-                    <button
-                        @click="showLoginModal = true"
-                        class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-full inline-flex items-center transition duration-300"
-                    >
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 16l-4-4m0 0l4-4m-4 4h14m-5 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h7a3 3 0 013 3v1" />
-                        </svg>
-                        Login
-                    </button>
-                    <button
-                        @click="showRegisterModal = true"
-                        class="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded-full inline-flex items-center transition duration-300"
-                    >
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18 9v3m0 0v3m0-3h3m-3 0h-3m-2-5a4 4 0 11-8 0 4 4 0 018 0zM3 20a6 6 0 0112 0v1H3v-1z" />
-                        </svg>
-                        Register
-                    </button>
-                </div>
+<body>
+    <div class="login-box">
+        <h2>Inicio de sesión</h2>
+        <form id="loginForm">
+            <div class="user-box">
+                <input type="text" name="email" required="">
+                <label for="email">Correo</label>
             </div>
-        </header>
-
-        <!-- Login Modal -->
-        <div x-show="showLoginModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4">
-            <div class="bg-white rounded-lg p-8 max-w-md w-full" @click.away="showLoginModal = false">
-                <div class="flex justify-between items-center mb-6">
-                    <h2 class="text-2xl font-bold">Login</h2>
-                    <button @click="showLoginModal = false" class="text-gray-500 hover:text-gray-700">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
-                        </svg>
-                    </button>
-                </div>
-                <form @submit.prevent="console.log('Login submitted')">
-                    <div class="mb-4">
-                        <label for="loginEmail" class="block text-gray-700 text-sm font-bold mb-2">
-                            Email
-                        </label>
-                        <input
-                            type="email"
-                            id="loginEmail"
-                            class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                            required
-                        />
-                    </div>
-                    <div class="mb-6">
-                        <label for="loginPassword" class="block text-gray-700 text-sm font-bold mb-2">
-                            Password
-                        </label>
-                        <input
-                            type="password"
-                            id="loginPassword"
-                            class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
-                            required
-                        />
-                    </div>
-                    <div class="flex items-center justify-between">
-                        <button
-                            type="submit"
-                            class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
-                        >
-                            Sign In
-                        </button>
-                        <a class="inline-block align-baseline font-bold text-sm text-blue-500 hover:text-blue-800" href="#">
-                            Forgot Password?
-                        </a>
-                    </div>
-                </form>
+            <div class="user-box">
+                <input type="password" name="password" required="">
+                <label for="password">Contraseña</label>
             </div>
-        </div>
+            <a onclick="loginWithEmailPassword()">Iniciar</a>
+        </form>
+        <div id="error-message"></div>
+    </div>
 
-        <!-- Register Modal -->
-        <div x-show="showRegisterModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4">
-            <div class="bg-white rounded-lg p-8 max-w-md w-full" @click.away="showRegisterModal = false">
-                <div class="flex justify-between items-center mb-6">
-                    <h2 class="text-2xl font-bold">Register</h2>
-                    <button @click="showRegisterModal = false" class="text-gray-500 hover:text-gray-700">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
-                        </svg>
-                    </button>
-                </div>
-                <form @submit.prevent="console.log('Registration submitted')">
-                    <div class="mb-4">
-                        <label for="registerName" class="block text-gray-700 text-sm font-bold mb-2">
-                            Name
-                        </label>
-                        <input
-                            type="text"
-                            id="registerName"
-                            class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                            required
-                        />
-                    </div>
-                    <div class="mb-4">
-                        <label for="registerEmail" class="block text-gray-700 text-sm font-bold mb-2">
-                            Email
-                        </label>
-                        <input
-                            type="email"
-                            id="registerEmail"
-                            class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                            required
-                        />
-                    </div>
-                    <div class="mb-4">
-                        <label for="registerPassword" class="block text-gray-700 text-sm font-bold mb-2">
-                            Password
-                        </label>
-                        <input
-                            type="password"
-                            id="registerPassword"
-                            class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                            required
-                        />
-                    </div>
-                    <div class="mb-6">
-                        <label for="registerConfirmPassword" class="block text-gray-700 text-sm font-bold mb-2">
-                            Confirm Password
-                        </label>
-                        <input
-                            type="password"
-                            id="registerConfirmPassword"
-                            class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                            required
-                        />
-                    </div>
-                    <div class="flex items-center justify-between">
-                        <button
-                            type="submit"
-                            class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
-                        >
-                            Sign Up
-                        </button>
-                    </div>
-                </form>
-            </div>
-        </div>
-
-        <!-- Your existing content goes here -->
-        <main class="container mx-auto px-4 py-8">
-            <p>Your existing content...</p>
-        </main>
+    <div class="social-login">
+        <button onclick="loginWithGoogle()" class="social-button google">
+            <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0OCIgaGVpZ2h0PSI0OCIgdmlld0JveD0iMCAwIDQ4IDQ4Ij48cGF0aCBmaWxsPSIjRkZDMTA3IiBkPSJNNDMuNjExLDIwLjA4M0g0MlYyMEgyNHY4aDExLjMwM2MtMS42NDksNC42NTctNi4wOCw4LTExLjMwMyw4Yy02LjYyNywwLTEyLTUuMzczLTEyLTEyYzAtNi42MjcsNS4zNzMtMTIsMTItMTJjMy4wNTksMCw1Ljg0MiwxLjE1NCw3Ljk2MSwzLjAzOWw1LjY1Ny01LjY1N0MzNC4wNDYsNi4wNTMsMjkuMjY4LDQsMjQsNEMxMi45NTUsNCw0LDEyLjk1NSw0LDI0YzAsMTEuMDQ1LDguOTU1LDIwLDIwLDIwYzExLjA0NSwwLDIwLTguOTU1LDIwLTIwQzQ0LDIyLjY1OSw0My44NjIsMjEuMzUsNDMuNjExLDIwLjA4M3oiLz48cGF0aCBmaWxsPSIjRkYzRDAwIiBkPSJNNi4zMDYsMTQuNjkxbDYuNTcxLDQuODE5QzE0LjY1NSwxNS4xMDgsMTguOTYxLDEyLDI0LDEyYzMuMDU5LDAsNS44NDIsMS4xNTQsNy45NjEsMy4wMzlsNS42NTctNS42NTdDMzQuMDQ2LDYuMDUzLDI5LjI2OCw0LDI0LDRDMTYuMzE4LDQsOS42NTYsOC4zMzcsNi4zMDYsMTQuNjkxeiIvPjxwYXRoIGZpbGw9IiM0Q0FGNTAiIGQ9Ik0yNCw0NGM1LjE2NiwwLDkuODYtMS45NzcsMTMuNDA5LTUuMTkybC02LjE5LTUuMjM4QzI5LjIxMSwzNS4wOTEsMjYuNzE1LDM2LDI0LDM2Yy01LjIwMiwwLTkuNjE5LTMuMzE3LTExLjI4My03Ljk0NmwtNi41MjIsNS4wMjVDOS41MDUsMzkuNTU2LDE2LjIyNyw0NCwyNCw0NHoiLz48cGF0aCBmaWxsPSIjMTk3NkQyIiBkPSJNNDMuNjExLDIwLjA4M0g0MlYyMEgyNHY4aDExLjMwM2MtMC43OTIsMi4yMzctMi4yMzEsNC4xNjYtNC4wODcsNS41NzFjMC4wMDEtMC4wMDEsMC4wMDItMC4wMDEsMC4wMDMtMC4wMDJsNi4xOSw1LjIzOEMzNi45NzEsMzkuMjA1LDQ0LDM0LDQ0LDI0QzQ0LDIyLjY1OSw0My44NjIsMjEuMzUsNDMuNjExLDIwLjA4M3oiLz48L3N2Zz4=" alt="Google logo">
+            Continuar con Google
+        </button>
+        <button onclick="loginWithFacebook()" class="social-button facebook">
+            <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0Ij48cGF0aCBmaWxsPSJ3aGl0ZSIgZD0iTTEyIDJjNS41MTQgMCAxMCA0LjQ4NiAxMCAxMHMtNC40ODYgMTAtMTAgMTAtMTAtNC40ODYtMTAtMTAgNC40ODYtMTAgMTAtMTB6bTAgMmMtNC40MTEgMC04IDMuNTg5LTggOHMzLjU4OSA4IDggOCA4LTMuNTg5IDgtOC0zLjU4OS04LTgtOHptMCA2YzIuMjA2IDAgNCAxLjc5NCA0IDRzLTEuNzk0IDQtNCA0LTQtMS43OTQtNC00IDEuNzk0LTQgNC00em0wIDJjLTEuMTAzIDAtMiAuODk3LTIgMnMuODk3IDIgMiAyIDItLjg5NyAyLTItLjg5Ny0yLTItMnoiLz48L3N2Zz4=" alt="Facebook logo">
+            Continuar con Facebook
+        </button>
     </div>
 
     <script>
-        // You can add any additional JavaScript here if needed
+        // Configuración de Firebase
+        const firebaseConfig = {
+            // AQUÍ DEBES COLOCAR TU CONFIGURACIÓN DE FIREBASE
+            apiKey: "tu-api-key",
+            authDomain: "tu-auth-domain",
+            projectId: "tu-project-id",
+            storageBucket: "tu-storage-bucket",
+            messagingSenderId: "tu-messaging-sender-id",
+            appId: "tu-app-id"
+        };
+
+        // Inicializar Firebase
+        firebase.initializeApp(firebaseConfig);
+        const auth = firebase.auth();
+
+        // Función para mostrar mensajes de error
+        function showError(message) {
+            document.getElementById('error-message').textContent = message;
+        }
+
+        // Inicio de sesión con email y contraseña
+        async function loginWithEmailPassword() {
+            const email = document.querySelector('input[name="email"]').value;
+            const password = document.querySelector('input[name="password"]').value;
+
+            try {
+                const userCredential = await auth.signInWithEmailAndPassword(email, password);
+                window.location.href = '/dashboard'; // Redirige después del inicio de sesión exitoso
+            } catch (error) {
+                showError('Error en el inicio de sesión: ' + error.message);
+            }
+        }
+
+        // Inicio de sesión con Google
+        async function loginWithGoogle() {
+            const provider = new firebase.auth.GoogleAuthProvider();
+            try {
+                const result = await auth.signInWithPopup(provider);
+                window.location.href = '/dashboard'; // Redirige después del inicio de sesión exitoso
+            } catch (error) {
+                showError('Error al iniciar sesión con Google: ' + error.message);
+            }
+        }
+
+        // Inicio de sesión con Facebook
+        async function loginWithFacebook() {
+            const provider = new firebase.auth.FacebookAuthProvider();
+            try {
+                const result = await auth.signInWithPopup(provider);
+                window.location.href = '/dashboard'; // Redirige después del inicio de sesión exitoso
+            } catch (error) {
+                showError('Error al iniciar sesión con Facebook: ' + error.message);
+            }
+        }
+
+        // Observador del estado de autenticación
+        auth.onAuthStateChanged((user) => {
+            if (user) {
+                // El usuario está conectado
+                console.log('Usuario conectado:', user.email);
+            }
+        });
     </script>
 </body>
 </html>
