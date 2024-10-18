@@ -179,6 +179,17 @@
         .back-button i {
             margin-right: 8px;
         }
+
+        /* Botón para registrarse */
+        .register-link {
+            margin-top: 20px;
+            color: #03e9f4;
+            text-decoration: none;
+        }
+
+        .register-link:hover {
+            text-decoration: underline;
+        }
     </style>
 </head>
 <body>
@@ -201,6 +212,9 @@
             <a onclick="loginWithEmailPassword()">Iniciar</a>
         </form>
         <div id="error-message"></div>
+
+        <!-- Enlace para registrarse -->
+        <a href="Registro-prueba.html" class="register-link">¿No tienes una cuenta? Crea una</a>
     </div>
 
     <div class="social-login">
