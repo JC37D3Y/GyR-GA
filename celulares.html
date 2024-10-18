@@ -635,63 +635,109 @@
 </div>
    
    <!-- Footer -->
-    <center>
-        <footer>
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-12 text-center">
-                        <p>&copy; 2023 - Todos los derechos reservados</p>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-12 text-center">
-                        <center>
-                        <a href="https://www.facebook.com/GYR-GRUPO-ASESOR-SA-103434441845111/" target="_blank">
-                            <button class="Btn">
-                                <span class="svgContainer">
-                                    <svg
-                                        viewBox="0 0 320 512"
-                                        height="1.3em"
-                                        xmlns="http://www.w3.org/2000/svg"
-                                        class="svgIcon"
-                                        fill="white"
-                                    >
-                                        <path
-                                            d="M80 299.3V512H196V299.3h86.5l18-97.8H196V166.9c0-51.7 20.3-71.5 72.7-71.5c16.3 0 29.4 .4 37 1.2V7.9C291.4 4 256.4 0 236.2 0C129.3 0 80 50.5 80 159.4v42.1H14v97.8H80z"
-                                        ></path>
-                                    </svg>
-                                </span>
-                                <span class="BG"></span>
-                            </button>
-                        </a>
-                        <span class="text-facebook">Nuestro Facebook</span>
-                        <a href="https://www.bing.com/maps?osid=ad899003-b955-482c-aa45-2541d786e9ad&cp=9.930998~-84.059358&lvl=17&pi=0&v=2&sV=2&form=S00027" target="_blank">
-                            <button class="Btn Btn-ubicacion">
-                                <span class="svgContainer">
-                                    <svg
-                                        viewBox="0 0 24 24"
-                                        height="1.3em"
-                                        xmlns="http://www.w3.org/2000/svg"
-                                        class="svgIcon"
-                                        fill="white"
-                                    >
-                                        <path
-                                            d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-2-5.13z"
-                                        ></path>
-                                        <path
-                                            d="M12 12a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7z"
-                                        ></path>
-                                    </svg>
-                                </span>
-                                <span class="BG"></span>
-                            </button>
-                        </a>
-                        <span class="text-ubicacion">Nuestra ubicación</span>
-                    </div>
+   <center>
+    <footer>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12 text-center">
+                    <p>&copy; 2024 - Todos los derechos reservados ©</p>
                 </div>
             </div>
-        </footer>
+
+            <!-- Nueva estructura circular de botones sociales -->
+            <div class="row">
+                <div class="col-md-12 text-center">
+                    <div class="social-button">
+                        <div class="facebook">
+                            <a href="https://www.facebook.com/gabrieladuran" target="_blank">
+                                <img src="https://upload.wikimedia.org/wikipedia/commons/5/51/Facebook_f_logo_%282019%29.svg" alt="Facebook">
+                            </a>
+                        </div>
+                        <div class="ubicacion">
+                            <a href="https://www.bing.com/maps?osid=ad899003-b955-482c-aa45-2541d786e9ad&cp=9.930998~-84.059358&lvl=17&pi=0&v=2&sV=2&form=S00027" target="_blank">
+                                <i class="fas fa-map-marker-alt"></i>
+                            </a>
+                        </div>
+                        
+                        <div class="email">
+                            <a href="mailto:gyrventas@ice.co.cr" target="_blank">
+                                <img src="https://upload.wikimedia.org/wikipedia/commons/4/4e/Gmail_Icon.png" alt="Correo">
+                            </a>
+                        </div>
+                        <div class="whatsapp">
+                            <a href="https://wa.me/50689966880" target="_blank">
+                                <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp">
+                            </a>
+                        </div>
+                    </div>
+                    <!-- Texto adicional para los botones -->
+                    <span class="text-facebook">Nuestro Facebook</span> 
+                    <span class="text-ubicacion">Nuestra ubicación</span> 
+                    <span class="text-email">Enviar Correo</span>
+                </div>
+            </div>
+        </div>
+    </footer>
+</center>
+
+<!-- Estilos del botón circular de redes sociales -->
+<style>
+    .social-button {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: 1fr 1fr;
+        border-radius: 50%;
+        width: 200px;
+        height: 200px;
+        margin: 20px auto;
+        overflow: hidden;
+        box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+    }
+
+    .social-button div {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: #343a40; /* Color más oscuro */
+        border: 1px solid #272727;
+        transition: background-color 0.3s ease;
+    }
+
+    .social-button div:hover {
+        background-color: #23272b; /* Color más oscuro al hacer hover */
+    }
+
+    .social-button img {
+        width: 40px;
+        height: 40px;
+    }
+
+    .facebook { background-color: #3B5998; }
+    .whatsapp { background-color: #25D366; }
+    .email { background-color: #D14836; }
+    .ubicacion { background-color: #4285F4; }
+
+    /* Estilo de texto para los botones */
+    .text-facebook, .text-ubicacion, .text-email {
+        display: inline-block;
+        margin-top: 10px;
+        font-size: 14px;
+        color: #fff; /* Color claro para contraste */
+    }
+
+    footer {
+        background-color: #343a40; /* Fondo más oscuro para el footer */
+        color: white;
+    }
+    .social-button i {
+        font-size: 40px; /* Asegura que el tamaño del ícono sea similar a los demás */
+        color: white;    /* Color blanco para hacer que el icono contraste con el fondo */
+    }
+    
+</style>
+
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+
 </body>
 </html>
