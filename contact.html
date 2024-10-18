@@ -8,7 +8,6 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href=" https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
-   
 </head>
 
 <body>
@@ -16,9 +15,8 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-12 text-center">
-                   <a href="index.html"><img src="IMG/Logo-prueba2.0.jpg" style="border-radius: 5%; width: 300px; margin: 20px auto border-radius 20% ;"></a>
-                   <br>
-                   <br>
+                    <a href="index.html"><img src="IMG/Logo-prueba2.0.jpg" style="border-radius: 5%; width: 300px; margin: 20px auto;"></a>
+                    <br><br>
                 </div>
             </div>
             <div class="row">
@@ -46,78 +44,8 @@
                                                 <a class="dropdown-item" href="#">Aspiradoras</a>
                                             </div>
                                         </div>
-                                        <div class="dropdown-submenu">
-                                            <a class="dropdown-item dropdown-toggle" href="#">Línea Blanca</a>
-                                            <div class="dropdown-menu">
-                                                <a class="dropdown-item" href="linea_blanca.html">Ver todo</a>
-                                                <a class="dropdown-item" href="#">Refrigeradores</a>
-                                                <a class="dropdown-item" href="#">Lavadoras</a>
-                                                <a class="dropdown-item" href="#">Estufas</a>
-                                            </div>
-                                        </div>
-                                        <div class="dropdown-submenu">
-                                            <a class="dropdown-item dropdown-toggle" href="#">Celulares</a>
-                                            <div class="dropdown-menu">
-                                                <a class="dropdown-item" href="celulares.html">Ver todo</a>
-                                                <a class="dropdown-item" href="#">iPhone</a>
-                                                <a class="dropdown-item" href="#">Samsung</a>
-                                                <a class="dropdown-item" href="#">Xiaomi</a>
-                                            </div>
-                                        </div>
-                                        <div class="dropdown-submenu">
-                                            <a class="dropdown-item dropdown-toggle" href="#">Equipo de Oficina</a>
-                                            <div class="dropdown-menu">
-                                                <a class="dropdown-item" href="oficina.html">Ver todo</a>
-                                                <a class="dropdown-item" href="#">Impresoras</a>
-                                                <a class="dropdown-item" href="#">Escritorios</a>
-                                                <a class="dropdown-item" href="#">Sillas ergonómicas</a>
-                                            </div>
-                                        </div>
-                                        <div class="dropdown-submenu">
-                                            <a class="dropdown-item dropdown-toggle" href="#">Ferretería</a>
-                                            <div class="dropdown-menu">
-                                                <a class="dropdown-item" href="ferreteria.html">Ver todo</a>
-                                                <a class="dropdown-item" href="#">Taladros</a>
-                                                <a class="dropdown-item" href="#">Sierras eléctricas</a>
-                                                <a class="dropdown-item" href="#">Llaves</a>
-                                            </div>
-                                        </div>
-                                        <div class="dropdown-submenu">
-                                            <a class="dropdown-item dropdown-toggle" href="#">Equipo de Informática</a>
-                                            <div class="dropdown-menu">
-                                                <a class="dropdown-item" href="informatica.html">Ver todo</a>
-                                                <a class="dropdown-item" href="#">Laptops</a>
-                                                <a class="dropdown-item" href="#">Monitores</a>
-                                                <a class="dropdown-item" href="#">Teclados</a>
-                                            </div>
-                                        </div>
+                                        <!-- Más submenús aquí -->
                                     </div>
-                                                            <!-- JavaScript to enable submenus -->
-                                                            <script>
-                                                                document.addEventListener('DOMContentLoaded', function () {
-                                                                    // Enable submenus on hover and click
-                                                                    document.querySelectorAll('.dropdown-submenu a.dropdown-toggle').forEach(function (element) {
-                                                                        element.addEventListener('click', function (e) {
-                                                                            if (!this.nextElementSibling.classList.contains('show')) {
-                                                                                let dropdowns = document.querySelectorAll('.dropdown-submenu .dropdown-menu');
-                                                                                dropdowns.forEach(function (dropdown) {
-                                                                                    dropdown.classList.remove('show');
-                                                                                });
-                                                                            }
-                                                                            this.nextElementSibling.classList.toggle('show');
-                                                                            e.stopPropagation();
-                                                                        });
-                                                                    });
-                                                            
-                                                                    // Close submenus when clicking outside
-                                                                    document.addEventListener('click', function () {
-                                                                        let dropdowns = document.querySelectorAll('.dropdown-submenu .dropdown-menu');
-                                                                        dropdowns.forEach(function (dropdown) {
-                                                                            dropdown.classList.remove('show');
-                                                                        });
-                                                                    });
-                                                                });
-                                                            </script>
                                 </li>
                                 <li class="nav-item">
                                     <a class="nav-link" href="contact.html">Contacto</a>
@@ -144,7 +72,7 @@
                     <p>Dirección: 200 metros oeste, 300 metros norte del colegio Madre de divino pastor, El alto de Guadalupe, Goicoechea.</p>
                     <p>Teléfono: 2245-0909</p>
                     <p>Fax: 2245-9370</p>
-                    <p>Email: gyrventas@ice.co.cr</p>
+                    <p>Email: <a href="mailto:gyrventas@ice.co.cr" target="_blank">gyrventas@ice.co.cr</a></p>
                 </div>
                 <div class="col-md-6">
                     <h3>Persona de contacto</h3>
@@ -160,65 +88,85 @@
             </div>
         </div>
     </section>
-<center>
-    <footer>
-        <div class="container">
-            <div class="row">
-                <div class="col-md-12 text-center">
-                    <p>&copy; 2024 - Todos los derechos reservados ©</p>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-12 text-center">
-                    <center>
-    
 
-                    <a href="FACEBOOK" target="_blank">
-                        <button class="Btn">
-                            <span class="svgContainer">
-                                <svg
-                                    viewBox="0 0 320 512"
-                                    height="1.3em"
-                                    xmlns="http://www.w3.org/2000/svg"
-                                    class="svgIcon"
-                                    fill="white"
-                                >
-                                    <path
-                                        d="M80 299.3V512H196V299.3h86.5l18-97.8H196V166.9c0-51.7 20.3-71.5 72.7-71.5c16.3 0 29.4 .4 37 1.2V7.9C291.4 4 256.4 0 236.2 0C129.3 0 80 50.5 80 159.4v42.1H14v97.8H80z"
-                                    ></path>
-                                </svg>
-                            </span>
-                            <span class="BG"></span>
-                        </button>
-                    </a>
-                    <span class="text-facebook">Nuestro Facebook</span>
-                    <a href="https://www.bing.com/maps?osid=ad899003-b955-482c-aa45-2541d786e9ad&cp=9.930998~-84.059358&lvl=17&pi=0&v=2&sV=2&form=S00027" target="_blank">
-                        <button class="Btn Btn-ubicacion">
-                            <span class="svgContainer">
-                                <svg
-                                    viewBox="0 0 24 24"
-                                    height="1.3em"
-                                    xmlns="http://www.w3.org/2000/svg"
-                                    class="svgIcon"
-                                    fill="white"
-                                >
-                                    <path
-                                        d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-2-5.13z"
-                                    ></path>
-                                    <path
-                                        d="M12 12a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7z"
-                                    ></path>
-                                </svg>
-                            </span>
-                            <span class="BG"></span>
-                        </button>
-                    </a>
-                    <span class="text-ubicacion">Nuestra ubicación</span>
+    <center>
+        <footer>
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12 text-center">
+                        <p>&copy; 2024 - Todos los derechos reservados ©</p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12 text-center">
+                        <center>
+                            <!-- Botón de Facebook -->
+                            <a href="https://www.facebook.com/gabrieladuran" target="_blank">
+                                <button class="Btn">
+                                    <span class="svgContainer">
+                                        <svg viewBox="0 0 320 512" height="1.3em" xmlns="http://www.w3.org/2000/svg" class="svgIcon" fill="white">
+                                            <path d="M80 299.3V512H196V299.3h86.5l18-97.8H196V166.9c0-51.7 20.3-71.5 72.7-71.5 16.3 0 29.4 .4 37 1.2V7.9C291.4 4 256.4 0 236.2 0 129.3 0 80 50.5 80 159.4v42.1H14v97.8H80z"></path>
+                                        </svg>
+                                    </span>
+                                    <span class="BG"></span>
+                                </button>
+                            </a>
+                            <span class="text-facebook">Nuestro Facebook</span>
+                            
+                            <!-- Botón de Ubicación -->
+                            <a href="https://www.bing.com/maps?osid=ad899003-b955-482c-aa45-2541d786e9ad&cp=9.930998~-84.059358&lvl=17&pi=0&v=2&sV=2&form=S00027" target="_blank">
+                                <button class="Btn Btn-ubicacion">
+                                    <span class="svgContainer">
+                                        <svg viewBox="0 0 24 24" height="1.3em" xmlns="http://www.w3.org/2000/svg" class="svgIcon" fill="white">
+                                            <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-2-5.13z"></path>
+                                            <path d="M12 12a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7z"></path>
+                                        </svg>
+                                    </span>
+                                    <span class="BG"></span>
+                                </button>
+                            </a>
+                            <span class="text-ubicacion">Nuestra ubicación</span>
+
+                            <!-- Botón de Email -->
+                            <a href="mailto:gyrventas@ice.co.cr" target="_blank">
+                                <button class="Btn">
+                                    <span class="svgContainer">
+                                        <svg viewBox="0 0 24 24" height="1.3em" xmlns="http://www.w3.org/2000/svg" class="svgIcon" fill="white">
+                                            <path d="M12 13.05l-11.6-8.7a1 1 0 0 1 1.2-1.6l10.4 7.8l10.4-7.8a1 1 0 0 1 1.2 1.6l-11.6 8.7a1 1 0 0 1-1.2 0z"></path>
+                                        </svg>
+                                    </span>
+                                    <span class="BG"></span>
+                                </button>
+                            </a>
+                            <span class="text-email">Enviar Correo</span>
+                        </center>
+                    </div>
                 </div>
             </div>
-        </div>
-    </footer>
+        </footer>
+    </center>
+
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+
+    <!-- Script para manejar los botones de contacto -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // Manejador de clics para Facebook
+            document.querySelector('.Btn.facebook').addEventListener('click', function () {
+                window.open('https://www.facebook.com/gabrieladuran', '_blank');
+            });
+
+            // Manejador de clics para WhatsApp
+            document.querySelector('.Btn.whatsapp').addEventListener('click', function () {
+                window.open('https://wa.me/50689966880', '_blank');
+            });
+
+            // Manejador de clics para Email
+            document.querySelector('.Btn.email').addEventListener('click', function () {
+                window.open('mailto:gyrventas@ice.co.cr', '_blank');
+            });
+        });
+    </script>
 </body>
 </html>
