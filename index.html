@@ -327,8 +327,8 @@
                                     </li>
                                 </ul>
                                 <div class="ml-auto">
-                                    <button @click="showLoginModal = true" class="btn login-register-btn login-btn mr-2">Iniciar Sesión</button>
-                                    <button @click="showRegisterModal = true" class="btn login-register-btn register-btn">Registrarse</button>
+                                    <a href="login.html">  <button @click="showLoginModal = true" class="btn login-register-btn login-btn mr-2">Iniciar Sesión</button></a>
+                                    <a href="Registro-prueba.html"><button @click="showRegisterModal = true" class="btn login-register-btn register-btn">Registrarse</button></a>
                                 </div>
                             </div>
                         </nav>
@@ -365,133 +365,7 @@
             </div>
         </header>
 
- <!-- Login Modal -->
-<div x-show="showLoginModal" class="modal fade show" style="display: block;" tabindex="-1" role="dialog">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title">Iniciar Sesión</h5>
-          <button type="button" class="close" @click="showLoginModal = false">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div class="modal-body">
-          <form id="loginForm" action="login.php" method="post">
-            <div class="form-group">
-              <label for="loginEmail">Correo Electrónico</label>
-              <input type="email" class="form-control" id="loginEmail" required>
-            </div>
-            <div class="form-group">
-              <label for="loginPassword">Contraseña</label>
-              <input type="password" class="form-control" id="loginPassword" required>
-            </div>
-            <button type="submit" class="btn btn-primary">Iniciar Sesión</button>
-          </form>
-        </div>
-      </div>
-    </div>
-  </div>
-  
-  <!-- Register Modal -->
-  <div x-show="showRegisterModal" class="modal fade show" style="display: block;" tabindex="-1" role="dialog">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title">Registrarse</h5>
-          <button type="button" class="close" @click="showRegisterModal = false">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div class="modal-body">
-          <form id="registerForm">
-            <div class="form-group">
-              <label for ="registerName">Nombre</label>
-              <input type="text" class="form-control" id="registerName" required>
-            </div>
-            <div class="form-group">
-              <label for="registerEmail">Correo Electrónico</label>
-              <input type="email" class="form-control" id="registerEmail" required>
-            </div>
-            <div class="form-group">
-              <label for="registerPassword">Contraseña</label>
-              <input type="password" class="form-control" id="registerPassword" required>
-            </div>
-            <div class="form-group">
-              <label for="registerConfirmPassword">Confirmar Contraseña</label>
-              <input type="password" class="form-control" id="registerConfirmPassword" required>
-            </div>
-            <button type="submit" class="btn btn-success">Registrarse</button>
-          </form>
-        </div>
-      </div>
-    </div>
-  </div>
-  
-  <script>
-    // Get the form elements
-    const loginForm = document.getElementById('loginForm');
-    const registerForm = document.getElementById('registerForm');
-  
-    // Add event listeners to the forms
-    loginForm.addEventListener('submit', handleLoginSubmit);
-    registerForm.addEventListener('submit', handleRegisterSubmit);
-  
-    // Function to handle login form submission
-    function handleLoginSubmit(event) {
-      event.preventDefault();
-      const email = document.getElementById('loginEmail').value;
-      const password = document.getElementById('loginPassword').value;
-  
-      // Send request to server
-      fetch('login.php', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({ email, password })
-      })
-      .then(response => response.json())
-      .then(data => {
-        if (data.success) {
-          // Save token to local storage
-          localStorage.setItem('token', data.token);
-          // Close the modal
-          loginModal.style.display = 'none';
-        } else {
-          alert('Credenciales incorrectas');
-        }
-      })
-      .catch(error => console.error('Error:', error));
-    }
-  
-    // Function to handle register form submission
-    function handleRegisterSubmit(event) {
-      event.preventDefault();
-      const name = document.getElementById('registerName').value;
-      const email = document.getElementById('registerEmail').value;
-      const password = document.getElementById('registerPassword').value;
-      const confirmPassword = document.getElementById('registerConfirmPassword').value;
-  
-      // Send request to server
-      fetch('register.php', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({ name, email, password, confirmPassword })
-      })
-      .then(response => response.json())
-      .then(data => {
-        if (data.success) {
-          // Close the modal
-          registerModal.style.display = 'none';
-        } else {
-          alert('Error al registrar usuario');
-        }
-      })
-      .catch(error => console.error('Error:', error));
-    }
-  </script>
+ 
 
   <!-- Sección de Celulares -->
 <h2 class="section-title">Smartphones</h2>

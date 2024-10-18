@@ -14,7 +14,6 @@
     <script src="https://accounts.google.com/gsi/client" async defer></script>
     
     <style>
-        /* Mantenemos los estilos anteriores y agregamos los nuevos */
         .social-buttons {
             margin-top: 20px;
             display: flex;
@@ -74,25 +73,50 @@
         .separator::after {
             right: 0;
         }
+
+        .register-box {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            height: 100%;
+        }
+
+        /* Estilo para el botón de regresar en la esquina superior izquierda */
+        .btn-back {
+            position: sticky;
+            top: 20px;
+            left: 20px;
+            display: inline-block;
+            padding: 10px;
+            background-color: transparent;
+            color: #303030;
+            font-size: 18px;
+            border: none;
+            cursor: pointer;
+            text-decoration: none;
+            transition: color 0.3s ease;
+            font-weight: bold;
+        }
+
+        .btn-back::before {
+            content: '←';
+            margin-right: 5px;
+        }
+
+        .btn-back:hover {
+            color: #797979;
+        }
     </style>
 </head>
+<br>
+<br>
+<br>
 <body>
+    <!-- Botón de regresar en la esquina superior izquierda -->
+    <a href="index.html" class="btn-back">Inicio</a>
+
     <div class="register-box">
         <h2>Registro</h2>
-        
-        <!-- Botones de redes sociales -->
-        <div class="social-buttons">
-            <button onclick="signInWithGoogle()" class="social-btn google-btn">
-                <img src="https://www.google.com/favicon.ico" alt="Google" width="18" height="18">
-                Continuar con Google
-            </button>
-            <button onclick="signInWithFacebook()" class="social-btn facebook-btn">
-                <img src="https://static.xx.fbcdn.net/rsrc.php/yD/r/d4ZIVX-5C-b.ico" alt="Facebook" width="18" height="18">
-                Continuar con Facebook
-            </button>
-        </div>
-
-        <div class="separator">o</div>
 
         <form>
             <div class="caja-usuario">
@@ -115,14 +139,30 @@
                 <label for="confirm-password">Confirmar Contraseña</label>
             </div>
             <br>
-            <a href="#" class="btn-register">
-                <span></span>
-                <span></span>
-                <span></span>
-                <span></span>
-                Registrarse
-            </a>
+            <center>
+                <a href="#" class="btn-register">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                    Registrarse
+                </a>
+            </center>
         </form>
+
+        <div class="separator" style="color:white">o</div>
+
+        <!-- Botones de redes sociales -->
+        <div class="social-buttons">
+            <button onclick="signInWithGoogle()" class="social-btn google-btn">
+                <img src="https://www.google.com/favicon.ico" alt="Google" width="18" height="18">
+                Continuar con Google
+            </button>
+            <button onclick="signInWithFacebook()" class="social-btn facebook-btn">
+                <img src="https://static.xx.fbcdn.net/rsrc.php/v3/yz/r/_wfrZcpRBnE.png" alt="Facebook" width="18" height="18">
+                Continuar con Facebook
+            </button>
+        </div>
     </div>
 
     <script>
@@ -140,10 +180,8 @@
         function signInWithFacebook() {
             FB.login(function(response) {
                 if (response.authResponse) {
-                    // El usuario ha iniciado sesión correctamente
                     FB.api('/me', { fields: 'name, email' }, function(response) {
                         console.log('Información del usuario:', response);
-                        // Aquí puedes manejar el registro/inicio de sesión en tu backend
                     });
                 } else {
                     console.log('El usuario canceló el inicio de sesión o no autorizó la aplicación.');
@@ -154,7 +192,7 @@
         // Función para iniciar sesión con Google
         function signInWithGoogle() {
             google.accounts.id.initialize({
-                client_id: 'TU_CLIENT_ID.apps.googleusercontent.com', // Reemplaza con tu Client ID de Google
+                client_id: 'TU_CLIENT_ID.apps.googleusercontent.com',
                 callback: handleGoogleSignIn
             });
             google.accounts.id.prompt();
@@ -162,12 +200,10 @@
 
         // Callback para manejar la respuesta de Google
         function handleGoogleSignIn(response) {
-            // Decodificar el token JWT que viene en response.credential
             const responsePayload = decodeJwtResponse(response.credential);
             console.log("ID: " + responsePayload.sub);
             console.log('Nombre completo: ' + responsePayload.name);
             console.log('Email: ' + responsePayload.email);
-            // Aquí puedes manejar el registro/inicio de sesión en tu backend
         }
 
         // Función auxiliar para decodificar el token JWT
