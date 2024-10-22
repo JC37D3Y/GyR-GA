@@ -276,17 +276,17 @@ searchForm.addEventListener('submit', (e) => {
         </script>
         <script>
             let cart = [];
-    
+
             function addToCart(name, price) {
                 cart.push({name, price});
                 updateCartDisplay();
             }
-    
+            
             function removeFromCart(index) {
                 cart.splice(index, 1);
                 updateCartDisplay();
             }
-    
+            
             function updateCartDisplay() {
                 const cartCount = document.querySelector('.cart-count');
                 const cartItems = document.getElementById('cartItems');
@@ -307,19 +307,30 @@ searchForm.addEventListener('submit', (e) => {
                 const total = cart.reduce((sum, item) => sum + item.price, 0);
                 cartTotal.textContent = `Total: $${total.toFixed(2)}`;
             }
-    
+            
             function checkout() {
                 if (cart.length === 0) {
                     alert('Your cart is empty!');
                     return;
                 }
-                alert('Thank you for your purchase!');
-                cart = [];
-                updateCartDisplay();
-                $('#cartModal').modal('hide');
+                // Abrir el modal de pago
+                $('#paymentModal').modal('show');
             }
-    
-            // Modify all "Comprar" buttons to add items to cart
+            
+            function completePurchase() {
+                const paymentForm = document.getElementById('paymentForm');
+                
+                if (paymentForm.checkValidity()) {
+                    alert('¡Gracias por su compra! Su pedido ha sido realizado.');
+                    cart = [];
+                    updateCartDisplay();
+                    $('#paymentModal').modal('hide');
+                } else {
+                    alert('Por favor completa el pago.');
+                }
+            }
+            
+            // Modificar botones de "Comprar"
             document.addEventListener('DOMContentLoaded', function() {
                 const buyButtons = document.querySelectorAll('.button');
                 buyButtons.forEach(button => {
@@ -331,6 +342,7 @@ searchForm.addEventListener('submit', (e) => {
                     }
                 });
             });
+            
         </script>
     </div>
 </nav>
@@ -358,14 +370,14 @@ searchForm.addEventListener('submit', (e) => {
                                     <p>Capacidad de 10 kg, tecnología de lavado inteligente</p>
                                     <p class="price">$499.99</p>
                                     <button class="button">
-                                        <svg viewBox="0 0  24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                                             <path d="M3 3h18v18H3V3z M19 19H5V5h14v14z M15 5v2h4v-2H15z M7 7v2h10V7H7z M7 11v2h10V11H7z M7 15v2h10v-2H7z"></path>
                                         </svg>
                                         <span class="text">Comprar</span>
                                     </button>
                                     <br>
-                                    <button class="btn " data-toggle="modal" data-target="#imagen6Modal">
-                                        <img src="IMG/image.png" style="width: 40px" >
+                                    <button class="btn" data-toggle="modal" data-target="#imagen6Modal">
+                                        <img src="IMG/image.png" style="width: 40px">
                                     </button>
                                 </div>
                             </div>
@@ -379,13 +391,13 @@ searchForm.addEventListener('submit', (e) => {
                                     <p class="price">$799.99</p>
                                     <button class="button">
                                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                            <path d="M3 3h18v18H3V3z M19 19H5V 5h14v14z M15 5v2h4v-2H15z M7 7v2h10V7H7z M7 11v2h10V11H7z M7 15v2h10v-2H7z"></path>
+                                            <path d="M3 3h18v18H3V3z M19 19H5V5h14v14z M15 5v2h4v-2H15z M7 7v2h10V7H7z M7 11v2h10V11H7z M7 15v2h10v-2H7z"></path>
                                         </svg>
                                         <span class="text">Comprar</span>
                                     </button>
                                     <br>
-                                    <button class="btn " data-toggle="modal" data-target="#imagen6Modal">
-                                        <img src="IMG/image.png" style="width: 40px" >
+                                    <button class="btn" data-toggle="modal" data-target="#imagen6Modal">
+                                        <img src="IMG/image.png" style="width: 40px">
                                     </button>
                                 </div>
                             </div>
@@ -404,8 +416,8 @@ searchForm.addEventListener('submit', (e) => {
                                         <span class="text">Comprar</span>
                                     </button>
                                     <br>
-                                    <button class="btn " data-toggle="modal" data-target="#imagen6Modal">
-                                        <img src="IMG/image.png" style="width: 40px" >
+                                    <button class="btn" data-toggle="modal" data-target="#imagen6Modal">
+                                        <img src="IMG/image.png" style="width: 40px">
                                     </button>
                                 </div>
                             </div>
@@ -423,13 +435,13 @@ searchForm.addEventListener('submit', (e) => {
                                     <p class="price">$299.99</p>
                                     <button class="button">
                                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                            <path d="M 3 3h18v18H3V3z M19 19H5V5h14v14z M15 5v2h4v-2H15z M7 7v2h10V7H7z M7 11v2h10V11H7z M7 15v2h10v-2H7z"></path>
+                                            <path d="M3 3h18v18H3V3z M19 19H5V5h14v14z M15 5v2h4v-2H15z M7 7v2h10V7H7z M7 11v2h10V11H7z M7 15v2h10v-2H7z"></path>
                                         </svg>
                                         <span class="text">Comprar</span>
                                     </button>
                                     <br>
-                                    <button class="btn " data-toggle="modal" data-target="#imagen6Modal">
-                                        <img src="IMG/image.png" style="width: 40px" >
+                                    <button class="btn" data-toggle="modal" data-target="#imagen6Modal">
+                                        <img src="IMG/image.png" style="width: 40px">
                                     </button>
                                 </div>
                             </div>
@@ -439,7 +451,7 @@ searchForm.addEventListener('submit', (e) => {
                                 <img src="electrodomestico5.jpg" alt="Cafetera" class="card-img-top">
                                 <div class="card-body">
                                     <h3>Cafetera</h3>
-                                    <p>Potencia de 1000W, tecnología de cocción rápida</p>
+                                    <p>Potencia de 1000W, tecnología avanzada de café</p>
                                     <p class="price">$399.99</p>
                                     <button class="button">
                                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -448,8 +460,8 @@ searchForm.addEventListener('submit', (e) => {
                                         <span class="text">Comprar</span>
                                     </button>
                                     <br>
-                                    <button class="btn " data-toggle="modal" data-target="#imagen6Modal">
-                                        <img src="IMG/image.png" style="width: 40px" >
+                                    <button class="btn" data-toggle="modal" data-target="#imagen6Modal">
+                                        <img src="IMG/image.png" style="width: 40px">
                                     </button>
                                 </div>
                             </div>
@@ -463,13 +475,13 @@ searchForm.addEventListener('submit', (e) => {
                                     <p class="price">$249.99</p>
                                     <button class="button">
                                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                            <path d="M3 3h18v18H3V3z M19 19H5 V5h14v14z M15 5v2h4v-2H15z M7 7v2h10V7H7z M7 11v2h10V11H7z M7 15v2h10v-2H7z"></path>
+                                            <path d="M3 3h18v18H3V3z M19 19H5V5h14v14z M15 5v2h4v-2H15z M7 7v2h10V7H7z M7 11v2h10V11H7z M7 15v2h10v-2H7z"></path>
                                         </svg>
                                         <span class="text">Comprar</span>
                                     </button>
                                     <br>
-                                    <button class="btn " data-toggle="modal" data-target="#imagen6Modal">
-                                        <img src="IMG/image.png" style="width: 40px" >
+                                    <button class="btn" data-toggle="modal" data-target="#imagen6Modal">
+                                        <img src="IMG/image.png" style="width: 40px">
                                     </button>
                                 </div>
                             </div>
@@ -487,6 +499,7 @@ searchForm.addEventListener('submit', (e) => {
             </a>
         </div>
     </section>
+    
 
     <!-- Modal para la imagen 1 -->
 <div class="modal fade" id="imagen1Modal" tabindex="-1" role="dialog" aria-labelledby="imagen1ModalLabel" aria-hidden="true">
@@ -618,7 +631,7 @@ searchForm.addEventListener('submit', (e) => {
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="cartModalLabel">Shopping Cart</h5>
+                <h5 class="modal-title" id="cartModalLabel">Carrito de compras</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -628,12 +641,55 @@ searchForm.addEventListener('submit', (e) => {
                 <div id="cartTotal"></div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary" onclick="checkout()">Checkout</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                <button type="button" class="btn btn-primary" onclick="checkout()">Proceder al pago</button>
             </div>
         </div>
     </div>
 </div>
+
+<!-- Payment Modal -->
+<div class="modal fade" id="paymentModal" tabindex="-1" role="dialog" aria-labelledby="paymentModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="paymentModalLabel">Información de pago</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="paymentForm">
+                    <div class="form-group">
+                        <label for="cardName">Nombre en la tarjeta</label>
+                        <input type="text" class="form-control" id="cardName" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="cardNumber">Número de tarjeta</label>
+                        <input type="text" class="form-control" id="cardNumber" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="expirationDate">Fecha de expiración</label>
+                        <input type="text" class="form-control" id="expirationDate" placeholder="MM/AA" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="cvv">CVV</label>
+                        <input type="text" class="form-control" id="cvv" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="shippingAddress">Dirección de envío</label>
+                        <input type="text" class="form-control" id="shippingAddress" required>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                <button type="button" class="btn btn-primary" onclick="completePurchase()">Finalizar compra</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 
 
     <!-- Footer -->

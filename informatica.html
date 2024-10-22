@@ -263,17 +263,17 @@ searchForm.addEventListener('submit', (e) => {
         </script>
         <script>
             let cart = [];
-    
+
             function addToCart(name, price) {
                 cart.push({name, price});
                 updateCartDisplay();
             }
-    
+            
             function removeFromCart(index) {
                 cart.splice(index, 1);
                 updateCartDisplay();
             }
-    
+            
             function updateCartDisplay() {
                 const cartCount = document.querySelector('.cart-count');
                 const cartItems = document.getElementById('cartItems');
@@ -294,19 +294,30 @@ searchForm.addEventListener('submit', (e) => {
                 const total = cart.reduce((sum, item) => sum + item.price, 0);
                 cartTotal.textContent = `Total: $${total.toFixed(2)}`;
             }
-    
+            
             function checkout() {
                 if (cart.length === 0) {
                     alert('Your cart is empty!');
                     return;
                 }
-                alert('Thank you for your purchase!');
-                cart = [];
-                updateCartDisplay();
-                $('#cartModal').modal('hide');
+                // Abrir el modal de pago
+                $('#paymentModal').modal('show');
             }
-    
-            // Modify all "Comprar" buttons to add items to cart
+            
+            function completePurchase() {
+                const paymentForm = document.getElementById('paymentForm');
+                
+                if (paymentForm.checkValidity()) {
+                    alert('¡Gracias por su compra! Su pedido ha sido realizado.');
+                    cart = [];
+                    updateCartDisplay();
+                    $('#paymentModal').modal('hide');
+                } else {
+                    alert('Por favor completa el pago.');
+                }
+            }
+            
+            // Modificar botones de "Comprar"
             document.addEventListener('DOMContentLoaded', function() {
                 const buyButtons = document.querySelectorAll('.button');
                 buyButtons.forEach(button => {
@@ -318,6 +329,7 @@ searchForm.addEventListener('submit', (e) => {
                     }
                 });
             });
+            
         </script>
     </div>
 </nav>
@@ -573,27 +585,69 @@ searchForm.addEventListener('submit', (e) => {
         </div>
     </div>
 
-    <!-- Shopping Cart Modal -->
-    <div class="modal fade" id="cartModal" tabindex="-1" role="dialog" aria-labelledby="cartModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="cartModalLabel">Shopping Cart</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <div id="cartItems"></div>
-                    <div id="cartTotal"></div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary" onclick="checkout()">Checkout</button>
-                </div>
+<!-- Shopping Cart Modal -->
+<div class="modal fade" id="cartModal" tabindex="-1" role="dialog" aria-labelledby="cartModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="cartModalLabel">Carrito de compras</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div id="cartItems"></div>
+                <div id="cartTotal"></div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                <button type="button" class="btn btn-primary" onclick="checkout()">Proceder al pago</button>
             </div>
         </div>
     </div>
+</div>
+
+<!-- Payment Modal -->
+<div class="modal fade" id="paymentModal" tabindex="-1" role="dialog" aria-labelledby="paymentModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="paymentModalLabel">Información de pago</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="paymentForm">
+                    <div class="form-group">
+                        <label for="cardName">Nombre en la tarjeta</label>
+                        <input type="text" class="form-control" id="cardName" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="cardNumber">Número de tarjeta</label>
+                        <input type="text" class="form-control" id="cardNumber" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="expirationDate">Fecha de expiración</label>
+                        <input type="text" class="form-control" id="expirationDate" placeholder="MM/AA" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="cvv">CVV</label>
+                        <input type="text" class="form-control" id="cvv" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="shippingAddress">Dirección de envío</label>
+                        <input type="text" class="form-control" id="shippingAddress" required>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                <button type="button" class="btn btn-primary" onclick="completePurchase()">Finalizar compra</button>
+            </div>
+        </div>
+    </div>
+</div>
 
     <!-- Cart Icon -->
     <div class="cart-icon" data-toggle="modal" data-target="#cartModal">
@@ -608,12 +662,12 @@ searchForm.addEventListener('submit', (e) => {
             cart.push({name, price});
             updateCartDisplay();
         }
-
+        
         function removeFromCart(index) {
             cart.splice(index, 1);
             updateCartDisplay();
         }
-
+        
         function updateCartDisplay() {
             const cartCount = document.querySelector('.cart-count');
             const cartItems = document.getElementById('cartItems');
@@ -634,19 +688,30 @@ searchForm.addEventListener('submit', (e) => {
             const total = cart.reduce((sum, item) => sum + item.price, 0);
             cartTotal.textContent = `Total: $${total.toFixed(2)}`;
         }
-
+        
         function checkout() {
             if (cart.length === 0) {
                 alert('Your cart is empty!');
                 return;
             }
-            alert('Thank you for your purchase!');
-            cart = [];
-            updateCartDisplay();
-            $('#cartModal').modal('hide');
+            // Abrir el modal de pago
+            $('#paymentModal').modal('show');
         }
-
-        // Modify all "Comprar" buttons to add items to cart
+        
+        function completePurchase() {
+            const paymentForm = document.getElementById('paymentForm');
+            
+            if (paymentForm.checkValidity()) {
+                alert('¡Gracias por su compra! Su pedido ha sido realizado.');
+                cart = [];
+                updateCartDisplay();
+                $('#paymentModal').modal('hide');
+            } else {
+                alert('Por favor completa el pago.');
+            }
+        }
+        
+        // Modificar botones de "Comprar"
         document.addEventListener('DOMContentLoaded', function() {
             const buyButtons = document.querySelectorAll('.button');
             buyButtons.forEach(button => {
@@ -658,6 +723,7 @@ searchForm.addEventListener('submit', (e) => {
                 }
             });
         });
+        
     </script>
 
     <!-- Footer -->
