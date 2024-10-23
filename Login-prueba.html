@@ -1,245 +1,221 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login-prueba</title>
-    <!-- Firebase SDK -->
-    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app-compat.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-auth-compat.js"></script>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Compralo.com - Soporte Técnico</title>
+    
+    <!-- CSS -->
     <style>
+        /* General styles */
         body {
+            font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
-            font-family: sans-serif;
-            background: #ffffff;
-            min-height: 100vh;
+            background-color: #f0f0f0;
         }
 
-        .login-box {
-            position: absolute;
-            top: 40%;
-            left: 50%;
-            width: 400px;
-            padding: 40px;
-            transform: translate(-50%, -50%);
-            background: #333333;
-            box-sizing: border-box;
-            box-shadow: 0 15px 25px rgba(0, 0, 0, 0.2);
+        header {
+            background-color: #007bff;
+            color: white;
+            text-align: center;
+            padding: 20px;
+            font-size: 24px;
+        }
+
+        /* Sticky Chatbot Logo */
+        .chatbot-logo {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 1000;
+            cursor: pointer;
+        }
+
+        .chatbot-logo img {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+        }
+
+        /* Chatbot Container */
+        .chatbot-container {
+            display: none;
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 350px;
+            height: 400px;
+            background-color: #f5f5f5;
+            border: 1px solid #ddd;
             border-radius: 10px;
-            text-align: center;
-        }
-
-        .login-box h2 {
-            margin: 0 0 30px;
-            padding: 0;
-            color: #fff;
-        }
-
-        .user-box {
-            position: relative;
-            margin-bottom: 30px;
-        }
-
-        .user-box input {
-            width: 100%;
-            padding: 10px 0;
-            font-size: 16px;
-            color: #fff;
-            border: none;
-            border-bottom: 1px solid #fff;
-            outline: none;
-            background: transparent;
-            margin-bottom: 20px;
-        }
-
-        .user-box label {
-            position: absolute;
-            top: 0;
-            left: 0;
-            padding: 10px 0;
-            font-size: 16px;
-            color: #fff;
-            pointer-events: none;
-            transition: .5s;
-        }
-
-        .user-box input:focus ~ label,
-        .user-box input:valid ~ label {
-            top: -20px;
-            left: 0;
-            color: #03e9f4;
-            font-size: 12px;
-        }
-
-        form a {
-            position: relative;
-            display: inline-block;
-            padding: 10px 20px;
-            color: #03e9f4;
-            font-size: 16px;
-            text-decoration: none;
-            text-transform: uppercase;
-            overflow: hidden;
-            transition: .5s;
-            margin-top: 20px;
-            letter-spacing: 4px;
-            cursor: pointer;
-        }
-
-        form a:hover {
-            background: #c7ffea;
-            color: #fff;
-            border-radius: 5px;
-            box-shadow: 0 0 5px #03e9f4,
-                        0 0 25px #03e9f4,
-                        0 0 50px #03e9f4,
-                        0 0 100px #03e9f4;
-        }
-
-        .social-login {
-            position: absolute;
-            top: 75%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            display: flex;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            z-index: 1001;
             flex-direction: column;
-            gap: 15px;
-            width: 300px;
         }
 
-        .social-button {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-            padding: 12px 20px;
-            border-radius: 5px;
-            text-decoration: none;
-            font-size: 14px;
-            transition: opacity 0.3s;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        .chatbot-header {
+            background-color: #007bff;
+            color: white;
+            padding: 10px;
+            text-align: center;
+            font-weight: bold;
+            border-top-left-radius: 10px;
+            border-top-right-radius: 10px;
+            position: relative;
+        }
+
+        .close-btn {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 18px;
             cursor: pointer;
         }
 
-        .social-button:hover {
-            opacity: 0.9;
+        .chatbot-messages {
+            flex-grow: 1;
+            padding: 10px;
+            overflow-y: auto;
         }
 
-        .social-button img {
-            width: 20px;
-            height: 20px;
+        .message {
+            padding: 8px;
+            margin-bottom: 10px;
+            border-radius: 10px;
+            max-width: 80%;
         }
 
-        .google {
-            background-color: #ffffff;
-            color: #757575;
-            border: 1px solid #dadce0;
+        .bot-message {
+            background-color: #e9ecef;
+            align-self: flex-start;
         }
 
-        .facebook {
-            background-color: #1877f2;
-            color: #ffffff;
+        .user-message {
+            background-color: #007bff;
+            color: white;
+            align-self: flex-end;
         }
-        
-        #error-message {
-            color: #ff4444;
-            margin-top: 10px;
-            text-align: center;
+
+        .chatbot-input {
+            display: flex;
+            border-top: 1px solid #ddd;
+        }
+
+        .chatbot-input input {
+            flex-grow: 1;
+            padding: 10px;
+            border: none;
+            border-radius: 0;
+            outline: none;
+        }
+
+        .chatbot-input button {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            cursor: pointer;
+        }
+
+        .chatbot-input button:hover {
+            background-color: #0056b3;
         }
     </style>
 </head>
 <body>
-    <div class="login-box">
-        <h2>Inicio de sesión</h2>
-        <form id="loginForm">
-            <div class="user-box">
-                <input type="text" name="email" required="">
-                <label for="email">Correo</label>
-            </div>
-            <div class="user-box">
-                <input type="password" name="password" required="">
-                <label for="password">Contraseña</label>
-            </div>
-            <a onclick="loginWithEmailPassword()">Iniciar</a>
-        </form>
-        <div id="error-message"></div>
+
+    <!-- Header -->
+    <header>
+        Bienvenido a Compralo.com
+    </header>
+
+    <!-- Main Content -->
+    <main>
+        <section style="padding: 20px;">
+            <h1>¡Explora nuestros productos!</h1>
+            <p>Compralo.com ofrece una variedad de productos tecnológicos para que puedas disfrutar de las últimas tendencias.</p>
+        </section>
+    </main>
+
+    <!-- Chatbot Button -->
+    <div class="chatbot-logo">
+        <img src="logo-compralo.png" alt="Compralo.com Soporte Técnico" id="openChatbot">
     </div>
 
-    <div class="social-login">
-        <button onclick="loginWithGoogle()" class="social-button google">
-            <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0OCIgaGVpZ2h0PSI0OCIgdmlld0JveD0iMCAwIDQ4IDQ4Ij48cGF0aCBmaWxsPSIjRkZDMTA3IiBkPSJNNDMuNjExLDIwLjA4M0g0MlYyMEgyNHY4aDExLjMwM2MtMS42NDksNC42NTctNi4wOCw4LTExLjMwMyw4Yy02LjYyNywwLTEyLTUuMzczLTEyLTEyYzAtNi42MjcsNS4zNzMtMTIsMTItMTJjMy4wNTksMCw1Ljg0MiwxLjE1NCw3Ljk2MSwzLjAzOWw1LjY1Ny01LjY1N0MzNC4wNDYsNi4wNTMsMjkuMjY4LDQsMjQsNEMxMi45NTUsNCw0LDEyLjk1NSw0LDI0YzAsMTEuMDQ1LDguOTU1LDIwLDIwLDIwYzExLjA0NSwwLDIwLTguOTU1LDIwLTIwQzQ0LDIyLjY1OSw0My44NjIsMjEuMzUsNDMuNjExLDIwLjA4M3oiLz48cGF0aCBmaWxsPSIjRkYzRDAwIiBkPSJNNi4zMDYsMTQuNjkxbDYuNTcxLDQuODE5QzE0LjY1NSwxNS4xMDgsMTguOTYxLDEyLDI0LDEyYzMuMDU5LDAsNS44NDIsMS4xNTQsNy45NjEsMy4wMzlsNS42NTctNS42NTdDMzQuMDQ2LDYuMDUzLDI5LjI2OCw0LDI0LDRDMTYuMzE4LDQsOS42NTYsOC4zMzcsNi4zMDYsMTQuNjkxeiIvPjxwYXRoIGZpbGw9IiM0Q0FGNTAiIGQ9Ik0yNCw0NGM1LjE2NiwwLDkuODYtMS45NzcsMTMuNDA5LTUuMTkybC02LjE5LTUuMjM4QzI5LjIxMSwzNS4wOTEsMjYuNzE1LDM2LDI0LDM2Yy01LjIwMiwwLTkuNjE5LTMuMzE3LTExLjI4My03Ljk0NmwtNi41MjIsNS4wMjVDOS41MDUsMzkuNTU2LDE2LjIyNyw0NCwyNCw0NHoiLz48cGF0aCBmaWxsPSIjMTk3NkQyIiBkPSJNNDMuNjExLDIwLjA4M0g0MlYyMEgyNHY4aDExLjMwM2MtMC43OTIsMi4yMzctMi4yMzEsNC4xNjYtNC4wODcsNS41NzFjMC4wMDEtMC4wMDEsMC4wMDItMC4wMDEsMC4wMDMtMC4wMDJsNi4xOSw1LjIzOEMzNi45NzEsMzkuMjA1LDQ0LDM0LDQ0LDI0QzQ0LDIyLjY1OSw0My44NjIsMjEuMzUsNDMuNjExLDIwLjA4M3oiLz48L3N2Zz4=" alt="Google logo">
-            Continuar con Google
-        </button>
-        <button onclick="loginWithFacebook()" class="social-button facebook">
-            <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0Ij48cGF0aCBmaWxsPSJ3aGl0ZSIgZD0iTTEyIDJjNS41MTQgMCAxMCA0LjQ4NiAxMCAxMHMtNC40ODYgMTAtMTAgMTAtMTAtNC40ODYtMTAtMTAgNC40ODYtMTAgMTAtMTB6bTAgMmMtNC40MTEgMC04IDMuNTg5LTggOHMzLjU4OSA4IDggOCA4LTMuNTg5IDgtOC0zLjU4OS04LTgtOHptMCA2YzIuMjA2IDAgNCAxLjc5NCA0IDRzLTEuNzk0IDQtNCA0LTQtMS43OTQtNC00IDEuNzk0LTQgNC00em0wIDJjLTEuMTAzIDAtMiAuODk3LTIgMnMuODk3IDIgMiAyIDItLjg5NyAyLTItLjg5Ny0yLTItMnoiLz48L3N2Zz4=" alt="Facebook logo">
-            Continuar con Facebook
-        </button>
+    <!-- Chatbot Window -->
+    <div class="chatbot-container" id="chatbotContainer">
+        <div class="chatbot-header">
+            <h4>Soporte Técnico - Compralo.com</h4>
+            <button id="closeChatbot" class="close-btn">&times;</button>
+        </div>
+        <div class="chatbot-messages" id="chatbotMessages">
+            <div class="message bot-message">
+                ¡Hola! Soy el chatbot de soporte técnico de Compralo.com. ¿En qué puedo ayudarte hoy?
+            </div>
+        </div>
+        <div class="chatbot-input">
+            <input type="text" id="userInput" placeholder="Escribe tu mensaje aquí..." />
+            <button id="sendMessage">Enviar</button>
+        </div>
     </div>
 
+    <!-- JavaScript -->
     <script>
-        // Configuración de Firebase
-        const firebaseConfig = {
-            // AQUÍ DEBES COLOCAR TU CONFIGURACIÓN DE FIREBASE
-            apiKey: "tu-api-key",
-            authDomain: "tu-auth-domain",
-            projectId: "tu-project-id",
-            storageBucket: "tu-storage-bucket",
-            messagingSenderId: "tu-messaging-sender-id",
-            appId: "tu-app-id"
-        };
+        // Mostrar/ocultar la ventana del chatbot
+        const chatbotLogo = document.getElementById('openChatbot');
+        const chatbotContainer = document.getElementById('chatbotContainer');
+        const closeChatbot = document.getElementById('closeChatbot');
 
-        // Inicializar Firebase
-        firebase.initializeApp(firebaseConfig);
-        const auth = firebase.auth();
+        chatbotLogo.addEventListener('click', () => {
+            chatbotContainer.style.display = 'flex';
+            chatbotLogo.style.display = 'none';
+        });
 
-        // Función para mostrar mensajes de error
-        function showError(message) {
-            document.getElementById('error-message').textContent = message;
+        closeChatbot.addEventListener('click', () => {
+            chatbotContainer.style.display = 'none';
+            chatbotLogo.style.display = 'block';
+        });
+
+        // Interacción del chatbot
+        const userInput = document.getElementById('userInput');
+        const sendMessageBtn = document.getElementById('sendMessage');
+        const chatbotMessages = document.getElementById('chatbotMessages');
+
+        function addMessage(content, sender) {
+            const messageDiv = document.createElement('div');
+            messageDiv.classList.add('message', sender === 'bot' ? 'bot-message' : 'user-message');
+            messageDiv.textContent = content;
+            chatbotMessages.appendChild(messageDiv);
+            chatbotMessages.scrollTop = chatbotMessages.scrollHeight; // Desplaza hacia el final
         }
 
-        // Inicio de sesión con email y contraseña
-        async function loginWithEmailPassword() {
-            const email = document.querySelector('input[name="email"]').value;
-            const password = document.querySelector('input[name="password"]').value;
-
-            try {
-                const userCredential = await auth.signInWithEmailAndPassword(email, password);
-                window.location.href = '/dashboard'; // Redirige después del inicio de sesión exitoso
-            } catch (error) {
-                showError('Error en el inicio de sesión: ' + error.message);
-            }
+        function getBotResponse(userMessage) {
+            // Respuestas predefinidas para prueba
+            const responses = {
+                "hola": "¡Hola! ¿Cómo puedo asistirte hoy?",
+                "problema con mi pedido": "Lamento escuchar eso. Por favor, proporcióname tu número de pedido.",
+                "gracias": "¡De nada! Si tienes más preguntas, no dudes en preguntarme.",
+            };
+            return responses[userMessage.toLowerCase()] || "Lo siento, no entiendo tu pregunta. ¿Podrías reformularla?";
         }
 
-        // Inicio de sesión con Google
-        async function loginWithGoogle() {
-            const provider = new firebase.auth.GoogleAuthProvider();
-            try {
-                const result = await auth.signInWithPopup(provider);
-                window.location.href = '/dashboard'; // Redirige después del inicio de sesión exitoso
-            } catch (error) {
-                showError('Error al iniciar sesión con Google: ' + error.message);
-            }
-        }
-
-        // Inicio de sesión con Facebook
-        async function loginWithFacebook() {
-            const provider = new firebase.auth.FacebookAuthProvider();
-            try {
-                const result = await auth.signInWithPopup(provider);
-                window.location.href = '/dashboard'; // Redirige después del inicio de sesión exitoso
-            } catch (error) {
-                showError('Error al iniciar sesión con Facebook: ' + error.message);
-            }
-        }
-
-        // Observador del estado de autenticación
-        auth.onAuthStateChanged((user) => {
-            if (user) {
-                // El usuario está conectado
-                console.log('Usuario conectado:', user.email);
+        sendMessageBtn.addEventListener('click', () => {
+            const userMessage = userInput.value;
+            if (userMessage.trim()) {
+                addMessage(userMessage, 'user');
+                const botResponse = getBotResponse(userMessage);
+                setTimeout(() => {
+                    addMessage(botResponse, 'bot');
+                }, 500);
+                userInput.value = ''; // Limpia el campo de entrada
             }
         });
     </script>
+
 </body>
 </html>
