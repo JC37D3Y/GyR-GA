@@ -411,6 +411,84 @@
                                 });
                             });
                         </script>
+<br>
+<br>
+<center>
+    <div class="video-container">
+        <video autoplay muted loop playsinline>
+            <source src="IMG/108458-680697604.mp4" type="video/mp4">
+            Tu navegador no soporta la etiqueta de video.
+        </video>
+        <div class="overlay-text">
+            <h1>Encuentra todo lo que necesitas al mejor precio</h1>
+        </div>
+    </div>
+    
+</center>
+<style>
+    .video-container {
+        position: relative;
+        width: 60%;
+        height: auto;
+        overflow: hidden;
+        border-radius: 50px;
+        cursor: pointer; /* Mostrar un puntero de mano cuando se haga hover en el contenedor */
+    }
+    
+    .video-container video {
+        width: 100%;
+        height: auto;
+        object-fit: cover;
+    }
+    
+    .overlay-text {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        color: white;
+        font-size: 24px;
+        font-weight: bold;
+        text-align: center;
+        background-color: rgba(0, 0, 0, 0.5); /* Fondo oscuro semi-transparente */
+        padding: 20px;
+        border-radius: 10px;
+        opacity: 0;
+        transition: opacity 0.5s ease;
+        pointer-events: none; /* Desactiva la capacidad de hacer clic en el texto */
+    }
+    
+    /* El texto aparecerá cuando se haga hover o toque el video */
+    .video-container:hover .overlay-text,
+    .video-container:active .overlay-text { 
+        opacity: 1; 
+    }
+    
+    /* Ajustes para pantallas más pequeñas */
+    @media screen and (max-width: 768px) {
+        .video-container {
+            width: 90%; /* Aumentar el ancho para dispositivos móviles */
+        }
+    
+        .overlay-text {
+            font-size: 20px; /* Reducir el tamaño de la fuente para pantallas medianas */
+            padding: 15px; /* Ajustar el padding */
+        }
+    }
+    
+    /* Ajustes para pantallas muy pequeñas (teléfonos) */
+    @media screen and (max-width: 480px) {
+        .video-container {
+            width: 100%; /* Usar el 100% del ancho en teléfonos */
+        }
+    
+        .overlay-text {
+            font-size: 16px; /* Reducir aún más el tamaño de la fuente */
+            padding: 10px; /* Reducir el padding en pantallas pequeñas */
+        }
+    }
+    
+</style>
 
   <!-- Sección de Celulares -->
 <h2 class="section-title">Smartphones</h2>
