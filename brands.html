@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Electrodomésticos</title>
+    <link rel="shortcut icon" href="IMG/Logo-prueba2.0.jpg"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <style>
+        /* Estilo general */
+        .button {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 10px 15px;
+            gap: 15px;
+            background-color: #2ecc71;
+            outline: 3px #2ecc71 solid;
+            outline-offset: -3px;
+            border-radius: 5px;
+            border: none;
+            cursor: pointer;
+            transition: 400ms;
+        }
+
+        .button .text {
+            color: white;
+            font-weight: 700;
+            font-size: 1em;
+            transition: 400ms;
+            margin-bottom: 0;
+        }
+
+        .button:hover {
+            background-color: transparent;
+        }
+
+        .button:hover .text {
+            color: #2ecc71;
+        }
+
+        /* Estilos de las tarjetas */
+        .card-deck {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        .card {
+            width: 18rem;
+            margin: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s;
+        }
+
+        .card:hover {
+            transform: scale(1.05);
+        }
+
+        .card img {
+            max-height: 200px;
+            object-fit: cover;
+        }
+
+        /* Footer */
+        footer {
+            background-color: #343a40;
+            color: white;
+        }
+        .social-button {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            grid-template-rows: 1fr 1fr;
+            border-radius: 50%;
+            width: 200px;
+            height: 200px;
+            margin: 20px auto;
+            overflow: hidden;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .social-button div {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #343a40;
+            border: 1px solid #272727;
+            transition: background-color 0.3s ease;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12 text-center">
+                    <a href="index.html"> 
+                        <img src="IMG/Logo-prueba2.0.jpg" style="border-radius: 5%; width: 300px; margin: 20px auto;">
+                    </a>
+                </div>
+            </div>
+            <!-- Navigation Bar -->
+            <div class="row">
+                <div class="col-md-12">
+                    <nav class="navbar navbar-expand-lg navbar-light bg-light static" style="border-radius:50px">
+                        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                            <span class="navbar-toggler-icon"></span>
+                        </button>
+                        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                            <ul class="navbar-nav mx-auto">
+                                <li class="nav-item active"><a class="nav-link" href="index.html">Inicio</a></li>
+                                <li class="nav-item"><a class="nav-link" href="contact.html">Contacto</a></li>
+                            </ul>
+                            <form class="form-inline my-2 my-lg-0" id="search-form">
+                                <input class="form-control mr-sm-2" type="search" id="search-input" placeholder="Buscar" aria-label="Buscar">
+                                <button class="btn btn-outline-success my-2 my-sm-0" id="search-button" type="submit">Buscar</button>
+                            </form>
+                        </div>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main content: Tarjetas de Marcas -->
+    <main>
+        <div class="container my-5">
+            <h2 class="text-center section-title">Marcas Populares</h2>
+            <div class="card-deck">
+                <div class="card">
+                    <img src="IMG/Logos/Xiaomi-Logo-2014.png" class="card-img-top" alt="Xiaomi">
+                    <div class="card-body text-center">
+                        <h5 class="card-title">Xiaomi</h5>
+                        <button class="button" onclick="location.href='buscar_xiaomi.html'">
+                            <span class="text">Buscar productos</span>
+                        </button>
+                    </div>
+                </div>
+                <div class="card">
+                    <img src="IMG/Logos/samsung-logo-1993.jpg" class="card-img-top" alt="Samsung">
+                    <div class="card-body text-center">
+                        <h5 class="card-title">Samsung</h5>
+                        <button class="button" onclick="location.href='buscar_samsung.html'">
+                            <span class="text">Buscar productos</span>
+                        </button>
+                    </div>
+                </div>
+                <div class="card">
+                    <img src="IMG/Logos/kisspng-lg-electronics-logo-lg-g-pro-lite-image-high-defin-1713912331340.webp" class="card-img-top" alt="LG">
+                    <div class="card-body text-center">
+                        <h5 class="card-title">LG</h5>
+                        <button class="button" onclick="location.href='buscar_lg.html'">
+                            <span class="text">Buscar productos</span>
+                        </button>
+                    </div>
+                </div>
+                <div class="card">
+                    <img src="IMG/Logos/ikea-yellow1340.logowik.com.webp" class="card-img-top" alt="IKEA">
+                    <div class="card-body text-center">
+                        <h5 class="card-title">IKEA</h5>
+                        <button class="button" onclick="location.href='buscar_ikea.html'">
+                            <span class="text">Buscar productos</span>
+                        </button>
+                    </div>
+                </div>
+                <div class="card">
+                    <img src="IMG/Logos/HP-Logo.png" class="card-img-top" alt="HP">
+                    <div class="card-body text-center">
+                        <h5 class="card-title">HP</h5>
+                        <button class="button" onclick="location.href='buscar_hp.html'">
+                            <span class="text">Buscar productos</span>
+                        </button>
+                    </div>
+                </div>
+                <div class="card">
+                    <img src="IMG/Logos/Herman-MIller-Logo-Design.jpg" class="card-img-top" alt="Herman Miller">
+                    <div class="card-body text-center">
+                        <h5 class="card-title">Herman Miller</h5>
+                        <button class="button" onclick="location.href='buscar_hermanmiller.html'">
+                            <span class="text">Buscar productos</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <center>
+        <footer>
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12 text-center">
+                        <p>&copy; 2024 - Todos los derechos reservados ©</p>
+                    </div>
+                    <div class="social-button">
+                        <div class="facebook"><a href="https://www.facebook.com/gabrieladuran" target="_blank"><img src="https://upload.wikimedia.org/wikipedia/commons/5/51/Facebook_f_logo_%282019%29.svg" alt="Facebook"></a></div>
+                        <div class="ubicacion"><a href="https://www.bing.com/maps?osid=ad899003-b955-482c-aa45-2541d786e9ad&cp=9.930998~-84.059358&lvl=17&pi=0&v=2&sV=2&form=S00027" target="_blank"><i class="fas fa-map-marker-alt"></i></a></div>
+                        <div class="email"><a href="mailto:gyrventas@ice.co.cr" target="_blank"><img src="https://upload.wikimedia.org/wikipedia/commons/4/4e/Gmail_Icon.png" alt="Email"></a></div>
+                        <div class="telefono"><a href="tel:+506-2229-1212" target="_blank"><i class="fas fa-phone-alt"></i></a></div>
+                    </div>
+                </div>
+            </div>
+        </footer>
+    </center>
+
+    <!-- Scripts de Bootstrap -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+</body>
+</html>
