@@ -189,24 +189,108 @@
         </div>
     </main>
 
-    <!-- Footer -->
-    <center>
-        <footer>
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-12 text-center">
-                        <p>&copy; 2024 - Todos los derechos reservados ©</p>
-                    </div>
-                    <div class="social-button">
-                        <div class="facebook"><a href="https://www.facebook.com/gabrieladuran" target="_blank"><img src="https://upload.wikimedia.org/wikipedia/commons/5/51/Facebook_f_logo_%282019%29.svg" alt="Facebook"></a></div>
-                        <div class="ubicacion"><a href="https://www.bing.com/maps?osid=ad899003-b955-482c-aa45-2541d786e9ad&cp=9.930998~-84.059358&lvl=17&pi=0&v=2&sV=2&form=S00027" target="_blank"><i class="fas fa-map-marker-alt"></i></a></div>
-                        <div class="email"><a href="mailto:gyrventas@ice.co.cr" target="_blank"><img src="https://upload.wikimedia.org/wikipedia/commons/4/4e/Gmail_Icon.png" alt="Email"></a></div>
-                        <div class="telefono"><a href="tel:+506-2229-1212" target="_blank"><i class="fas fa-phone-alt"></i></a></div>
-                    </div>
+   
+   <!-- Footer -->
+   <center>
+    <footer>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12 text-center">
+                    <p>&copy; 2024 - Todos los derechos reservados ©</p>
                 </div>
             </div>
-        </footer>
-    </center>
+
+            <!-- Nueva estructura circular de botones sociales -->
+            <div class="row">
+                <div class="col-md-12 text-center">
+                    <div class="social-button">
+                        <div class="facebook">
+                            <a href="https://www.facebook.com/gabrieladuran" target="_blank">
+                                <img src="https://upload.wikimedia.org/wikipedia/commons/5/51/Facebook_f_logo_%282019%29.svg" alt="Facebook">
+                            </a>
+                        </div>
+                        <div class="ubicacion">
+                            <a href="https://www.bing.com/maps?osid=ad899003-b955-482c-aa45-2541d786e9ad&cp=9.930998~-84.059358&lvl=17&pi=0&v=2&sV=2&form=S00027" target="_blank">
+                                <i class="fas fa-map-marker-alt"></i>
+                            </a>
+                        </div>
+                        
+                        <div class="email">
+                            <a href="mailto:gyrventas@ice.co.cr" target="_blank">
+                                <img src="https://upload.wikimedia.org/wikipedia/commons/4/4e/Gmail_Icon.png" alt="Correo">
+                            </a>
+                        </div>
+                        <div class="whatsapp">
+                            <a href="https://wa.me/50689966880" target="_blank">
+                                <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp">
+                            </a>
+                        </div>
+                    </div>
+                    <!-- Texto adicional para los botones -->
+                    <span class="text-facebook">Nuestro Facebook</span> 
+                    <span class="text-ubicacion">Nuestra ubicación</span> 
+                    <span class="text-email">Enviar Correo</span>
+                </div>
+            </div>
+        </div>
+    </footer>
+</center>
+
+<!-- Estilos del botón circular de redes sociales -->
+<style>
+    .social-button {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: 1fr 1fr;
+        border-radius: 50%;
+        width: 200px;
+        height: 200px;
+        margin: 20px auto;
+        overflow: hidden;
+        box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+    }
+
+    .social-button div {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: #343a40; /* Color más oscuro */
+        border: 1px solid #272727;
+        transition: background-color 0.3s ease;
+    }
+
+    .social-button div:hover {
+        background-color: #23272b; /* Color más oscuro al hacer hover */
+    }
+
+    .social-button img {
+        width: 40px;
+        height: 40px;
+    }
+
+    .facebook { background-color: #3B5998; }
+    .whatsapp { background-color: #25D366; }
+    .email { background-color: #D14836; }
+    .ubicacion { background-color: #4285F4; }
+
+    /* Estilo de texto para los botones */
+    .text-facebook, .text-ubicacion, .text-email {
+        display: inline-block;
+        margin-top: 10px;
+        font-size: 14px;
+        color: #fff; /* Color claro para contraste */
+    }
+
+    footer {
+        background-color: #343a40; /* Fondo más oscuro para el footer */
+        color: white;
+    }
+    .social-button i {
+        font-size: 40px; /* Asegura que el tamaño del ícono sea similar a los demás */
+        color: white;    /* Color blanco para hacer que el icono contraste con el fondo */
+    }
+    
+</style>
 
     <!-- Scripts de Bootstrap -->
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
