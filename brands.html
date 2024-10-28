@@ -115,10 +115,42 @@
                                 <li class="nav-item active"><a class="nav-link" href="index.html">Inicio</a></li>
                                 <li class="nav-item"><a class="nav-link" href="contact.html">Contacto</a></li>
                             </ul>
-                            <form class="form-inline my-2 my-lg-0" id="search-form">
-                                <input class="form-control mr-sm-2" type="search" id="search-input" placeholder="Buscar" aria-label="Buscar">
-                                <button class="btn btn-outline-success my-2 my-sm-0" id="search-button" type="submit">Buscar</button>
-                            </form>
+       <!-- Search Form -->
+       <form class="form-inline my-2 my-lg-0" id="search-form">
+        <input class="form-control mr-sm-2" type="search" id="search-input" placeholder="Buscar" aria-label="Buscar">
+        <button class="btn btn-outline-success my-2 my-sm-0" id="search-button" type="submit">Buscar</button>
+    </form>
+    <script>
+        // Obtener el formulario de búsqueda y el input de búsqueda
+const searchForm = document.getElementById('search-form');
+const searchInput = document.getElementById('search-input');
+
+// Agregar un evento de submit al formulario de búsqueda
+searchForm.addEventListener('submit', (e) => {
+e.preventDefault(); // Evitar que el formulario se envíe
+
+// Obtener el valor del input de búsqueda
+const searchTerm = searchInput.value.trim().toLowerCase();
+
+// Buscar los elementos que coinciden con la búsqueda
+const searchResults = document.querySelectorAll('.card');
+
+// Ocultar todos los elementos
+searchResults.forEach((result) => {
+    result.style.display = 'none';
+});
+
+// Mostrar solo los elementos que coinciden con la búsqueda
+searchResults.forEach((result) => {
+    const title = result.querySelector('h3').textContent.toLowerCase();
+    const description = result.querySelector('p').textContent.toLowerCase();
+
+    if (title.includes(searchTerm) || description.includes(searchTerm)) {
+        result.style.display = 'block';
+    }
+});
+});
+    </script>
                         </div>
                     </nav>
                 </div>
