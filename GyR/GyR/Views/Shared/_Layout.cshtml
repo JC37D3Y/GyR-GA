@@ -6,75 +6,108 @@
     <title>@ViewBag.Title - Mi aplicación ASP.NET</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
-    <style>
+    <style type="text/css">
         /* Estilos personalizados para el navbar */
         .navbar-custom {
             background-color: #f2f2f2;
             border-bottom: 1px solid #ddd;
-        }
-
-        .navbar-brand {
-            font-size: 2rem;
-            color: #333 !important;
-            font-weight: bold;
-        }
-
-        .navbar-logo {
-            display: flex;
+            padding: 0;
             flex-direction: column;
-            align-items: center;
-            padding: 1rem 0;
-            text-align: center;
         }
-
-            .navbar-logo img {
-                max-height: 100px;
-                max-width: 100%;
-                margin-bottom: 0.5rem;
-            }
-
+        .navbar-logo {
+            width: 100%;
+            text-align: center;
+            padding: 1.5rem 0; /* Aumentado el padding para dar más espacio */
+        }
+        .navbar-logo img {
+            max-height: 150px; /* Aumentado de 100px a 150px */
+            width: auto;
+            max-width: 80%; /* Asegura que el logo no sea demasiado ancho en pantallas pequeñas */
+            height: auto; /* Mantiene la proporción del aspecto */
+            object-fit: contain; /* Asegura que la imagen se ajuste sin distorsionarse */
+        }
+        .nav-container {
+            width: 100%;
+            background-color: #f2f2f2;
+            padding: 0.5rem 0;
+        }
+        .navbar-nav {
+            margin: 0 auto;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
         .navbar-nav .nav-link {
             color: #555 !important;
             font-weight: 500;
-            margin: 0 10px;
+            margin: 0 15px;
         }
-
         .navbar-toggler {
             border: none;
             color: #555;
+            margin: 0.5rem auto;
         }
-
         .navbar-dark .navbar-toggler-icon {
             background-color: #555;
+        }
+        
+        /* Estilo para el contenedor de login */
+        .login-container {
+            display: flex;
+            justify-content: center;
+            margin-top: 0.5rem;
+        }
+
+        /* Media queries para responsividad */
+        @@media (max-width: 576px) {
+            .navbar-logo img {
+                max-height: 120px; /* Tamaño más pequeño para móviles */
+                max-width: 90%;
+            }
+            .navbar-nav {
+                text-align: center;
+            }
+            .navbar-nav .nav-link {
+                margin: 0.5rem 0;
+            }
+            .login-container {
+                margin-top: 1rem;
+            }
+        }
+
+        /* Para pantallas más grandes */
+        @@media (min-width: 992px) {
+            .navbar-logo img {
+                max-height: 200px; /* Tamaño más grande para pantallas desktop */
+            }
         }
     </style>
 </head>
 <body>
-    <center>
-    <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark navbar-custom">
-        <div class="container">
-            <div class="navbar-logo">
-                <!-- Logo grande y centrado -->
-                <br />
-                <img src="~/Scripts/IMG/Logo-prueba2.0.jpg" />
-                <br />
-                @Html.ActionLink("Inicio", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
-            </div>
-            <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" title="Alternar navegación" aria-controls="navbarSupportedContent"
-                    aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse d-sm-inline-flex justify-content-between">
-                <ul class="navbar-nav flex-grow-1 justify-content-center">
-                    <li>@Html.ActionLink("Inicio", "Index", "Home", new { area = "" }, new { @class = "nav-link" })</li>
-                    <li>@Html.ActionLink("Acerca de", "About", "Home", new { area = "" }, new { @class = "nav-link" })</li>
-                    <li>@Html.ActionLink("Contacto", "Contact", "Home", new { area = "" }, new { @class = "nav-link" })</li>
-                </ul>
-                @Html.Partial("_LoginPartial")
+    <nav class="navbar navbar-expand-sm navbar-dark navbar-custom">
+        <div class="navbar-logo">
+            <img src="~/Scripts/IMG/Logo-prueba2.0.jpg" alt="Logo" style="border-radius: 25px; " />
+        </div>
+        <div class="nav-container">
+            <div class="container">
+                <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target=".navbar-collapse"
+                        title="Alternar navegación" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse">
+                    <ul class="navbar-nav">
+                        <li>@Html.ActionLink("Inicio", "Index", "Home", new { area = "" }, new { @class = "nav-link" })</li>
+                        <li>@Html.ActionLink("Acerca de", "About", "Home", new { area = "" }, new { @class = "nav-link" })</li>
+                        <li>@Html.ActionLink("Contacto", "Contact", "Home", new { area = "" }, new { @class = "nav-link" })</li>
+                    </ul>
+                </div>
+                <div class="login-container">
+                    @Html.Partial("_LoginPartial")
+                </div>
             </div>
         </div>
     </nav>
-        </center>
     <div class="container body-content">
         @RenderBody()
         <hr />
@@ -82,7 +115,6 @@
             <p>&copy; @DateTime.Now.Year - Mi aplicación ASP.NET</p>
         </footer>
     </div>
-
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)
