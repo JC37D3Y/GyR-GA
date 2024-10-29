@@ -100,11 +100,15 @@
                         <li>@Html.ActionLink("Inicio", "Index", "Home", new { area = "" }, new { @class = "nav-link" })</li>
                         <li>@Html.ActionLink("Acerca de", "About", "Home", new { area = "" }, new { @class = "nav-link" })</li>
                         <li>@Html.ActionLink("Contacto", "Contact", "Home", new { area = "" }, new { @class = "nav-link" })</li>
+                        <li>
+                            <div class="login-container">
+                                @Html.Partial("_LoginPartial")
+                            </div>
+                        </li>
                     </ul>
+
                 </div>
-                <div class="login-container">
-                    @Html.Partial("_LoginPartial")
-                </div>
+
             </div>
         </div>
     </nav>
