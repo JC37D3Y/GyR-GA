@@ -223,6 +223,8 @@
     <Content Include="Scripts\IMG\Logos\apple_logo_1988.webp" />
     <Content Include="Scripts\IMG\Logos\ikea-yellow1340.logowik.com.webp" />
     <Content Include="Scripts\IMG\Logos\kisspng-lg-electronics-logo-lg-g-pro-lite-image-high-defin-1713912331340.webp" />
+    <Content Include="Scripts\IMG\prev.webp" />
+    <Content Include="Scripts\IMG\sig.webp" />
     <None Include="Scripts\jquery-3.7.0.intellisense.js" />
     <Content Include="Scripts\IMG\108458-680697604.mp4" />
     <Content Include="Scripts\IMG\bac.png" />
