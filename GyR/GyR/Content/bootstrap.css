@@ -8,7 +8,139 @@
 
 /*Estilos*/
 /* ... (existing styles) ... */
+/* Diseño general */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f3f4f6;
+    color: #333;
+}
 
+.contact-section {
+    padding: 60px 0;
+    background-color: #ffffff;
+}
+
+.container {
+    max-width: 900px;
+    margin: auto;
+    padding: 0 20px;
+}
+
+.header h2 {
+    font-size: 28px;
+    text-align: center;
+    color: #2c3e50;
+    font-weight: bold;
+    margin-bottom: 30px;
+    position: relative;
+    animation: slideDown 0.8s ease;
+}
+
+/* Tarjetas de contacto */
+.contact-info {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.contact-card {
+    flex: 1 1 45%;
+    padding: 25px;
+    background: #ecf0f1;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+    animation: fadeIn 1s ease;
+}
+
+    .contact-card h3 {
+        font-size: 22px;
+        color: #2980b9;
+        margin-bottom: 15px;
+        font-weight: 700;
+    }
+
+    .contact-card p {
+        font-size: 16px;
+        color: #555;
+        margin: 8px 0;
+    }
+
+    .contact-card a {
+        color: #2980b9;
+        text-decoration: none;
+        transition: color 0.3s ease;
+    }
+
+        .contact-card a:hover {
+            color: #2ecc71;
+        }
+
+    .contact-card:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+    }
+
+/* Botón de acción */
+.contact-action {
+    text-align: center;
+    margin-top: 30px;
+}
+
+.btn-whatsapp {
+    display: inline-block;
+    padding: 12px 24px;
+    font-size: 16px;
+    color: #ffffff;
+    background-color: #25d366;
+    border: none;
+    border-radius: 8px;
+    text-decoration: none;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    animation: pulse 1.5s infinite;
+}
+
+    .btn-whatsapp:hover {
+        background-color: #1ebd61;
+        transform: scale(1.05);
+    }
+
+/* Animaciones */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes slideDown {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes pulse {
+    0%, 100% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.1);
+    }
+}
   
 
 :root {

@@ -1,19 +1,137 @@
 ﻿@{
-    ViewBag.Title = "Contact";
+    ViewBag.Title = "";
 }
 <main aria-labelledby="title">
-    <h2 id="title">@ViewBag.Title.</h2>
+    <h2 id="title">@ViewBag.Title</h2>
     <h3>@ViewBag.Message</h3>
 
-    <address>
-        One Microsoft Way<br />
-        Redmond, WA 98052-6399<br />
-        <abbr title="Phone">P:</abbr>
-        425.555.0100
-    </address>
+    <section class="contact-section">
+        <div class="container">
+            <div class="header">
+                <h2>Información de Contacto</h2>
+            </div>
+            <div class="contact-info">
+                <div class="contact-card">
+                    <h3>Datos de contacto</h3>
+                    <p><strong>Cédula Jurídica:</strong> 3-101-576808</p>
+                    <p><strong>Dirección:</strong> 200 metros oeste, 300 metros norte del colegio Madre de divino pastor, El alto de Guadalupe, Goicoechea.</p>
+                    <p><strong>Teléfono:</strong> 2245-0909</p>
+                    <p><strong>Fax:</strong> 2245-9370</p>
+                    <p><strong>Email:</strong> <a href="mailto:gyrventas@ice.co.cr">gyrventas@ice.co.cr</a></p>
+                </div>
+                <div class="contact-card">
+                    <h3>Persona de contacto</h3>
+                    <p><strong>Nombre:</strong> Gabriela Durán Solís</p>
+                    <p><strong>Celular:</strong> 8996 6880</p>
+                    <p><strong>ID Pyme:</strong> 27554</p>
+                </div>
+            </div>
+            <div class="contact-action">
+                <a href="https://wa.me/50689966880" target="_blank" class="btn-whatsapp">Enviar mensaje por WhatsApp</a>
+            </div>
+        </div>
+    </section>
 
-    <address>
-        <strong>Support:</strong>   <a href="mailto:Support@example.com">Support@example.com</a><br />
-        <strong>Marketing:</strong> <a href="mailto:Marketing@example.com">Marketing@example.com</a>
-    </address>
+    <style>
+        /* Diseño general */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f3f4f6;
+            color: #333;
+        }
+
+        .contact-section {
+            padding: 60px 0;
+            background-color: #ffffff;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: auto;
+            padding: 0 20px;
+        }
+
+        .header h2 {
+            font-size: 28px;
+            text-align: center;
+            color: #2c3e50;
+            font-weight: bold;
+            margin-bottom: 30px;
+            position: relative;
+            animation: slideDown 0.8s ease;
+        }
+
+        /* Tarjetas de contacto */
+        .contact-info {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+            justify-content: space-between;
+        }
+
+        .contact-card {
+            flex: 1 1 45%;
+            padding: 25px;
+            background: #ecf0f1;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+            animation: fadeIn 1s ease;
+        }
+
+        .contact-card h3 {
+            font-size: 22px;
+            color: #2980b9;
+            margin-bottom: 15px;
+            font-weight: 700;
+        }
+
+        .contact-card p {
+            font-size: 16px;
+            color: #555;
+            margin: 8px 0;
+        }
+
+        .contact-card a {
+            color: #2980b9;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .contact-card a:hover {
+            color: #2ecc71;
+        }
+
+        .contact-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+        }
+
+        /* Botón de acción */
+        .contact-action {
+            text-align: center;
+            margin-top: 30px;
+        }
+
+        .btn-whatsapp {
+            display: inline-block;
+            padding: 12px 24px;
+            font-size: 16px;
+            color: #ffffff;
+            background-color: #25d366;
+            border: none;
+            border-radius: 8px;
+            text-decoration: none;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: background-color 0.3s ease, transform 0.2s ease;
+            animation: pulse 1.5s infinite;
+        }
+
+        .btn-whatsapp:hover {
+            background-color: #1ebd61;
+            transform: scale(1.05);
+        }
+
+
+    </style>
 </main>
