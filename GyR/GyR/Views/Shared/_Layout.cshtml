@@ -138,10 +138,12 @@
                                     </div>
                                     <div class="ubicacion">
                                         <a href="https://www.bing.com/maps?osid=ad899003-b955-482c-aa45-2541d786e9ad&cp=9.930998~-84.059358&lvl=17&pi=0&v=2&sV=2&form=S00027" target="_blank">
-                                            <i class="fas fa-map-marker-alt"></i>
+                                            <svg class="location-icon" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                                <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                                                <circle cx="12" cy="10" r="3"></circle>
+                                            </svg>
                                         </a>
                                     </div>
-
                                     <div class="email">
                                         <a href="mailto:gyrventas@ice.co.cr" target="_blank">
                                             <img src="https://upload.wikimedia.org/wikipedia/commons/4/4e/Gmail_Icon.png" alt="Correo">
@@ -161,10 +163,14 @@
                         </div>
                     </div>
                 </footer>
-            </center>
 
             <!-- Estilos del botón circular de redes sociales -->
             <style>
+                footer {
+                    background-color: #f8f8f8; /* Color de fondo claro */
+                    color: #333; /* Color de texto más oscuro */
+                }
+
                 .social-button {
                     display: grid;
                     grid-template-columns: 1fr 1fr;
@@ -181,13 +187,12 @@
                         display: flex;
                         justify-content: center;
                         align-items: center;
-                        background-color: #343a40; /* Color más oscuro */
-                        border: 1px solid #272727;
+                        background-color: #6c757d; /* Color gris más oscuro */
                         transition: background-color 0.3s ease;
                     }
 
                         .social-button div:hover {
-                            background-color: #23272b; /* Color más oscuro al hacer hover */
+                            background-color: #495057; /* Color gris más oscuro al hacer hover */
                         }
 
                     .social-button img {
@@ -211,22 +216,24 @@
                     background-color: #4285F4;
                 }
 
-                /* Estilo de texto para los botones */
                 .text-facebook, .text-ubicacion, .text-email {
                     display: inline-block;
                     margin-top: 10px;
                     font-size: 14px;
-                    color: #fff; /* Color claro para contraste */
+                    color: #333; /* Color de texto más oscuro */
                 }
 
-                footer {
-                    background-color: #fff; /* Fondo más oscuro para el footer */
-                    color: white;
+                .location-icon {
+                    width: 24px;
+                    height: 24px;
+                    fill: none;
+                    stroke: #fff; /* Color de icono blanco */
+                    stroke-width: 2;
+                    transition: stroke 0.3s ease;
                 }
 
-                .social-button i {
-                    font-size: 40px; /* Asegura que el tamaño del ícono sea similar a los demás */
-                    color: white; /* Color blanco para hacer que el icono contraste con el fondo */
+                .ubicacion a:hover .location-icon {
+                    stroke: #eee; /* Color de icono más claro al hacer hover */
                 }
             </style>
         </footer>
