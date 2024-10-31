@@ -4,8 +4,78 @@
     ViewBag.Title = "Iniciar sesión";
 }
 
-<main aria-labelledby="title">
-    <h2 id="title">@ViewBag.Title.</h2>
+<style>
+    /* Login Form */
+.login-containe {
+    max-width: 800px;
+    margin: auto;
+    background-color: #ffffff;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+    animation: fadeIn 1s ease;
+}
+
+#loginForm h4 {
+    color: #2c3e50;
+    font-size: 18px;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-control {
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    padding: 10px;
+    transition: border-color 0.3s ease;
+}
+
+.form-control:focus {
+    border-color: #3498db;
+    box-shadow: 0 0 8px rgba(52, 152, 219, 0.3);
+}
+
+/* Especificación de estilo solo para los botones del formulario de login */
+.login-btn {
+    background-color: #3498db;
+    color: #ffffff;
+    font-weight: bold;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    display: inline-block;
+    text-align: center;
+    text-decoration: none;
+}
+
+.login-btn:hover {
+    background-color: #2980b9;
+    transform: translateY(-2px);
+}
+
+
+</style>
+<center>
+    <main aria-labelledby="title">
+        <h2 id="title">@ViewBag.Title</h2>
+
+        <!-- Información de la Empresa -->
+        <section class="company-info">
+            <h3>Bienvenido a GyR S.A.</h3>
+            <p>Cédula Jurídica: 3-101-576808</p>
+            <p>Dirección: 200 metros oeste, 300 metros norte del colegio Madre de Divino Pastor, El Alto de Guadalupe, Goicoechea.</p>
+            <p>Teléfono: 2245-0909</p>
+            <p>Email: <a href="mailto:gyrventas@ice.co.cr">gyrventas@ice.co.cr</a></p>
+        </section>
+</center>
+<!-- Formulario de Login -->
+<div class="login-containe">
     <div class="row">
         <div class="col-md-8">
             <section id="loginForm">
@@ -15,21 +85,21 @@
                     <h4>Utilice una cuenta local para iniciar sesión.</h4>
                     <hr />
                     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-                    <div class="row">
+                    <div class="form-group row">
                         @Html.LabelFor(m => m.Email, new { @class = "col-md-2 col-form-label" })
                         <div class="col-md-10">
                             @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
                             @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
                         </div>
                     </div>
-                    <div class="row">
+                    <div class="form-group row">
                         @Html.LabelFor(m => m.Password, new { @class = "col-md-2 col-form-label" })
                         <div class="col-md-10">
                             @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
                             @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
                         </div>
                     </div>
-                    <div class="row">
+                    <div class="form-group row">
                         <div class="offset-md-2 col-md-10">
                             <div class="checkbox">
                                 @Html.CheckBoxFor(m => m.RememberMe)
@@ -37,18 +107,14 @@
                             </div>
                         </div>
                     </div>
-                    <div class="row">
+                    <div class="form-group row">
                         <div class="offset-md-2 col-md-10">
-                            <input type="submit" value="Iniciar sesión" class="btn btn-outline-dark" />
+                            <input type="submit" value="Iniciar sesión" class="btn btn-primary login-btn" />
                         </div>
                     </div>
                     <p>
                         @Html.ActionLink("Registrarse como usuario nuevo", "Register")
                     </p>
-                    @* Habilite esta opción una vez tenga la confirmación de la cuenta habilitada para la funcionalidad de restablecimiento de contraseña
-                        <p>
-                            @Html.ActionLink("¿Ha olvidado su contraseña?", "ForgotPassword")
-                        </p>*@
                 }
             </section>
         </div>
@@ -58,6 +124,7 @@
             </section>
         </div>
     </div>
+</div>
 </main>
 
 @section Scripts {
