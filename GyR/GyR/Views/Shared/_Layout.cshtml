@@ -14,25 +14,24 @@
             padding: 20px;
             flex-direction: column;
             border-radius: 25px;
-            
         }
         .navbar-logo {
             width: 100%;
             text-align: center;
-            padding: 1.5rem 0; /* Aumentado el padding para dar más espacio */
+            padding: 1.5rem 0;
         }
         .navbar-logo img {
-            max-height: 150px; /* Aumentado de 100px a 150px */
+            max-height: 150px;
             width: auto;
-            max-width: 80%; /* Asegura que el logo no sea demasiado ancho en pantallas pequeñas */
-            height: auto; /* Mantiene la proporción del aspecto */
-            object-fit: contain; /* Asegura que la imagen se ajuste sin distorsionarse */
+            max-width: 80%;
+            height: auto;
+            object-fit: contain;
         }
         .nav-container {
             width: 100%;
             background-color: #f2f2f2;
             padding: 0.5rem 0;
-            border-radius:30px;
+            border-radius: 30px;
         }
         .navbar-nav {
             margin: 0 auto;
@@ -45,44 +44,35 @@
             font-weight: 500;
             margin: 0 15px;
         }
-        .navbar-toggler {
-            border: none;
-            color: white;
-            margin: 0.5rem auto;
+
+        /* Estilos del dropdown */
+        .dropdown-menu {
+            display: none; /* Oculta el menú por defecto */
+            position: absolute;
+            background-color: #f8f9fa;
+            border-radius: 0.25rem;
+            padding: 0.5rem 0;
+            border: 1px solid #ddd;
+            min-width: 150px;
+            top: 100%;
+            left: 0;
         }
-        .navbar-dark .navbar-toggler-icon {
-            background-color:lightgray;
-            border-radius: 5px;
+        .dropdown-item {
+            color: #555 !important;
+            padding: 10px 20px;
+            transition: background-color 0.2s ease;
         }
-        
-        /* Estilo para el contenedor de login */
-        .login-container {
-            display: flex;
-            justify-content: center;
-            margin-top: 0.5rem;
+        .dropdown-item:hover {
+            background-color: #e2e6ea;
         }
 
         /* Media queries para responsividad */
-        @@media (max-width: 576px) {
-            .navbar-logo img {
-                max-height: 120px; /* Tamaño más pequeño para móviles */
-                max-width: 90%;
-            }
+
             .navbar-nav {
                 text-align: center;
             }
             .navbar-nav .nav-link {
                 margin: 0.5rem 0;
-            }
-            .login-container {
-                margin-top: 1rem;
-            }
-        }
-
-        /* Para pantallas más grandes */
-        @@media (min-width: 992px) {
-            .navbar-logo img {
-                max-height: 200px; /* Tamaño más grande para pantallas desktop */
             }
         }
     </style>
@@ -90,32 +80,49 @@
 <body>
     <nav class="navbar navbar-expand-sm navbar-dark navbar-custom">
         <div class="navbar-logo">
-            <img src="~/Scripts/IMG/Logo-prueba2.0.jpg" alt="Logo" style="border-radius: 25px; " />
+            <img src="~/Scripts/IMG/Logo-prueba2.0.jpg" alt="Logo" style="border-radius: 25px;" />
         </div>
         <div class="nav-container">
             <div class="container">
-                <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target=".navbar-collapse"
-                        title="Alternar navegación" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse">
-                    <ul class="navbar-nav">
-                        <li>@Html.ActionLink("Inicio", "Index", "Home", new { area = "" }, new { @class = "nav-link" })</li>
-                        <li>@Html.ActionLink("Acerca de", "About", "Home", new { area = "" }, new { @class = "nav-link" })</li>
-                        <li>@Html.ActionLink("Contacto", "Contact", "Home", new { area = "" }, new { @class = "nav-link" })</li>
-                        <li>
-                            <div class="login-container">
-                                @Html.Partial("_LoginPartial")
-                            </div>
-                        </li>
-                    </ul>
-
-                </div>
-
+                <ul class="navbar-nav">
+                    <li>@Html.ActionLink("Inicio", "Index", "Home", new { area = "" }, new { @class = "nav-link" })</li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link" href="#" onclick="toggleDropdown()">Acerca de</a>
+                        <ul class="dropdown-menu" id="dropdownMenu">
+                            <li><a class="dropdown-item" href="#">Muebles</a></li>
+                            <li><a class="dropdown-item" href="#">Celulares</a></li>
+                            <li><a class="dropdown-item" href="#">Electrodomésticos</a></li>
+                            <li><a class="dropdown-item" href="#">Oficina</a></li>
+                            <li><a class="dropdown-item" href="#">Ferretería</a></li>
+                            <li><a class="dropdown-item" href="#">Más productos</a></li>
+                        </ul>
+                    </li>
+                    <li>@Html.ActionLink("Contacto", "Contact", "Home", new { area = "" }, new { @class = "nav-link" })</li>
+                    <li>
+                        <div class="login-container">
+                            @Html.Partial("_LoginPartial")
+                        </div>
+                    </li>
+                </ul>
             </div>
         </div>
     </nav>
+
+    @* Script para alternar el menú dropdown *@
+    <script>
+        function toggleDropdown() {
+            var dropdownMenu = document.getElementById("dropdownMenu");
+            dropdownMenu.style.display = dropdownMenu.style.display === "block" ? "none" : "block";
+        }
+
+        // Ocultar el menú cuando se hace clic fuera de él
+        window.addEventListener("click", function (event) {
+            var dropdownMenu = document.getElementById("dropdownMenu");
+            if (!event.target.matches('.nav-link')) {
+                dropdownMenu.style.display = "none";
+            }
+        });
+    </script>
     <div class="container body-content">
         @RenderBody()
         <hr />
@@ -167,78 +174,78 @@
                     </div>
                 </footer>
 
-            <!-- Estilos del botón circular de redes sociales -->
-            <style>
-                footer {
-                    background-color: #f8f8f8; /* Color de fondo claro */
-                    color: #333; /* Color de texto más oscuro */
-                }
-
-                .social-button {
-                    display: grid;
-                    grid-template-columns: 1fr 1fr;
-                    grid-template-rows: 1fr 1fr;
-                    border-radius: 50%;
-                    width: 200px;
-                    height: 200px;
-                    margin: 20px auto;
-                    overflow: hidden;
-                    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
-                }
-
-                    .social-button div {
-                        display: flex;
-                        justify-content: center;
-                        align-items: center;
-                        background-color: #6c757d; /* Color gris más oscuro */
-                        transition: background-color 0.3s ease;
+                <!-- Estilos del botón circular de redes sociales -->
+                <style>
+                    footer {
+                        background-color: #f8f8f8; /* Color de fondo claro */
+                        color: #333; /* Color de texto más oscuro */
                     }
 
-                        .social-button div:hover {
-                            background-color: #495057; /* Color gris más oscuro al hacer hover */
+                    .social-button {
+                        display: grid;
+                        grid-template-columns: 1fr 1fr;
+                        grid-template-rows: 1fr 1fr;
+                        border-radius: 50%;
+                        width: 200px;
+                        height: 200px;
+                        margin: 20px auto;
+                        overflow: hidden;
+                        box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+                    }
+
+                        .social-button div {
+                            display: flex;
+                            justify-content: center;
+                            align-items: center;
+                            background-color: #6c757d; /* Color gris más oscuro */
+                            transition: background-color 0.3s ease;
                         }
 
-                    .social-button img {
-                        width: 40px;
-                        height: 40px;
+                            .social-button div:hover {
+                                background-color: #495057; /* Color gris más oscuro al hacer hover */
+                            }
+
+                        .social-button img {
+                            width: 40px;
+                            height: 40px;
+                        }
+
+                    .facebook {
+                        background-color: #3B5998;
                     }
 
-                .facebook {
-                    background-color: #3B5998;
-                }
+                    .whatsapp {
+                        background-color: #25D366;
+                    }
 
-                .whatsapp {
-                    background-color: #25D366;
-                }
+                    .email {
+                        background-color: #D14836;
+                    }
 
-                .email {
-                    background-color: #D14836;
-                }
+                    .ubicacion {
+                        background-color: #4285F4;
+                    }
 
-                .ubicacion {
-                    background-color: #4285F4;
-                }
+                    .text-facebook, .text-ubicacion, .text-email {
+                        display: inline-block;
+                        margin-top: 10px;
+                        font-size: 14px;
+                        color: #333; /* Color de texto más oscuro */
+                    }
 
-                .text-facebook, .text-ubicacion, .text-email {
-                    display: inline-block;
-                    margin-top: 10px;
-                    font-size: 14px;
-                    color: #333; /* Color de texto más oscuro */
-                }
+                    .location-icon {
+                        width: 24px;
+                        height: 24px;
+                        fill: none;
+                        stroke: #fff; /* Color de icono blanco */
+                        stroke-width: 2;
+                        transition: stroke 0.3s ease;
+                    }
 
-                .location-icon {
-                    width: 24px;
-                    height: 24px;
-                    fill: none;
-                    stroke: #fff; /* Color de icono blanco */
-                    stroke-width: 2;
-                    transition: stroke 0.3s ease;
-                }
-
-                .ubicacion a:hover .location-icon {
-                    stroke: #eee; /* Color de icono más claro al hacer hover */
-                }
-            </style>
+                    .ubicacion a:hover .location-icon {
+                        stroke: #eee; /* Color de icono más claro al hacer hover */
+                    }
+                </style>
         </footer>
     </div>
     @Scripts.Render("~/bundles/jquery")
