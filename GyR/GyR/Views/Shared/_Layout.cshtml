@@ -15,35 +15,40 @@
             flex-direction: column;
             border-radius: 25px;
         }
+
         .navbar-logo {
             width: 100%;
             text-align: center;
             padding: 1.5rem 0;
         }
-        .navbar-logo img {
-            max-height: 150px;
-            width: auto;
-            max-width: 80%;
-            height: auto;
-            object-fit: contain;
-        }
+
+            .navbar-logo img {
+                max-height: 150px;
+                width: auto;
+                max-width: 80%;
+                height: auto;
+                object-fit: contain;
+            }
+
         .nav-container {
             width: 100%;
             background-color: #f2f2f2;
             padding: 0.5rem 0;
             border-radius: 30px;
         }
+
         .navbar-nav {
             margin: 0 auto;
             display: flex;
             justify-content: center;
             align-items: center;
         }
-        .navbar-nav .nav-link {
-            color: #555 !important;
-            font-weight: 500;
-            margin: 0 15px;
-        }
+
+            .navbar-nav .nav-link {
+                color: #555 !important;
+                font-weight: 500;
+                margin: 0 15px;
+            }
 
         /* Estilos del dropdown */
         .dropdown-menu {
@@ -57,20 +62,23 @@
             top: 100%;
             left: 0;
         }
+
         .dropdown-item {
             color: #555 !important;
             padding: 10px 20px;
             transition: background-color 0.2s ease;
         }
-        .dropdown-item:hover {
-            background-color: #e2e6ea;
-        }
+
+            .dropdown-item:hover {
+                background-color: #e2e6ea;
+            }
 
         /* Media queries para responsividad */
 
-            .navbar-nav {
-                text-align: center;
-            }
+        .navbar-nav {
+            text-align: center;
+        }
+
             .navbar-nav .nav-link {
                 margin: 0.5rem 0;
             }
@@ -126,130 +134,131 @@
     <div class="container body-content">
         @RenderBody()
         <hr />
-        <footer>
-            <!-- Footer -->
-            <center>
-                <footer>
-                    <div class="container">
-                        <div class="row">
-                            <div class="col-md-12 text-center">
-                                <p>&copy; 2024 - Todos los derechos reservados ©</p>
-                            </div>
-                        </div>
 
-                        <!-- Nueva estructura circular de botones sociales -->
-                        <div class="row">
-                            <div class="col-md-12 text-center">
-                                <div class="social-button">
-                                    <div class="facebook">
-                                        <a href="https://www.facebook.com/gabrieladuran" target="_blank">
-                                            <img src="https://upload.wikimedia.org/wikipedia/commons/5/51/Facebook_f_logo_%282019%29.svg" alt="Facebook">
-                                        </a>
-                                    </div>
-                                    <div class="ubicacion">
-                                        <a href="https://www.bing.com/maps?osid=ad899003-b955-482c-aa45-2541d786e9ad&cp=9.930998~-84.059358&lvl=17&pi=0&v=2&sV=2&form=S00027" target="_blank">
-                                            <svg class="location-icon" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                                <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
-                                                <circle cx="12" cy="10" r="3"></circle>
-                                            </svg>
-                                        </a>
-                                    </div>
-                                    <div class="email">
-                                        <a href="mailto:gyrventas@ice.co.cr" target="_blank">
-                                            <img src="https://upload.wikimedia.org/wikipedia/commons/4/4e/Gmail_Icon.png" alt="Correo">
-                                        </a>
-                                    </div>
-                                    <div class="whatsapp">
-                                        <a href="https://wa.me/50689966880" target="_blank">
-                                            <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp">
-                                        </a>
-                                    </div>
-                                </div>
-                                <!-- Texto adicional para los botones -->
-                                <span class="text-facebook">Nuestro Facebook</span>
-                                <span class="text-ubicacion">Nuestra ubicación</span>
-                                <span class="text-email">Enviar Correo</span>
-                            </div>
-                        </div>
-                    </div>
-                </footer>
-
-                <!-- Estilos del botón circular de redes sociales -->
-                <style>
-                    footer {
-                        background-color: #f8f8f8; /* Color de fondo claro */
-                        color: #333; /* Color de texto más oscuro */
-                    }
-
-                    .social-button {
-                        display: grid;
-                        grid-template-columns: 1fr 1fr;
-                        grid-template-rows: 1fr 1fr;
-                        border-radius: 50%;
-                        width: 200px;
-                        height: 200px;
-                        margin: 20px auto;
-                        overflow: hidden;
-                        box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
-                    }
-
-                        .social-button div {
-                            display: flex;
-                            justify-content: center;
-                            align-items: center;
-                            background-color: #6c757d; /* Color gris más oscuro */
-                            transition: background-color 0.3s ease;
-                        }
-
-                            .social-button div:hover {
-                                background-color: #495057; /* Color gris más oscuro al hacer hover */
-                            }
-
-                        .social-button img {
-                            width: 40px;
-                            height: 40px;
-                        }
-
-                    .facebook {
-                        background-color: #3B5998;
-                    }
-
-                    .whatsapp {
-                        background-color: #25D366;
-                    }
-
-                    .email {
-                        background-color: #D14836;
-                    }
-
-                    .ubicacion {
-                        background-color: #4285F4;
-                    }
-
-                    .text-facebook, .text-ubicacion, .text-email {
-                        display: inline-block;
-                        margin-top: 10px;
-                        font-size: 14px;
-                        color: #333; /* Color de texto más oscuro */
-                    }
-
-                    .location-icon {
-                        width: 24px;
-                        height: 24px;
-                        fill: none;
-                        stroke: #fff; /* Color de icono blanco */
-                        stroke-width: 2;
-                        transition: stroke 0.3s ease;
-                    }
-
-                    .ubicacion a:hover .location-icon {
-                        stroke: #eee; /* Color de icono más claro al hacer hover */
-                    }
-                </style>
-        </footer>
     </div>
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)
 </body>
+<footer>
+    <!-- Footer -->
+    <center>
+        <footer>
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12 text-center">
+                        <p>&copy; 2024 - Todos los derechos reservados ©</p>
+                    </div>
+                </div>
+
+                <!-- Nueva estructura circular de botones sociales -->
+                <div class="row">
+                    <div class="col-md-12 text-center">
+                        <div class="social-button">
+                            <div class="facebook">
+                                <a href="https://www.facebook.com/gabrieladuran" target="_blank">
+                                    <img src="https://upload.wikimedia.org/wikipedia/commons/5/51/Facebook_f_logo_%282019%29.svg" alt="Facebook">
+                                </a>
+                            </div>
+                            <div class="ubicacion">
+                                <a href="https://www.bing.com/maps?osid=ad899003-b955-482c-aa45-2541d786e9ad&cp=9.930998~-84.059358&lvl=17&pi=0&v=2&sV=2&form=S00027" target="_blank">
+                                    <svg class="location-icon" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                        <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                                        <circle cx="12" cy="10" r="3"></circle>
+                                    </svg>
+                                </a>
+                            </div>
+                            <div class="email">
+                                <a href="mailto:gyrventas@ice.co.cr" target="_blank">
+                                    <img src="https://upload.wikimedia.org/wikipedia/commons/4/4e/Gmail_Icon.png" alt="Correo">
+                                </a>
+                            </div>
+                            <div class="whatsapp">
+                                <a href="https://wa.me/50689966880" target="_blank">
+                                    <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp">
+                                </a>
+                            </div>
+                        </div>
+                        <!-- Texto adicional para los botones -->
+                        <span class="text-facebook">Nuestro Facebook</span>
+                        <span class="text-ubicacion">Nuestra ubicación</span>
+                        <span class="text-email">Enviar Correo</span>
+                    </div>
+                </div>
+            </div>
+        </footer>
+
+        <!-- Estilos del botón circular de redes sociales -->
+        <style>
+            footer {
+                background-color: #333333; /* Color de fondo claro */
+                color: white; /* Color de texto más oscuro */
+            }
+
+            .social-button {
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+                grid-template-rows: 1fr 1fr;
+                border-radius: 50%;
+                width: 200px;
+                height: 200px;
+                margin: 20px auto;
+                overflow: hidden;
+                box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+            }
+
+                .social-button div {
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    background-color: #6c757d; /* Color gris más oscuro */
+                    transition: background-color 0.3s ease;
+                }
+
+                    .social-button div:hover {
+                        background-color: #495057; /* Color gris más oscuro al hacer hover */
+                    }
+
+                .social-button img {
+                    width: 40px;
+                    height: 40px;
+                }
+
+            .facebook {
+                background-color: #3B5998;
+            }
+
+            .whatsapp {
+                background-color: #25D366;
+            }
+
+            .email {
+                background-color: #D14836;
+            }
+
+            .ubicacion {
+                background-color: #4285F4;
+            }
+
+            .text-facebook, .text-ubicacion, .text-email {
+                display: inline-block;
+                margin-top: 10px;
+                font-size: 14px;
+                color: white; /* Color de texto más oscuro */
+            }
+
+            .location-icon {
+                width: 24px;
+                height: 24px;
+                fill: none;
+                stroke: #fff; /* Color de icono blanco */
+                stroke-width: 2;
+                transition: stroke 0.3s ease;
+            }
+
+            .ubicacion a:hover .location-icon {
+                stroke: #eee; /* Color de icono más claro al hacer hover */
+            }
+        </style>
+</footer>
 </html>
