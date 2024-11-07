@@ -1,5 +1,4 @@
 ﻿@using Microsoft.AspNet.Identity
-
 @if (Request.IsAuthenticated)
 {
     using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
@@ -7,20 +6,10 @@
         @Html.AntiForgeryToken()
 
         <ul class="navbar-nav navbar-right">
-            <li class="nav-item dropdown">
-                <!-- Display Profile Picture if available; fallback to default -->
-                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">
-                    <img src="@Url.Content(User.Identity.GetProfilePictureUrl())" alt="Profile Picture" class="rounded-circle" style="width: 30px; height: 30px; object-fit: cover; margin-right: 5px;">
-                    Hola @User.Identity.GetUserName()!
-                </a>
-                <div class="dropdown-menu dropdown-menu-right">
-                    <!-- Link to Manage Account Settings -->
-                    @Html.ActionLink("Configurar cuenta", "Index", "Manage", null, new { @class = "dropdown-item" })
-                    <div class="dropdown-divider"></div>
-                    <!-- Log Out Option -->
-                    <a class="dropdown-item" href="javascript:document.getElementById('logoutForm').submit()">Cerrar sesión</a>
-                </div>
+            <li>
+                @Html.ActionLink("Hola " + User.Identity.GetUserName() + "!", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage", @class = "nav-link" })
             </li>
+            <li><a class="nav-link" href="javascript:document.getElementById('logoutForm').submit()">Cerrar sesión</a></li>
         </ul>
     }
 }
