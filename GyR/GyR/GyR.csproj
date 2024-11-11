@@ -219,10 +219,17 @@
     <Content Include="Scripts\bootstrap.esm.min.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Scripts\IMG\3040757.jpg" />
+    <Content Include="Scripts\IMG\cocina.jpeg" />
+    <Content Include="Scripts\IMG\electro.jpeg" />
     <Content Include="Scripts\IMG\fb.webp" />
+    <Content Include="Scripts\IMG\ferre.jpeg" />
     <Content Include="Scripts\IMG\Logos\apple_logo_1988.webp" />
     <Content Include="Scripts\IMG\Logos\ikea-yellow1340.logowik.com.webp" />
     <Content Include="Scripts\IMG\Logos\kisspng-lg-electronics-logo-lg-g-pro-lite-image-high-defin-1713912331340.webp" />
+    <Content Include="Scripts\IMG\mision.png" />
+    <Content Include="Scripts\IMG\mueble.jpeg" />
+    <Content Include="Scripts\IMG\office.jpg" />
     <Content Include="Scripts\IMG\prev.webp" />
     <Content Include="Scripts\IMG\sig.webp" />
     <None Include="Scripts\jquery-3.7.0.intellisense.js" />
@@ -264,6 +271,7 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
+    <Content Include="Scripts\IMG\vision.png" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
