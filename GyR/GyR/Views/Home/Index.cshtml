@@ -1,5 +1,5 @@
 ﻿@{
-    ViewBag.Title = "Home Page";
+    ViewBag.Title = "Inicio";
 }
 
 <main>
@@ -98,7 +98,7 @@
             <div class="vm-card" id="vision-card">
                 <div class="vm-icon-container">
                     <div class="vm-icon-wrapper">
-                        <i data-lucide="target" class="vm-vision-color"><img src="~/Scripts/IMG/vision.png" width="125px"/></i>
+                        <i data-lucide="target" class="vm-vision-color"><img src="~/Scripts/IMG/vision.png" width="125px" /></i>
                     </div>
                 </div>
                 <h3 class="vm-card-title">Nuestra Visión</h3>
@@ -130,99 +130,285 @@
             </div>
         </div>
     </div>
+    <!-- Carrusel Minimalista de Marcas con Botones Laterales -->
+    <div id="minimalist-brand-carousel">
+        <h2>Distribuidor autorizado de</h2>
+        <div class="minimalist-carousel-container">
+            <!-- Botón "Prev" a la izquierda -->
+            <button class="minimalist-control-button prev-button">&#10094;</button>
+
+            <!-- Pista del carrusel -->
+            <div class="minimalist-carousel-track-container">
+                <div class="minimalist-carousel-track">
+                    <!-- Repite este bloque para cada marca (hasta 15 en total) -->
+                    <div class="minimalist-brand-item">
+                        <img src="~/Scripts/IMG/Logos/Dell-Logo-2010.png" width="150px" />
+                        <button class="minimalist-view-button">Ver</button>
+                    </div>
+                    <div class="minimalist-brand-item">
+                        <img src="~/Scripts/IMG/Logos/descarga (1).png" width="150px"/>                        
+                        <button class="minimalist-view-button">Ver</button>
+                    </div>
+                    <div class="minimalist-brand-item">
+                        <img src="~/Scripts/IMG/Logos/descarga.png" width="150px"/>
+                        <button class="minimalist-view-button">Ver</button>
+                    </div>
+                    <div class="minimalist-brand-item">
+                        <img src="~/Scripts/IMG/Logos/Herman-MIller-Logo-Design.jpg" width="150px"/>
+                        <button class="minimalist-view-button">Ver</button>
+                    </div>
+                    <div class="minimalist-brand-item">
+                        <img src="~/Scripts/IMG/Logos/HP-Logo.png" width="150px"/>
+                        <button class="minimalist-view-button">Ver</button>
+                    </div>
+                    <div class="minimalist-brand-item">
+                        <img src="~/Scripts/IMG/Logos/ikea-yellow1340.logowik.com.webp" width="150px"/>
+                        <button class="minimalist-view-button">Ver</button>
+                    </div>
+                    <div class="minimalist-brand-item">
+                        <img src="~/Scripts/IMG/Logos/kisspng-lg-electronics-logo-lg-g-pro-lite-image-high-defin-1713912331340.webp" width="150px"/>
+                        <button class="minimalist-view-button">Ver</button>
+                    </div>
+                    <div class="minimalist-brand-item">
+                        <img src="~/Scripts/IMG/Logos/samsung-logo-1993.jpg"width="150px" />
+                        <button class="minimalist-view-button">Ver</button>
+                    </div>
+                    <div class="minimalist-brand-item">
+                        <img src="~/Scripts/IMG/Logos/Xiaomi-Logo-2014.png" width="150px" />
+                        <button class="minimalist-view-button">Ver</button>
+                    </div>
+                    <!-- Agrega más elementos hasta 15 -->
+                </div>
+            </div>
+
+            <!-- Botón "Next" a la derecha -->
+            <button class="minimalist-control-button next-button">&#10095;</button>
+        </div>
+    </div>
+
+
+    <style>
+        /* Contenedor del carrusel */
+        #minimalist-brand-carousel {
+            text-align: center;
+            max-width: 720px;
+            margin: 0 auto;
+        }
+
+            #minimalist-brand-carousel h2 {
+                font-size: 1.2rem;
+                color: #333;
+                margin-bottom: 15px;
+            }
+
+        /* Contenedor y pista del carrusel */
+        .minimalist-carousel-container {
+            position: relative;
+            display: flex;
+            align-items: center;
+        }
+
+        .minimalist-carousel-track-container {
+            overflow: hidden;
+            width: 100%;
+        }
+
+        .minimalist-carousel-track {
+            display: flex;
+            transition: transform 0.4s ease;
+            gap: 20px;
+        }
+
+        /* Elementos del carrusel */
+        .minimalist-brand-item {
+            flex: 0 0 220px; /* Ajusta para cambiar el tamaño del elemento */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 15px;
+            background: #f5f5f5;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            transition: box-shadow 0.3s ease;
+        }
+
+            .minimalist-brand-item:hover {
+                box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+            }
+
+            .minimalist-brand-item img {
+                max-width: 100px;
+                margin-bottom: 10px;
+            }
+
+        /* Botón "Ver" */
+        .minimalist-view-button {
+            padding: 8px 12px;
+            background: #007bff;
+            border: none;
+            border-radius: 5px;
+            font-size: 0.85rem;
+            color: #fff;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+            .minimalist-view-button:hover {
+                background: #0056b3;
+            }
+
+        /* Controles del carrusel - Botones laterales */
+        /* Controles del carrusel - Botones laterales */
+        .minimalist-control-button {
+            background: #333; /* Cambia a un color oscuro para contraste */
+            border: none;
+            color: #fff;
+            font-size: 1.5rem;
+            padding: 10px 15px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            border-radius: 8px; /* Agrega borde redondeado */
+        }
+
+            .minimalist-control-button:hover {
+                background: #555; /* Color de fondo más claro al pasar el ratón */
+            }
+
+
+        .prev-button {
+            left: -50px; /* Ajusta la distancia desde el borde izquierdo */
+        }
+
+        .next-button {
+            right: -30px; /* Ajusta la distancia desde el borde derecho */
+        }
+
+
+
+    </style>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const track = document.querySelector('.minimalist-carousel-track');
+            const items = document.querySelectorAll('.minimalist-brand-item');
+            const prevButton = document.querySelector('.prev-button');
+            const nextButton = document.querySelector('.next-button');
+
+            let currentIndex = 0;
+            const itemsVisible = 3; // Cambia el número de elementos visibles aquí
+            const itemWidth = items[0].offsetWidth + 20; // Ancho de cada elemento + espacio entre ellos
+
+            function updateCarouselPosition() {
+                const newPosition = -(currentIndex * itemWidth);
+                track.style.transform = `translateX(${newPosition}px)`;
+            }
+
+            prevButton.addEventListener('click', () => {
+                currentIndex = (currentIndex > 0) ? currentIndex - 1 : items.length - itemsVisible;
+                updateCarouselPosition();
+            });
+
+            nextButton.addEventListener('click', () => {
+                currentIndex = (currentIndex < items.length - itemsVisible) ? currentIndex + 1 : 0;
+                updateCarouselPosition();
+            });
+        });
+
+
+    </script>
     <style>
         /* Prefijo 'vm-' añadido a todas las clases para evitar conflictos */
-.vm-container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 2rem;
-}
+        .vm-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
 
-.vm-cards-grid {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 2rem;
-}
+        .vm-cards-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 2rem;
+        }
 
 
-.vm-card {
-    background: white;
-    padding: 2rem;
-    border-radius: 1rem;
-    box-shadow: 10px 10px 20px rgba(163,177,198,0.3),
-               -10px -10px 20px rgba(255,255,255,0.8);
-    transition: all 0.3s ease;
-}
+        .vm-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 1rem;
+            box-shadow: 10px 10px 20px rgba(163,177,198,0.3), -10px -10px 20px rgba(255,255,255,0.8);
+            transition: all 0.3s ease;
+        }
 
-.vm-card:hover {
-    transform: translateY(-8px);
-}
+            .vm-card:hover {
+                transform: translateY(-8px);
+            }
 
-.vm-icon-container {
-    display: flex;
-    justify-content: center;
-    margin-bottom: 1.5rem;
-}
+        .vm-icon-container {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 1.5rem;
+        }
 
-.vm-icon-wrapper {
-    padding: 1rem;
-    background: white;
-    border-radius: 50%;
-    box-shadow: 6px 6px 12px rgba(163,177,198,0.3),
-               -6px -6px 12px rgba(255,255,255,0.8);
-}
+        .vm-icon-wrapper {
+            padding: 1rem;
+            background: white;
+            border-radius: 50%;
+            box-shadow: 6px 6px 12px rgba(163,177,198,0.3), -6px -6px 12px rgba(255,255,255,0.8);
+        }
 
-.vm-icon-wrapper svg {
-    width: 40px;
-    height: 40px;
-    transition: transform 0.3s ease;
-}
+            .vm-icon-wrapper svg {
+                width: 40px;
+                height: 40px;
+                transition: transform 0.3s ease;
+            }
 
-.vm-card:hover .vm-icon-wrapper svg {
-    transform: scale(1.1);
-}
+        .vm-card:hover .vm-icon-wrapper svg {
+            transform: scale(1.1);
+        }
 
-.vm-card-title {
-    font-family: 'Poppins', sans-serif;
-    font-size: 1.5rem;
-    font-weight: 600;
-    color: #1a1a1a;
-    text-align: center;
-    margin-bottom: 1rem;
-    letter-spacing: -0.5px;
-}
+        .vm-card-title {
+            font-family: 'Poppins', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: #1a1a1a;
+            text-align: center;
+            margin-bottom: 1rem;
+            letter-spacing: -0.5px;
+        }
 
-.vm-card-text {
-    color: #666;
-    text-align: center;
-    line-height: 1.6;
-    margin-bottom: 1.5rem;
-    font-family: 'SF Pro Display', -apple-system, BlinkMacSystemFont, sans-serif;
-}
+        .vm-card-text {
+            color: #666;
+            text-align: center;
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+            font-family: 'SF Pro Display', -apple-system, BlinkMacSystemFont, sans-serif;
+        }
 
-.vm-divider {
-    width: 4rem;
-    height: 4px;
-    border-radius: 2px;
-    margin: 0 auto;
-    opacity: 0.75;
-}
+        .vm-divider {
+            width: 4rem;
+            height: 4px;
+            border-radius: 2px;
+            margin: 0 auto;
+            opacity: 0.75;
+        }
 
-.vm-vision-color {
-    color: #2563eb;
-}
+        .vm-vision-color {
+            color: #2563eb;
+        }
 
-.vm-mission-color {
-    color: #16a34a;
-}
+        .vm-mission-color {
+            color: #16a34a;
+        }
 
-.vm-vision-divider {
-    background-color: #2563eb;
-}
+        .vm-vision-divider {
+            background-color: #2563eb;
+        }
 
-.vm-mission-divider {
-    background-color: #16a34a;
-}
+        .vm-mission-divider {
+            background-color: #16a34a;
+        }
     </style>
     <script>
         // Esperar a que el DOM esté completamente cargado
