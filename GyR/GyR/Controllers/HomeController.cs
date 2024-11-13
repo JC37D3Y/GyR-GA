@@ -42,6 +42,10 @@ namespace GyR.Controllers
 
             return View();
         }
+        public ActionResult compra()
+        {
+            return View();
+        }
         public class Product
         {
             public int Id { get; set; }

@@ -1,0 +1,170 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<link rel="stylesheet" href="~/css/styles.css" />
+
+<style>
+    /* Estilo General de la Página */
+    body {
+        font-family: Arial, sans-serif;
+    }
+
+    /* Contenedor del Producto */
+    .product-container {
+        background-color: #FFFFFF;
+        padding: 1.5rem;
+        max-width: 800px;
+        width: 100%;
+        margin: auto;
+        border-radius: 8px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    }
+
+    /* Imagen del Producto */
+    .product-image {
+        display: block;
+        margin: 0 auto;
+        width: 200px;
+        height: auto;
+    }
+
+    /* Título y descripción */
+    .product-title {
+        font-size: 24px;
+        font-weight: bold;
+        color: #333;
+        margin-top: 1rem;
+    }
+
+    .product-description {
+        color: #666;
+        margin-bottom: 1rem;
+    }
+
+    .product-price {
+        font-size: 24px;
+        font-weight: bold;
+        color: #28a745;
+        margin-bottom: 1rem;
+    }
+
+    /* Lista de especificaciones */
+    .specifications-list {
+        list-style: none;
+        padding: 0;
+        margin-bottom: 1rem;
+    }
+
+        .specifications-list li {
+            color: #555;
+            margin-bottom: 0.5rem;
+        }
+
+    /* Botones */
+    .btn-primary {
+        background-color: #4F46E5;
+        color: #FFFFFF;
+        padding: 0.75rem;
+        border-radius: 8px;
+        width: 100%;
+        font-weight: bold;
+        text-align: center;
+        transition: background-color 0.3s ease;
+        cursor: pointer;
+        border: none;
+    }
+
+        .btn-primary:hover {
+            background-color: #4338CA;
+        }
+
+    /* Modal */
+    #paymentModal {
+        display: none;
+        position: fixed;
+        inset: 0;
+        background-color: rgba(0, 0, 0, 0.6);
+        justify-content: center;
+        align-items: center;
+    }
+
+    .modal-content {
+        background-color: #FFFFFF;
+        padding: 1.5rem;
+        border-radius: 8px;
+        max-width: 500px;
+        width: 90%;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    }
+</style>
+
+<div class="product-container">
+    <!-- Imagen del Producto -->
+    <img src="~/Scripts/IMG/DELL.png" alt="Producto" class="product-image">
+
+    <!-- Título e Información del Producto -->
+    <h1 class="product-title">Dell Latitude 3440 - Notebook - 14"</h1>
+    <p class="product-description">
+        Dell<br>
+        1920 x 1080 LED<br>
+        Intel Core i5 3.3 GHz<br>
+        8 GB DDR4 SDRAM<br>
+        512 GB SSD<br>
+        Intel Integrated Graphics<br>
+        Windows 11 Pro<br>
+        Black
+    </p>
+    <p class="product-price">₡300,000</p>
+
+    <!-- Botón de Compra -->
+    <button onclick="showPaymentOptions()" class="btn-primary">
+        Comprar Ahora
+    </button>
+
+    <!-- Modal de Métodos de Pago -->
+    <div id="paymentModal">
+        <div class="modal-content">
+            <h2 class="text-xl font-bold text-center text-gray-800 mb-4">Selecciona un Método de Pago</h2>
+            <form id="orderForm" class="space-y-4">
+                <input type="text" id="fullName" placeholder="Nombre Completo" class="form-input" required>
+                <input type="text" id="address" placeholder="Dirección de Envío" class="form-input" required>
+
+                <select id="paymentMethod" class="form-select">
+                    <option value="tarjeta">Tarjeta de Crédito/Débito</option>
+                    <option value="paypal">PayPal</option>
+                    <option value="transferencia">Transferencia Bancaria</option>
+                </select>
+
+                <button type="submit" class="btn-primary">
+                    Confirmar Compra
+                </button>
+            </form>
+            <button onclick="hidePaymentOptions()" class="btn-cancel mt-4">
+                Cancelar
+            </button>
+        </div>
+    </div>
+</div>
+
+<script>
+    // Mostrar el modal de métodos de pago
+    function showPaymentOptions() {
+        document.getElementById("paymentModal").style.display = "flex";
+    }
+
+    // Ocultar el modal de métodos de pago
+    function hidePaymentOptions() {
+        document.getElementById("paymentModal").style.display = "none";
+    }
+
+    // Confirmar compra en el formulario
+    document.getElementById("orderForm").addEventListener("submit", function (e) {
+        e.preventDefault();
+        const fullName = document.getElementById("fullName").value;
+        const address = document.getElementById("address").value;
+        const paymentMethod = document.getElementById("paymentMethod").value;
+
+        alert(`Compra realizada con éxito:\nNombre: ${fullName}\nDirección: ${address}\nMétodo de Pago: ${paymentMethod}`);
+        hidePaymentOptions();
+    });
+</script>

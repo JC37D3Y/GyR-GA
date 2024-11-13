@@ -221,6 +221,7 @@
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\IMG\3040757.jpg" />
     <Content Include="Scripts\IMG\cocina.jpeg" />
+    <Content Include="Scripts\IMG\DELL.png" />
     <Content Include="Scripts\IMG\electro.jpeg" />
     <Content Include="Scripts\IMG\fb.webp" />
     <Content Include="Scripts\IMG\ferre.jpeg" />
@@ -306,6 +307,7 @@
     <Content Include="Views\Manage\VerifyPhoneNumber.cshtml" />
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
+    <Content Include="Views\Home\compra.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
