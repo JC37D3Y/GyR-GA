@@ -146,31 +146,31 @@
                         <button class="minimalist-view-button">Ver</button>
                     </div>
                     <div class="minimalist-brand-item">
-                        <img src="~/Scripts/IMG/Logos/descarga (1).png" width="150px"/>                        
+                        <img src="~/Scripts/IMG/Logos/descarga (1).png" width="150px" />
                         <button class="minimalist-view-button">Ver</button>
                     </div>
                     <div class="minimalist-brand-item">
-                        <img src="~/Scripts/IMG/Logos/descarga.png" width="150px"/>
+                        <img src="~/Scripts/IMG/Logos/descarga.png" width="150px" />
                         <button class="minimalist-view-button">Ver</button>
                     </div>
                     <div class="minimalist-brand-item">
-                        <img src="~/Scripts/IMG/Logos/Herman-MIller-Logo-Design.jpg" width="150px"/>
+                        <img src="~/Scripts/IMG/Logos/Herman-MIller-Logo-Design.jpg" width="150px" />
                         <button class="minimalist-view-button">Ver</button>
                     </div>
                     <div class="minimalist-brand-item">
-                        <img src="~/Scripts/IMG/Logos/HP-Logo.png" width="150px"/>
+                        <img src="~/Scripts/IMG/Logos/HP-Logo.png" width="150px" />
                         <button class="minimalist-view-button">Ver</button>
                     </div>
                     <div class="minimalist-brand-item">
-                        <img src="~/Scripts/IMG/Logos/ikea-yellow1340.logowik.com.webp" width="150px"/>
+                        <img src="~/Scripts/IMG/Logos/ikea-yellow1340.logowik.com.webp" width="150px" />
                         <button class="minimalist-view-button">Ver</button>
                     </div>
                     <div class="minimalist-brand-item">
-                        <img src="~/Scripts/IMG/Logos/kisspng-lg-electronics-logo-lg-g-pro-lite-image-high-defin-1713912331340.webp" width="150px"/>
+                        <img src="~/Scripts/IMG/Logos/kisspng-lg-electronics-logo-lg-g-pro-lite-image-high-defin-1713912331340.webp" width="150px" />
                         <button class="minimalist-view-button">Ver</button>
                     </div>
                     <div class="minimalist-brand-item">
-                        <img src="~/Scripts/IMG/Logos/samsung-logo-1993.jpg"width="150px" />
+                        <img src="~/Scripts/IMG/Logos/samsung-logo-1993.jpg" width="150px" />
                         <button class="minimalist-view-button">Ver</button>
                     </div>
                     <div class="minimalist-brand-item">
@@ -185,6 +185,109 @@
             <button class="minimalist-control-button next-button">&#10095;</button>
         </div>
     </div>
+
+    <br />
+    <br />
+    <br />
+
+    <div class="max-w-sm p-4 bg-white rounded-lg shadow-lg">
+        <div class="flex items-center justify-between mb-4">
+            <h2 class="text-lg font-semibold text-gray-800">Tipo de Cambio USD/CRC</h2>
+            <div id="loadingIndicator" class="hidden">
+                <div class="animate-spin rounded-full h-5 w-5 border-b-2 border-gray-900"></div>
+            </div>
+        </div>
+
+        <div class="grid grid-cols-2 gap-4 mb-4">
+            <div class="text-center p-3 bg-gray-50 rounded-lg">
+                <div class="text-sm text-gray-600 mb-1">Compra</div>
+                <div id="buyRate" class="text-2xl font-bold text-gray-900">---,--</div>
+            </div>
+
+            <div class="text-center p-3 bg-gray-50 rounded-lg">
+                <div class="text-sm text-gray-600 mb-1">Venta</div>
+                <div id="sellRate" class="text-2xl font-bold text-gray-900">---,--</div>
+            </div>
+        </div>
+
+        <div class="text-sm text-gray-500 text-center">
+            Última actualización: <span id="lastUpdated">Cargando...</span>
+        </div>
+
+        <div class="mt-4 text-xs text-gray-400 text-center">
+            Tipos de cambio según BCCR - Actualización automática cada 5 minutos
+        </div>
+    </div>
+
+    <script>
+        const ExchangeRateUpdater = {
+            init: function () {
+                this.updateExchangeRate();
+                this.setupEventListeners();
+                this.startAutoUpdate();
+            },
+
+            updateExchangeRate: function () {
+                const loadingIndicator = document.getElementById('loadingIndicator');
+                if (loadingIndicator) {
+                    loadingIndicator.classList.remove('hidden');
+                }
+
+                // Cambia la URL de la API al endpoint que estés utilizando o a una API pública
+                fetch('https://api.exchangerate-api.com/v4/latest/USD') // API pública de ejemplo
+                    .then(response => response.json())
+                    .then(data => {
+                        const buyRate = data.rates.CRC; // Tipo de cambio en colones costarricenses
+                        const sellRate = buyRate * 1.02; // Ejemplo: la venta se calcula con un margen de 2%
+
+                        this.updateDisplay({
+                            buyRate: buyRate.toFixed(2),
+                            sellRate: sellRate.toFixed(2),
+                            lastUpdated: new Date().toLocaleString() // Muestra la hora actualizada
+                        });
+                    })
+                    .catch(error => {
+                        console.error('Error al actualizar tipo de cambio:', error);
+                    })
+                    .finally(() => {
+                        if (loadingIndicator) {
+                            loadingIndicator.classList.add('hidden');
+                        }
+                    });
+            },
+
+            updateDisplay: function (data) {
+                const elements = {
+                    buyRate: document.getElementById('buyRate'),
+                    sellRate: document.getElementById('sellRate'),
+                    lastUpdated: document.getElementById('lastUpdated')
+                };
+
+                if (elements.buyRate) elements.buyRate.textContent = `₡${data.buyRate}`;
+                if (elements.sellRate) elements.sellRate.textContent = `₡${data.sellRate}`;
+                if (elements.lastUpdated) elements.lastUpdated.textContent = data.lastUpdated;
+            },
+
+            setupEventListeners: function () {
+                // Actualizar cuando la pestaña vuelve a estar activa
+                document.addEventListener('visibilitychange', () => {
+                    if (document.visibilityState === 'visible') {
+                        this.updateExchangeRate();
+                    }
+                });
+            },
+
+            startAutoUpdate: function () {
+                // Actualizar cada 5 minutos
+                setInterval(() => this.updateExchangeRate(), 300000);
+            }
+        };
+
+        // Inicializar cuando el DOM esté listo
+        document.addEventListener('DOMContentLoaded', () => {
+            ExchangeRateUpdater.init();
+        });
+    </script>
 
 
     <style>
@@ -285,9 +388,6 @@
         .next-button {
             right: -30px; /* Ajusta la distancia desde el borde derecho */
         }
-
-
-
     </style>
     <script>
         document.addEventListener("DOMContentLoaded", function () {

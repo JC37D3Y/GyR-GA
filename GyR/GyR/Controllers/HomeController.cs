@@ -13,6 +13,22 @@ namespace GyR.Controllers
             return View();
         }
 
+        public JsonResult GetCurrentRate()
+        {
+            // Aquí deberías obtener los valores de compra y venta desde tu fuente de datos
+            decimal buyRate = 600; // Ejemplo de tasa de compra
+            decimal sellRate = 605; // Ejemplo de tasa de venta
+            string lastUpdated = DateTime.Now.ToString("g"); // Última actualización
+
+            return Json(new
+            {
+                success = true,
+                buyRate = buyRate,
+                sellRate = sellRate,
+                lastUpdated = lastUpdated
+            }, JsonRequestBehavior.AllowGet);
+        }
+
         public ActionResult About()
         {
             ViewBag.Message = "Your application description page.";

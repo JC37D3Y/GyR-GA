@@ -112,38 +112,7 @@
                         </div>
                     </li>
                     <li>
-                        <style>
-                            #exchangeRate {
-color: green;
-margin: 20px;
-                            }
-                        </style>
-                        <div id="exchangeRate">Cargando tipo de cambio...</div>
 
-                        <script>
-                            async function fetchExchangeRate() {
-                                try {
-                                    // Aquí utilizamos una API gratuita para obtener el tipo de cambio
-                                    const response = await fetch('https://api.exchangerate-api.com/v4/latest/USD');
-                                    const data = await response.json();
-
-                                    // Asegúrate de cambiar 'CRC' por la moneda que necesitas (en este caso, colón costarricense)
-                                    const exchangeRate = data.rates.CRC;
-
-                                    // Mostrar el tipo de cambio en el div
-                                    document.getElementById('exchangeRate').innerHTML = `Tipo de cambio: ₡${exchangeRate}`;
-                                } catch (error) {
-                                    console.error('Error al obtener el tipo de cambio:', error);
-                                    document.getElementById('exchangeRate').innerHTML = 'Error al cargar el tipo de cambio';
-                                }
-                            }
-
-                            // Llamar a la función para obtener el tipo de cambio al cargar la página
-                            fetchExchangeRate();
-
-                            // Actualizar el tipo de cambio cada 24 horas (86400000 ms)
-                            setInterval(fetchExchangeRate, 86400000);
-                        </script>
                     </li>
                 </ul>
             </div>
