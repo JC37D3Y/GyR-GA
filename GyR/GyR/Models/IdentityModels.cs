@@ -25,6 +25,9 @@ namespace GyR.Models
         {
         }
 
+        // DbSet para la entidad Comment
+        public DbSet<Comment> Comments { get; set; }
+
         public static ApplicationDbContext Create()
         {
             return new ApplicationDbContext();

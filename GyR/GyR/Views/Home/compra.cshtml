@@ -96,6 +96,19 @@
         width: 90%;
         box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
     }
+
+    /* Estilos para el mapa */
+    #map {
+        width: 100%;
+        height: 300px;
+        border-radius: 8px;
+        margin-top: 1rem;
+    }
+
+    /* Campo de búsqueda del mapa */
+    .map-search {
+        margin-top: 1rem;
+    }
 </style>
 
 <div class="product-container">
@@ -127,7 +140,10 @@
             <h2 class="text-xl font-bold text-center text-gray-800 mb-4">Selecciona un Método de Pago</h2>
             <form id="orderForm" class="space-y-4">
                 <input type="text" id="fullName" placeholder="Nombre Completo" class="form-input" required>
-                <input type="text" id="address" placeholder="Dirección de Envío" class="form-input" required>
+
+                <!-- Campo de búsqueda de dirección y mapa -->
+                <input type="text" id="mapSearch" placeholder="Buscar ubicación" class="form-input map-search">
+                <div id="map"></div>
 
                 <select id="paymentMethod" class="form-select">
                     <option value="tarjeta">Tarjeta de Crédito/Débito</option>
@@ -147,6 +163,53 @@
 </div>
 
 <script>
+    // Inicialización del mapa y el buscador
+    let map, marker;
+    function initMap() {
+        map = new google.maps.Map(document.getElementById("map"), {
+            center: { lat: 9.9281, lng: -84.0907 }, // Ubicación inicial (San José, Costa Rica)
+            zoom: 12
+        });
+
+        // Marcador inicial en el centro
+        marker = new google.maps.Marker({
+            position: map.getCenter(),
+            map: map,
+            draggable: true
+        });
+
+        // Actualizar campo de búsqueda con la dirección seleccionada
+        const geocoder = new google.maps.Geocoder();
+        marker.addListener('dragend', () => {
+            geocoder.geocode({ location: marker.getPosition() }, (results, status) => {
+                if (status === 'OK' && results[0]) {
+                    document.getElementById("mapSearch").value = results[0].formatted_address;
+                }
+            });
+        });
+
+        // Campo de búsqueda en el mapa
+        const input = document.getElementById("mapSearch");
+        const searchBox = new google.maps.places.SearchBox(input);
+        map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
+
+        // Cambiar la ubicación del mapa al hacer una búsqueda
+        searchBox.addListener("places_changed", () => {
+            const places = searchBox.getPlaces();
+            if (places.length === 0) return;
+
+            const bounds = new google.maps.LatLngBounds();
+            places.forEach(place => {
+                if (!place.geometry) return;
+
+                // Mover el marcador a la ubicación seleccionada
+                marker.setPosition(place.geometry.location);
+                bounds.extend(place.geometry.location);
+            });
+            map.fitBounds(bounds);
+        });
+    }
+
     // Mostrar el modal de métodos de pago
     function showPaymentOptions() {
         document.getElementById("paymentModal").style.display = "flex";
@@ -161,10 +224,13 @@
     document.getElementById("orderForm").addEventListener("submit", function (e) {
         e.preventDefault();
         const fullName = document.getElementById("fullName").value;
-        const address = document.getElementById("address").value;
+        const address = document.getElementById("mapSearch").value;
         const paymentMethod = document.getElementById("paymentMethod").value;
 
         alert(`Compra realizada con éxito:\nNombre: ${fullName}\nDirección: ${address}\nMétodo de Pago: ${paymentMethod}`);
         hidePaymentOptions();
     });
 </script>
+
+<!-- Script de la API de Google Maps con Places -->
+<script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&libraries=places&callback=initMap" async defer></script>
