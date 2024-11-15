@@ -4,12 +4,11 @@
 <link rel="stylesheet" href="~/css/styles.css" />
 
 <style>
-    /* Estilo General de la Página */
-    body {
+    /* Estilo General */
+    body.product-page {
         font-family: Arial, sans-serif;
     }
 
-    /* Contenedor del Producto */
     .product-container {
         background-color: #FFFFFF;
         padding: 1.5rem;
@@ -20,7 +19,6 @@
         box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
     }
 
-    /* Imagen del Producto */
     .product-image {
         display: block;
         margin: 0 auto;
@@ -28,7 +26,6 @@
         height: auto;
     }
 
-    /* Título y descripción */
     .product-title {
         font-size: 24px;
         font-weight: bold;
@@ -48,20 +45,7 @@
         margin-bottom: 1rem;
     }
 
-    /* Lista de especificaciones */
-    .specifications-list {
-        list-style: none;
-        padding: 0;
-        margin-bottom: 1rem;
-    }
-
-        .specifications-list li {
-            color: #555;
-            margin-bottom: 0.5rem;
-        }
-
-    /* Botones */
-    .btn-primary {
+    .btn-primary-product {
         background-color: #4F46E5;
         color: #FFFFFF;
         padding: 0.75rem;
@@ -74,12 +58,11 @@
         border: none;
     }
 
-        .btn-primary:hover {
+        .btn-primary-product:hover {
             background-color: #4338CA;
         }
 
-    /* Modal */
-    #paymentModal {
+    #paymentModalProduct {
         display: none;
         position: fixed;
         inset: 0;
@@ -88,7 +71,7 @@
         align-items: center;
     }
 
-    .modal-content {
+    .modal-content-product {
         background-color: #FFFFFF;
         padding: 1.5rem;
         border-radius: 8px;
@@ -97,25 +80,57 @@
         box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
     }
 
-    /* Estilos para el mapa */
-    #map {
-        width: 100%;
-        height: 300px;
-        border-radius: 8px;
-        margin-top: 1rem;
+    .form-group {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 10px;
+        margin-bottom: 1rem;
     }
 
-    /* Campo de búsqueda del mapa */
-    .map-search {
-        margin-top: 1rem;
+    .form-select {
+        padding: 10px;
+        border-radius: 8px;
+        width: 100%;
+        border: 1px solid #ccc;
+        background: #fff;
     }
+
+    .btn-secondary-product {
+        background-color: #E53E3E;
+        color: #FFFFFF;
+        padding: 0.5rem;
+        border-radius: 8px;
+        width: 100%;
+        font-weight: bold;
+        text-align: center;
+        transition: background-color 0.3s ease;
+        cursor: pointer;
+        border: none;
+    }
+
+        .btn-secondary-product:hover {
+            background-color: #C53030;
+        }
+    .btn-cancel {
+        background-color: #D1D5DB; /* Gris claro */
+        color: #1F2937; /* Texto oscuro */
+        padding: 0.5rem 1rem;
+        border-radius: 8px;
+        font-weight: bold;
+        border: none;
+        cursor: pointer;
+        transition: background-color 0.3s ease, color 0.3s ease;
+    }
+
+        .btn-cancel:hover {
+            background-color: #9CA3AF; /* Gris medio */
+            color: #FFFFFF; /* Texto blanco */
+        }
 </style>
 
 <div class="product-container">
-    <!-- Imagen del Producto -->
     <img src="~/Scripts/IMG/DELL.png" alt="Producto" class="product-image">
-
-    <!-- Título e Información del Producto -->
     <h1 class="product-title">Dell Latitude 3440 - Notebook - 14"</h1>
     <p class="product-description">
         Dell<br>
@@ -129,29 +144,49 @@
     </p>
     <p class="product-price">₡300,000</p>
 
-    <!-- Botón de Compra -->
-    <button onclick="showPaymentOptions()" class="btn-primary">
+    <button onclick="showPaymentOptions()" class="btn-primary-product">
         Comprar Ahora
     </button>
 
-    <!-- Modal de Métodos de Pago -->
-    <div id="paymentModal">
-        <div class="modal-content">
+    <div id="paymentModalProduct">
+        <div class="modal-content-product">
             <h2 class="text-xl font-bold text-center text-gray-800 mb-4">Selecciona un Método de Pago</h2>
             <form id="orderForm" class="space-y-4">
-                <input type="text" id="fullName" placeholder="Nombre Completo" class="form-input" required>
+                <!-- Campo Nombre Completo y Ubicación -->
+                <div class="form-group">
+                    <input type="text" id="fullName" placeholder="Nombre Completo" class="form-input" required>
+                    <select id="provinceSelect" class="form-select" onchange="updateCantons()">
+                        <option value="">Seleccione una provincia</option>
+                        <option value="san-jose">San José</option>
+                        <option value="alajuela">Alajuela</option>
+                        <option value="cartago">Cartago</option>
+                        <option value="heredia">Heredia</option>
+                        <option value="guanacaste">Guanacaste</option>
+                        <option value="puntarenas">Puntarenas</option>
+                        <option value="limon">Limón</option>
+                    </select>
+                    <select id="cantonSelect" class="form-select">
+                        <option value="">Seleccione un cantón</option>
+                    </select>
+                </div>
 
-                <!-- Campo de búsqueda de dirección y mapa -->
-                <input type="text" id="mapSearch" placeholder="Buscar ubicación" class="form-input map-search">
-                <div id="map"></div>
+                <!-- Botón de Métodos de Pago -->
+                <button type="button" onclick="togglePaymentMethods()" class="btn-secondary-product">
+                    Métodos de Pago
+                </button>
+                <br />
+                <div id="paymentMethods" style="display:none;">
+                    <p><b>Métodos disponibles:</b></p>
+                    <ul>
+                        <li>Tarjeta de Crédito/Débito</li>
+                        <li>PayPal</li>
+                        <li>Transferencia Bancaria</li>
+                    </ul>
+                </div>
+                <br />
+                
 
-                <select id="paymentMethod" class="form-select">
-                    <option value="tarjeta">Tarjeta de Crédito/Débito</option>
-                    <option value="paypal">PayPal</option>
-                    <option value="transferencia">Transferencia Bancaria</option>
-                </select>
-
-                <button type="submit" class="btn-primary">
+                <button type="submit" class="btn-primary-product">
                     Confirmar Compra
                 </button>
             </form>
@@ -163,74 +198,59 @@
 </div>
 
 <script>
-    // Inicialización del mapa y el buscador
-    let map, marker;
-    function initMap() {
-        map = new google.maps.Map(document.getElementById("map"), {
-            center: { lat: 9.9281, lng: -84.0907 }, // Ubicación inicial (San José, Costa Rica)
-            zoom: 12
-        });
-
-        // Marcador inicial en el centro
-        marker = new google.maps.Marker({
-            position: map.getCenter(),
-            map: map,
-            draggable: true
-        });
-
-        // Actualizar campo de búsqueda con la dirección seleccionada
-        const geocoder = new google.maps.Geocoder();
-        marker.addListener('dragend', () => {
-            geocoder.geocode({ location: marker.getPosition() }, (results, status) => {
-                if (status === 'OK' && results[0]) {
-                    document.getElementById("mapSearch").value = results[0].formatted_address;
-                }
-            });
-        });
-
-        // Campo de búsqueda en el mapa
-        const input = document.getElementById("mapSearch");
-        const searchBox = new google.maps.places.SearchBox(input);
-        map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
-
-        // Cambiar la ubicación del mapa al hacer una búsqueda
-        searchBox.addListener("places_changed", () => {
-            const places = searchBox.getPlaces();
-            if (places.length === 0) return;
-
-            const bounds = new google.maps.LatLngBounds();
-            places.forEach(place => {
-                if (!place.geometry) return;
-
-                // Mover el marcador a la ubicación seleccionada
-                marker.setPosition(place.geometry.location);
-                bounds.extend(place.geometry.location);
-            });
-            map.fitBounds(bounds);
-        });
-    }
+    // Cantones por provincia
+    const cantones = {
+        "san-jose": ["Central", "Escazú", "Desamparados", "Puriscal", "Tarrazú"],
+        "alajuela": ["Central", "San Ramón", "Grecia", "San Carlos", "Zarcero"],
+        "cartago": ["Central", "Paraíso", "La Unión", "Jiménez", "Turrialba"],
+        "heredia": ["Central", "Barva", "Santo Domingo", "Santa Bárbara", "San Rafael"],
+        "guanacaste": ["Liberia", "Nicoya", "Santa Cruz", "Bagaces", "Carrillo"],
+        "puntarenas": ["Central", "Esparza", "Buenos Aires", "Montes de Oro", "Quepos"],
+        "limon": ["Central", "Pococí", "Siquirres", "Talamanca", "Matina"]
+    };
 
     // Mostrar el modal de métodos de pago
     function showPaymentOptions() {
-        document.getElementById("paymentModal").style.display = "flex";
+        document.getElementById("paymentModalProduct").style.display = "flex";
     }
 
     // Ocultar el modal de métodos de pago
     function hidePaymentOptions() {
-        document.getElementById("paymentModal").style.display = "none";
+        document.getElementById("paymentModalProduct").style.display = "none";
+    }
+
+    // Actualizar los cantones según la provincia seleccionada
+    function updateCantons() {
+        const provinceSelect = document.getElementById("provinceSelect");
+        const cantonSelect = document.getElementById("cantonSelect");
+        const selectedProvince = provinceSelect.value;
+
+        cantonSelect.innerHTML = '<option value="">Seleccione un cantón</option>';
+
+        if (selectedProvince && cantones[selectedProvince]) {
+            cantones[selectedProvince].forEach(canton => {
+                const option = document.createElement("option");
+                option.value = canton.toLowerCase();
+                option.textContent = canton;
+                cantonSelect.appendChild(option);
+            });
+        }
+    }
+
+    // Alternar visibilidad de los métodos de pago
+    function togglePaymentMethods() {
+        const paymentMethods = document.getElementById("paymentMethods");
+        paymentMethods.style.display = paymentMethods.style.display === "none" ? "block" : "none";
     }
 
     // Confirmar compra en el formulario
     document.getElementById("orderForm").addEventListener("submit", function (e) {
         e.preventDefault();
         const fullName = document.getElementById("fullName").value;
-        const address = document.getElementById("mapSearch").value;
-        const paymentMethod = document.getElementById("paymentMethod").value;
+        const province = document.getElementById("provinceSelect").selectedOptions[0].textContent;
+        const canton = document.getElementById("cantonSelect").selectedOptions[0].textContent;
 
-        alert(`Compra realizada con éxito:\nNombre: ${fullName}\nDirección: ${address}\nMétodo de Pago: ${paymentMethod}`);
+        alert(`Compra realizada con éxito:\nNombre: ${fullName}\nUbicación: ${province}, ${canton}`);
         hidePaymentOptions();
     });
 </script>
-
-<!-- Script de la API de Google Maps con Places -->
-<script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&libraries=places&callback=initMap" async defer></script>
