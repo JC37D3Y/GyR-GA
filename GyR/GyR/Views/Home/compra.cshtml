@@ -82,8 +82,7 @@
 
     .form-group {
         display: flex;
-        align-items: center;
-        justify-content: space-between;
+        flex-direction: column;
         gap: 10px;
         margin-bottom: 1rem;
     }
@@ -112,9 +111,10 @@
         .btn-secondary-product:hover {
             background-color: #C53030;
         }
+
     .btn-cancel {
-        background-color: #D1D5DB; /* Gris claro */
-        color: #1F2937; /* Texto oscuro */
+        background-color: #D1D5DB;
+        color: #1F2937;
         padding: 0.5rem 1rem;
         border-radius: 8px;
         font-weight: bold;
@@ -124,8 +124,8 @@
     }
 
         .btn-cancel:hover {
-            background-color: #9CA3AF; /* Gris medio */
-            color: #FFFFFF; /* Texto blanco */
+            background-color: #9CA3AF;
+            color: #FFFFFF;
         }
 </style>
 
@@ -165,8 +165,11 @@
                         <option value="puntarenas">Puntarenas</option>
                         <option value="limon">Limón</option>
                     </select>
-                    <select id="cantonSelect" class="form-select">
+                    <select id="cantonSelect" class="form-select" onchange="updateDistricts()">
                         <option value="">Seleccione un cantón</option>
+                    </select>
+                    <select id="districtSelect" class="form-select">
+                        <option value="">Seleccione un distrito</option>
                     </select>
                 </div>
 
@@ -184,7 +187,6 @@
                     </ul>
                 </div>
                 <br />
-                
 
                 <button type="submit" class="btn-primary-product">
                     Confirmar Compra
@@ -198,59 +200,101 @@
 </div>
 
 <script>
-    // Cantones por provincia
-    const cantones = {
-        "san-jose": ["Central", "Escazú", "Desamparados", "Puriscal", "Tarrazú"],
-        "alajuela": ["Central", "San Ramón", "Grecia", "San Carlos", "Zarcero"],
-        "cartago": ["Central", "Paraíso", "La Unión", "Jiménez", "Turrialba"],
-        "heredia": ["Central", "Barva", "Santo Domingo", "Santa Bárbara", "San Rafael"],
-        "guanacaste": ["Liberia", "Nicoya", "Santa Cruz", "Bagaces", "Carrillo"],
-        "puntarenas": ["Central", "Esparza", "Buenos Aires", "Montes de Oro", "Quepos"],
-        "limon": ["Central", "Pococí", "Siquirres", "Talamanca", "Matina"]
+    const locations = {
+        "san-jose": {
+            "central": ["Carmen", "Merced", "Hospital", "Catedral", "Zapote"],
+            "escazu": ["San Miguel", "San Rafael", "San Antonio"],
+            "desamparados": ["Desamparados", "San Miguel", "San Juan de Dios", "Granadilla"],
+            "puriscal": ["Santiago", "Mercedes Sur", "Barbacoas", "Grifo Alto"],
+            "tarrazu": ["San Marcos", "San Lorenzo", "San Carlos"]
+        },
+        "alajuela": {
+            "central": ["Alajuela", "San Antonio", "Guácima", "Tambor", "La Garita"],
+            "san-ramon": ["San Ramón", "San Juan", "Piedades Norte", "Piedades Sur", "Volio"],
+            "atenas": ["Atenas", "Jesús", "Mercedes", "San Isidro"],
+            "naranjo": ["Naranjo", "San Miguel", "San José", "Cirrí Sur"]
+        },
+        "cartago": {
+            "central": ["Cartago", "Quesada", "San Nicolás", "Aguacaliente"],
+            "paraiso": ["Paraíso", "Orosi", "Cachí", "Santiago"],
+            "la-union": ["Tres Ríos", "San Diego", "San Juan", "Santa Cruz"]
+        },
+        "heredia": {
+            "central": ["Heredia", "Mercedes", "San Francisco", "Ulloa"],
+            "barva": ["Barva", "San Pedro", "San Roque", "Santa Lucía"],
+            "santo-domingo": ["Santo Domingo", "San Vicente", "San Miguel"]
+        },
+        "guanacaste": {
+            "central": ["Liberia", "Cañas", "Tilarán", "Santa Cruz"],
+            "nicoya": ["Nicoya", "Mansión", "San Antonio", "Quebrada Honda"],
+            "santa-cruz": ["Santa Cruz", "Bolsón", "Veintisiete de Abril"]
+        },
+        "puntarenas": {
+            "central": ["Puntarenas", "Chacarita", "El Roble", "Arancibia"],
+            "buenos-aires": ["Buenos Aires", "Volcán", "Potrero Grande"],
+            "osa": ["Puerto Cortés", "Palmar", "Sierpe"]
+        },
+        "limon": {
+            "central": ["Limón", "Matama", "Río Blanco", "Valle La Estrella"],
+            "pococi": ["Guápiles", "Jiménez", "La Rita", "Roxana"],
+            "siquirres": ["Siquirres", "Pacuarit", "Florida"]
+        }
     };
 
-    // Mostrar el modal de métodos de pago
     function showPaymentOptions() {
         document.getElementById("paymentModalProduct").style.display = "flex";
     }
 
-    // Ocultar el modal de métodos de pago
     function hidePaymentOptions() {
         document.getElementById("paymentModalProduct").style.display = "none";
     }
 
-    // Actualizar los cantones según la provincia seleccionada
     function updateCantons() {
         const provinceSelect = document.getElementById("provinceSelect");
         const cantonSelect = document.getElementById("cantonSelect");
+        const districtSelect = document.getElementById("districtSelect");
         const selectedProvince = provinceSelect.value;
-
         cantonSelect.innerHTML = '<option value="">Seleccione un cantón</option>';
-
-        if (selectedProvince && cantones[selectedProvince]) {
-            cantones[selectedProvince].forEach(canton => {
+        districtSelect.innerHTML = '<option value="">Seleccione un distrito</option>';
+        if (selectedProvince && locations[selectedProvince]) {
+            Object.keys(locations[selectedProvince]).forEach(canton => {
                 const option = document.createElement("option");
-                option.value = canton.toLowerCase();
-                option.textContent = canton;
+                option.value = canton;
+                option.textContent = canton.charAt(0).toUpperCase() + canton.slice(1);
                 cantonSelect.appendChild(option);
             });
         }
     }
 
-    // Alternar visibilidad de los métodos de pago
-    function togglePaymentMethods() {
-        const paymentMethods = document.getElementById("paymentMethods");
-        paymentMethods.style.display = paymentMethods.style.display === "none" ? "block" : "none";
+    function updateDistricts() {
+        const cantonSelect = document.getElementById("cantonSelect");
+        const districtSelect = document.getElementById("districtSelect");
+        const provinceSelect = document.getElementById("provinceSelect");
+        const selectedProvince = provinceSelect.value;
+        const selectedCanton = cantonSelect.value;
+        districtSelect.innerHTML = '<option value="">Seleccione un distrito</option>';
+        if (selectedProvince && selectedCanton && locations[selectedProvince][selectedCanton]) {
+            locations[selectedProvince][selectedCanton].forEach(district => {
+                const option = document.createElement("option");
+                option.value = district.toLowerCase();
+                option.textContent = district;
+                districtSelect.appendChild(option);
+            });
+        }
     }
 
-    // Confirmar compra en el formulario
     document.getElementById("orderForm").addEventListener("submit", function (e) {
         e.preventDefault();
         const fullName = document.getElementById("fullName").value;
         const province = document.getElementById("provinceSelect").selectedOptions[0].textContent;
         const canton = document.getElementById("cantonSelect").selectedOptions[0].textContent;
-
-        alert(`Compra realizada con éxito:\nNombre: ${fullName}\nUbicación: ${province}, ${canton}`);
+        const district = document.getElementById("districtSelect").selectedOptions[0].textContent;
+        alert(`Pedido confirmado por ${fullName} en ${district}, ${canton}, ${province}.`);
         hidePaymentOptions();
     });
+
+    function togglePaymentMethods() {
+        const paymentMethods = document.getElementById("paymentMethods");
+        paymentMethods.style.display = paymentMethods.style.display === "none" ? "block" : "none";
+    }
 </script>
