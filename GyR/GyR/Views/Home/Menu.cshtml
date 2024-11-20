@@ -17,12 +17,12 @@
         padding: 10px 40px;
         overflow-x: auto;
         scroll-behavior: smooth;
-        scrollbar-width: none; /* Firefox */
-        -ms-overflow-style: none; /* IE and Edge */
+        scrollbar-width: none;
+        -ms-overflow-style: none;
     }
 
         .carousel-track::-webkit-scrollbar {
-            display: none; /* Chrome, Safari, Opera */
+            display: none;
         }
 
     .product-card {
@@ -34,6 +34,8 @@
         border: 1px solid #e0e0e0;
         min-width: 220px;
         max-width: 220px;
+        display: flex;
+        flex-direction: column;
     }
 
         .product-card:hover {
@@ -60,13 +62,19 @@
         align-items: center;
         justify-content: center;
         margin-bottom: 12px;
+        position: relative;
     }
 
     .product-image {
         max-height: 140px;
         max-width: 140px;
         object-fit: contain;
+        transition: transform 0.3s ease;
     }
+
+        .product-image:hover {
+            transform: scale(1.1);
+        }
 
     .product-title {
         font-size: 0.9em;
@@ -160,6 +168,63 @@
         .view-all:hover {
             text-decoration: underline;
         }
+
+    /* Nuevos estilos para nuevas características */
+    .product-actions {
+        display: flex;
+        justify-content: space-between;
+        margin-top: auto;
+        padding-top: 10px;
+        border-top: 1px solid #eee;
+    }
+
+    .btn-add-cart, .btn-favorite {
+        background: none;
+        border: none;
+        cursor: pointer;
+        transition: color 0.3s ease;
+    }
+
+        .btn-add-cart:hover, .btn-favorite:hover {
+            color: #0066c0;
+        }
+
+    .stock-indicator {
+        font-size: 0.7em;
+        color: #666;
+        margin-top: 4px;
+    }
+
+    .quick-view {
+        text-decoration: none;
+        color: #0066c0;
+        font-size: 0.8em;
+        margin-top: 8px;
+        text-align: center;
+    }
+
+    .theme-toggle {
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        z-index: 1000;
+        background: #f0f0f0;
+        border: none;
+        padding: 10px;
+        border-radius: 50%;
+        cursor: pointer;
+    }
+
+    /* Modo Oscuro */
+    body.dark-mode {
+        background-color: #121212;
+        color: #ffffff;
+    }
+
+        body.dark-mode .product-card {
+            background-color: #1e1e1e;
+            color: #e0e0e0;
+        }
 </style>
 
 <div class="carousel-container">
@@ -168,27 +233,54 @@
         <a href="#" class="view-all">Ver todos</a>
     </div>
 
-    <!-- Nueva barra de búsqueda -->
-    <div style="padding: 0 40px; margin-bottom: 20px;">
+    <!-- Nueva barra de búsqueda con filtros -->
+    <div style="padding: 0 40px; margin-bottom: 20px; display: flex; gap: 10px;">
         <input type="text" id="searchBar" placeholder="Buscar productos..."
                class="form-control" oninput="filterProducts()"
-               style="width: 100%; padding: 8px; font-size: 1em;">
+               style="width: 70%; padding: 8px; font-size: 1em;">
+
+        <select id="categoryFilter" onchange="filterProducts()" class="form-control" style="width: 15%;">
+            <option value="">Todas las Categorías</option>
+            <option value="electronica">Electrónica</option>
+            <option value="ropa">Ropa</option>
+            <option value="hogar">Hogar</option>
+        </select>
+
+        <select id="priceFilter" onchange="filterProducts()" class="form-control" style="width: 15%;">
+            <option value="">Precio</option>
+            <option value="low">Menor a Mayor</option>
+            <option value="high">Mayor a Menor</option>
+        </select>
+
+        <!-- Nuevos campos para rango de precios -->
+        <input type="number" id="minPrice" placeholder="Min Precio" oninput="filterProducts()" style="width: 15%;">
+        <input type="number" id="maxPrice" placeholder="Max Precio" oninput="filterProducts()" style="width: 15%;">
     </div>
 
-    <button class="carousel-button prev" onclick="scrollCarousel('left')">←</button>
-    <button class="carousel-button next" onclick="scrollCarousel('right')">→</button>
+    <button class="carousel-button prev" aria-label="Previous products" onclick="scrollCarousel('left')">←</button>
+    <button class="carousel-button next" aria-label="Next products" onclick="scrollCarousel('right')">→</button>
 
     <div class="carousel-track" id="productCarousel">
         @foreach (var product in Model)
         {
             var originalPrice = product.Price * 1.5m;
+            var stockLevel = new Random().Next(0, 50); // Simulación de stock
 
-            <div class="product-card" data-name="@product.Name.ToLower()">
+            <div class="product-card"
+                 data-name="@product.Name.ToLower()"
+                 data-category="electronica"
+                 data-price="@product.Price">
                 <div class="pre-tag">Pre</div>
                 <div class="product-image-container">
                     <img src="@Url.Content(product.ImageUrl)"
                          alt="@product.Name"
-                         class="product-image" />
+                         class="product-image"
+                         loading="lazy"
+                         onclick="openQuickView('@product.Name', '@product.Price', '@Url.Content(product.ImageUrl)')" />
+
+                    <button class="btn-favorite" onclick="toggleFavorite(this)">
+                        ♡
+                    </button>
                 </div>
 
                 <div class="product-details">
@@ -197,7 +289,7 @@
                     <div class="price-section">
                         <div class="original-price">Desde € @originalPrice.ToString("N0")</div>
                         <div class="flex items-baseline gap-2">
-                            <span class="current-price">€ @product.Price.ToString("N0")</span>
+                            <span class="current -price">€ @product.Price.ToString("N0")</span>
                             <span class="discount-tag">50% OFF</span>
                         </div>
                     </div>
@@ -209,16 +301,75 @@
                     <div class="promotion-text">
                         $20 OFF con Promerica o Tasa Cero
                     </div>
+
+                    <div class="stock-indicator">
+                        @(stockLevel > 10 ? "En Stock" : stockLevel + " unidades disponibles")
+                    </div>
+
+                    <div class="product-actions">
+                        <button class="btn-add-cart" onclick="addToCart('@product.Name', @product.Price)">
+                            🛒 Añadir
+                        </button>
+                        <a href="#" class="quick-view" onclick="openQuickView('@product.Name', '@product.Price', '@Url.Content(product.ImageUrl)')">
+                            Vista Rápida
+                        </a>
+                    </div>
                 </div>
             </div>
         }
     </div>
 </div>
 
+<!-- Modal de Vista Rápida -->
+<div id="quickViewModal" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.5); z-index:1000; display:flex; justify-content:center; align-items:center;">
+    <div style="background:white; padding:20px; border-radius:8px; max-width:500px; width:90%;">
+        <h2 id="quickViewTitle"></h2>
+        <img id="quickViewImage" style="max-width:100%; max-height:300px;" />
+        <p id="quickViewPrice"></p>
+        <button onclick="closeQuickView()">Cerrar</button>
+    </div>
+</div>
+
+<!-- Botón de Cambio de Tema -->
+<button class="theme-toggle" onclick="toggleDarkMode()">🌓</button>
+
 <script>
+    // Funciones de Carrito y Favoritos
+    function addToCart(name, price) {
+        alert(`Añadido al carrito: ${name} - €${price}`);
+        // Aquí implementarías la lógica real de añadir al carrito
+    }
+
+    function toggleFavorite(element) {
+        element.textContent = element.textContent === '♡' ? '♥' : '♡';
+    }
+
+    // Funciones de Búsqueda y Filtrado
+    function filterProducts() {
+        const searchQuery = document.getElementById('searchBar').value.toLowerCase();
+        const categoryFilter = document.getElementById('categoryFilter').value;
+        const priceFilter = document.getElementById('priceFilter').value;
+        const minPrice = parseFloat(document.getElementById('minPrice').value) || 0;
+        const maxPrice = parseFloat(document.getElementById('maxPrice').value) || Infinity;
+        const products = document.querySelectorAll('.product-card');
+
+        products.forEach(product => {
+            const productName = product.getAttribute('data-name');
+            const productCategory = product.getAttribute('data-category');
+            const productPrice = parseFloat(product.getAttribute('data-price'));
+
+            const matchesSearch = productName.includes(searchQuery);
+            const matchesCategory = categoryFilter === '' || productCategory === categoryFilter;
+            const matchesPrice = productPrice >= minPrice && productPrice <= maxPrice;
+
+            product.style.display = (matchesSearch && matchesCategory && matchesPrice) ? 'flex' : 'none';
+        });
+    }
+
+    // Funciones de Carrusel
     function scrollCarousel(direction) {
         const carousel = document.getElementById('productCarousel');
-        const scrollAmount = 250; // Ajusta esto según el ancho de tus cards
+        const scrollAmount = 250;
 
         if (direction === 'left') {
             carousel.scrollLeft -= scrollAmount;
@@ -227,17 +378,37 @@
         }
     }
 
-    function filterProducts() {
-        const searchQuery = document.getElementById('searchBar').value.toLowerCase();
-        const products = document.querySelectorAll('.product-card');
+    // Vista Rápida
+    function openQuickView(name, price, imageUrl) {
+        document.getElementById('quickViewTitle').textContent = name;
+        document.getElementById('quickViewPrice').textContent = `Precio: €${price}`;
+        document.getElementById('quickViewImage').src = imageUrl;
+        document.getElementById('quickViewModal').style.display = 'flex';
+    }
 
-        products.forEach(product => {
-            const productName = product.getAttribute('data-name');
-            if (productName.includes(searchQuery)) {
-                product.style.display = 'block';
-            } else {
-                product.style.display = 'none';
-            }
-        });
+    function closeQuickView() {
+        document.getElementById('quickViewModal').style.display = 'none';
+    }
+
+    // Modo Oscuro
+    function toggleDarkMode() {
+        document.body.classList.toggle('dark-mode');
+    }
+
+    // Cerrar modal con Esc
+    document.addEventListener('keydown', function (event) {
+        if (event.key === 'Escape') {
+            closeQuickView();
+        }
+    });
+
+    // Historial de Productos Vistos
+
+    function trackProductView(productId) {
+        let viewedProducts = JSON.parse(localStorage.getItem('viewedProducts') || '[]');
+        if (!viewedProducts.includes(productId)) {
+            viewedProducts.push(productId);
+            localStorage.setItem('viewedProducts', JSON.stringify(viewedProducts));
+        }
     }
 </script>
