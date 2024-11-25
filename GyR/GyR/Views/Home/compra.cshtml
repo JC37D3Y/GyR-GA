@@ -195,59 +195,80 @@
                 <div class="payment-methods-container">
                     <h3>Medios de pago</h3>
                     <p>Tarjetas de Débito y Crédito</p>
-                    <div class="payment-method-icons">
-                        <img src="~/Scripts/IMG/visa.jpg" alt="Visa">
-                        <img src="~/Scripts/IMG/Mastercard-logo.svg.png" alt="MasterCard">
-                        <img src="~/Scripts/IMG/American-Express-Color.png" alt="American Express">
-                        <img src="~/Scripts/IMG/paypal.jpeg" alt="PayPal">
+                    <div class="payment-method-icons" style="display: flex; justify-content: center; gap: 15px; margin-top: 10px;">
+                        <img src="~/Scripts/IMG/visa.jpg" alt="Visa" style="width: 60px; height: auto;">
+                        <img src="~/Scripts/IMG/Mastercard-logo.svg.png" alt="MasterCard" style="width: 60px; height: auto;">
+                        <img src="~/Scripts/IMG/American-Express-Color.png" alt="American Express" style="width: 60px; height: auto;">
+                        <img src="~/Scripts/IMG/paypal.jpeg" alt="PayPal" style="width: 60px; height: auto;">
                     </div>
                     <a href="#" style="display: block; margin-top: 10px; font-size: 14px; color: blue; text-decoration: underline;">Ver medios de pago</a>
+
+                    <!-- Botón tipo dropdown -->
+                    <div class="dropdown" style="margin-top: 20px; text-align: center;">
+                        <button class="btn-primary-product" type="button" onclick="toggleDropdown()" id="dropdownButton">
+                            Configurar Tipo de Pago
+                        </button>
+                        <div id="dropdownMenu" class="dropdown-menu" style="display: none; margin-top: 10px; background-color: #f9f9f9; border: 1px solid #ddd; border-radius: 8px; padding: 10px; width: 100%; max-width: 300px; margin: 10px auto;">
+                            <div class="dropdown-item">
+                                <label>
+                                    <input type="radio" name="paymentType" value="credit-card" checked>
+                                    Tarjeta de Crédito
+                                </label>
+                            </div>
+                            <div class="dropdown-item">
+                                <label>
+                                    <input type="radio" name="paymentType" value="debit-card">
+                                    Tarjeta de Débito
+                                </label>
+                            </div>
+                            <div class="dropdown-item">
+                                <label>
+                                    <input type="radio" name="paymentType" value="paypal">
+                                    PayPal
+                                </label>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <style>
-                    #paymentModalProduct {
-                        display: none;
-                        position: fixed;
-                        inset: 0;
-                        background-color: rgba(0, 0, 0, 0.6);
-                        justify-content: center;
-                        align-items: center;
-                    }
 
-                    .modal-content-product {
-                        background-color: #FFFFFF;
-                        padding: 1.5rem;
-                        border-radius: 8px;
-                        max-width: 500px;
-                        width: 90%;
-                        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-                    }
-
-                    .payment-methods-container {
-                        margin-top: 20px;
-                        text-align: center;
-                    }
-
-                        .payment-methods-container h3 {
-                            margin-bottom: 15px;
-                            font-size: 18px;
-                            font-weight: bold;
-                        }
-
-                    .payment-method-icons img {
-                        width: 50px;
-                        margin: 0 10px;
-                        vertical-align: middle;
-                    }
-                </style>
                 <script>
-                    function showPaymentOptions() {
-                        document.getElementById("paymentModalProduct").style.display = "flex";
-                    }
-
-                    function hidePaymentOptions() {
-                        document.getElementById("paymentModalProduct").style.display = "none";
+                    function toggleDropdown() {
+                        const dropdownMenu = document.getElementById("dropdownMenu");
+                        dropdownMenu.style.display = dropdownMenu.style.display === "none" || dropdownMenu.style.display === "" ? "block" : "none";
                     }
                 </script>
+
+                <style>
+                    .payment-method-icons img {
+                        transition: transform 0.2s;
+                    }
+
+                        .payment-method-icons img:hover {
+                            transform: scale(1.1);
+                        }
+
+                    .dropdown-menu {
+                        display: none;
+                    }
+
+                    .dropdown-item {
+                        margin-bottom: 10px;
+                    }
+
+                        .dropdown-item:last-child {
+                            margin-bottom: 0;
+                        }
+
+                        .dropdown-item label {
+                            font-size: 16px;
+                            color: #333;
+                        }
+
+                        .dropdown-item input[type="radio"] {
+                            margin-right: 10px;
+                        }
+                </style>
+
                 <br />
 
                 <button type="submit" class="btn-primary-product">
