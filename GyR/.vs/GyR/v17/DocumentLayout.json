@@ -11,7 +11,7 @@
       "RelativeMoniker": "D:0:0:{E25BB4B3-480E-4D6B-9D4D-B44AB3E989DE}|GyR\\GyR.csproj|solutionrelative:gyr\\views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{E25BB4B3-480E-4D6B-9D4D-B44AB3E989DE}|GyR\\GyR.csproj|c:\\users\\fam. l\u00F3pez quesada\\desktop\\jc\\pr\u00E1ctica profesional gyr\\gyr-ga\\gyr\\gyr\\views\\home\\menu.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "AbsoluteMoniker": "D:0:0:{E25BB4B3-480E-4D6B-9D4D-B44AB3E989DE}|GyR\\GyR.csproj|C:\\Users\\Fam. L\u00F3pez Quesada\\Desktop\\JC\\Pr\u00E1ctica profesional GyR\\GyR-GA\\GyR\\gyr\\views\\home\\menu.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
       "RelativeMoniker": "D:0:0:{E25BB4B3-480E-4D6B-9D4D-B44AB3E989DE}|GyR\\GyR.csproj|solutionrelative:gyr\\views\\home\\menu.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
@@ -23,7 +23,7 @@
       "RelativeMoniker": "D:0:0:{E25BB4B3-480E-4D6B-9D4D-B44AB3E989DE}|GyR\\GyR.csproj|solutionrelative:gyr\\controllers\\homecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{E25BB4B3-480E-4D6B-9D4D-B44AB3E989DE}|GyR\\GyR.csproj|c:\\users\\fam. l\u00F3pez quesada\\desktop\\jc\\pr\u00E1ctica profesional gyr\\gyr-ga\\gyr\\gyr\\models\\product.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{E25BB4B3-480E-4D6B-9D4D-B44AB3E989DE}|GyR\\GyR.csproj|C:\\Users\\Fam. L\u00F3pez Quesada\\Desktop\\JC\\Pr\u00E1ctica profesional GyR\\GyR-GA\\GyR\\gyr\\models\\product.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{E25BB4B3-480E-4D6B-9D4D-B44AB3E989DE}|GyR\\GyR.csproj|solutionrelative:gyr\\models\\product.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
@@ -86,8 +86,7 @@
               "RelativeToolTip": "GyR\\Models\\Product.cs",
               "ViewState": "AgIAAAwAAAAAAAAAAAA0wBEAAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-11-18T21:39:47.655Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-11-18T21:39:47.655Z"
             },
             {
               "$type": "Document",
@@ -99,8 +98,7 @@
               "RelativeToolTip": "GyR\\Views\\Home\\Menu.cshtml",
               "ViewState": "AgIAAI8BAAAAAAAAAAAAAJwBAAAFAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-11-18T21:23:23.514Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-11-18T21:23:23.514Z"
             },
             {
               "$type": "Document",
@@ -144,9 +142,9 @@
               "Title": "compra.cshtml",
               "DocumentMoniker": "C:\\Users\\Fam. L\u00F3pez Quesada\\Desktop\\JC\\Pr\u00E1ctica profesional GyR\\GyR-GA\\GyR\\GyR\\Views\\Home\\compra.cshtml",
               "RelativeDocumentMoniker": "GyR\\Views\\Home\\compra.cshtml",
-              "ToolTip": "C:\\Users\\Fam. L\u00F3pez Quesada\\Desktop\\JC\\Pr\u00E1ctica profesional GyR\\GyR-GA\\GyR\\GyR\\Views\\Home\\compra.cshtml",
-              "RelativeToolTip": "GyR\\Views\\Home\\compra.cshtml",
-              "ViewState": "AgIAAC0AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "ToolTip": "C:\\Users\\Fam. L\u00F3pez Quesada\\Desktop\\JC\\Pr\u00E1ctica profesional GyR\\GyR-GA\\GyR\\GyR\\Views\\Home\\compra.cshtml*",
+              "RelativeToolTip": "GyR\\Views\\Home\\compra.cshtml*",
+              "ViewState": "AgIAAM0AAAAAAAAAAAAgwCYBAAAIAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
               "WhenOpened": "2024-11-13T14:47:39.789Z",
               "EditorCaption": ""
@@ -173,8 +171,7 @@
               "RelativeToolTip": "GyR\\Content\\bootstrap.css",
               "ViewState": "AgIAALsAAAAAAAAAAAAAALsAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003000|",
-              "WhenOpened": "2024-10-29T14:29:32.957Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-10-29T14:29:32.957Z"
             },
             {
               "$type": "Document",
@@ -198,8 +195,7 @@
               "RelativeToolTip": "GyR\\Views\\Shared\\_Layout.cshtml",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-10-29T14:31:05.363Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-10-29T14:31:05.363Z"
             },
             {
               "$type": "Document",
@@ -211,8 +207,7 @@
               "RelativeToolTip": "GyR\\Controllers\\HomeController.cs",
               "ViewState": "AgIAABYAAAAAAAAAAAAcwHcAAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-10-30T20:26:53.024Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-10-30T20:26:53.024Z"
             },
             {
               "$type": "Document",

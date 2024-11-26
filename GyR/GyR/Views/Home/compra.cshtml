@@ -11,8 +11,8 @@
 
     .product-container {
         background-color: #FFFFFF;
-        padding: 1.5rem;
-        max-width: 800px;
+        padding: 5%;
+        max-width: 95%;
         width: 100%;
         margin: auto;
         border-radius: 8px;
@@ -22,33 +22,38 @@
     .product-image {
         display: block;
         margin: 0 auto;
-        width: 200px;
+        max-width: 60%;
         height: auto;
     }
 
     .product-title {
-        font-size: 24px;
+        font-size: 1.8em;
         font-weight: bold;
         color: #333;
         margin-top: 1rem;
+        text-align: center;
     }
 
     .product-description {
         color: #666;
         margin-bottom: 1rem;
+        font-size: 1em;
+        line-height: 1.5em;
+        text-align: justify;
     }
 
     .product-price {
-        font-size: 24px;
+        font-size: 1.8em;
         font-weight: bold;
         color: #28a745;
         margin-bottom: 1rem;
+        text-align: center;
     }
 
     .btn-primary-product {
         background-color: #4F46E5;
         color: #FFFFFF;
-        padding: 0.75rem;
+        padding: 1rem;
         border-radius: 8px;
         width: 100%;
         font-weight: bold;
@@ -73,10 +78,10 @@
 
     .modal-content-product {
         background-color: #FFFFFF;
-        padding: 1.5rem;
+        padding: 5%;
         border-radius: 8px;
-        max-width: 500px;
-        width: 90%;
+        max-width: 90%;
+        width: 100%;
         box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
     }
 
@@ -93,12 +98,13 @@
         width: 100%;
         border: 1px solid #ccc;
         background: #fff;
+        font-size: 1em;
     }
 
     .btn-secondary-product {
         background-color: #E53E3E;
         color: #FFFFFF;
-        padding: 0.5rem;
+        padding: 0.75rem;
         border-radius: 8px;
         width: 100%;
         font-weight: bold;
@@ -115,7 +121,7 @@
     .btn-cancel {
         background-color: #D1D5DB;
         color: #1F2937;
-        padding: 0.5rem 1rem;
+        padding: 0.75rem;
         border-radius: 8px;
         font-weight: bold;
         border: none;
@@ -126,6 +132,38 @@
         .btn-cancel:hover {
             background-color: #9CA3AF;
             color: #FFFFFF;
+        }
+
+    .payment-method-icons img {
+        transition: transform 0.2s;
+        max-width: 15%;
+        height: auto;
+        margin: 0 auto;
+    }
+
+        .payment-method-icons img:hover {
+            transform: scale(1.1);
+        }
+
+    .dropdown-menu {
+        display: none;
+    }
+
+    .dropdown-item {
+        margin-bottom: 10px;
+    }
+
+        .dropdown-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .dropdown-item label {
+            font-size: 1em;
+            color: #333;
+        }
+
+        .dropdown-item input[type="radio"] {
+            margin-right: 10px;
         }
 </style>
 
@@ -150,131 +188,23 @@
 
     <div id="paymentModalProduct">
         <div class="modal-content-product">
-            <h2 class="text-xl font-bold text-center text-gray-800 mb-4">Selecciona un Método de Pago</h2>
-            <form id="orderForm" class="space-y-4">
-                <div class="form-group">
-                    <input type="text" id="fullName" placeholder="Nombre Completo" class="form-input" required>
-                    <select id="provinceSelect" class="form-select" onchange="updateCantons()">
-                        <option value="">Seleccione una provincia</option>
-                        <option value="san-jose">San José</option>
-                        <option value="alajuela">Alajuela</option>
-                        <option value="cartago">Cartago</option>
-                        <option value="heredia">Heredia</option>
-                        <option value="guanacaste">Guanacaste</option>
-                        <option value="puntarenas">Puntarenas</option>
-                        <option value="limon">Limón</option>
-                    </select>
-                    <select id="cantonSelect" class="form-select" onchange="updateDistricts()">
-                        <option value="">Seleccione un cantón</option>
-                    </select>
-                    <select id="districtSelect" class="form-select">
-                        <option value="">Seleccione un distrito</option>
-                    </select>
-                </div>
+            <h2>Métodos de Pago</h2>
 
-                <div id="shippingOptions" style="display:none;">
-                    <label>Opciones de envío:</label>
-                    <select class="form-select" onchange="handleShippingOptionChange(event)">
-                        <option value="">Seleccione una opción de envío</option>
-                        <option value="personal">Envío personal</option>
-                        <option value="traditional">Envío tradicional (₡5000 adicionales)</option>
-                    </select>
-                </div>
+            <div class="payment-methods">
+                <button class="payment-option" data-method="paypal">PayPal</button>
+                <button class="payment-option" data-method="card">Tarjeta</button>
+                <button class="payment-option" data-method="transfer">Transferencia</button>
+                <button class="payment-option" data-method="giftcard">Tarjeta de Regalo</button>
+            </div>
 
-                <div id="productTypeOptions" style="display:none;">
-                    <label>Tipo de producto:</label>
-                    <select class="form-select" onchange="handleProductTypeChange(event)">
-                        <option value="">Seleccione el tipo de producto</option>
-                        <option value="light">Producto ligero (₡7500)</option>
-                        <option value="heavy">Producto pesado (₡10000)</option>
-                    </select>
-                </div>
+            <div id="payment-form" style="display:none;">
+                <h3 id="form-title"></h3>
+                <form id="form">
+                    <div id="form-fields"></div>
+                    <button type="submit" class="btn-primary-product">Enviar</button>
+                </form>
+            </div>
 
-                <p>Costo de envío: ₡<span id="shippingCost">0</span></p>
-
-                <div class="payment-methods-container">
-                    <h3>Medios de pago</h3>
-                    <p>Tarjetas de Débito y Crédito</p>
-                    <div class="payment-method-icons" style="display: flex; justify-content: center; gap: 15px; margin-top: 10px;">
-                        <img src="~/Scripts/IMG/visa.jpg" alt="Visa" style="width: 60px; height: auto;">
-                        <img src="~/Scripts/IMG/Mastercard-logo.svg.png" alt="MasterCard" style="width: 60px; height: auto;">
-                        <img src="~/Scripts/IMG/American-Express-Color.png" alt="American Express" style="width: 60px; height: auto;">
-                        <img src="~/Scripts/IMG/paypal.jpeg" alt="PayPal" style="width: 60px; height: auto;">
-                    </div>
-                    <a href="#" style="display: block; margin-top: 10px; font-size: 14px; color: blue; text-decoration: underline;">Ver medios de pago</a>
-
-                    <!-- Botón tipo dropdown -->
-                    <div class="dropdown" style="margin-top: 20px; text-align: center;">
-                        <button class="btn-primary-product" type="button" onclick="toggleDropdown()" id="dropdownButton">
-                            Configurar Tipo de Pago
-                        </button>
-                        <div id="dropdownMenu" class="dropdown-menu" style="display: none; margin-top: 10px; background-color: #f9f9f9; border: 1px solid #ddd; border-radius: 8px; padding: 10px; width: 100%; max-width: 300px; margin: 10px auto;">
-                            <div class="dropdown-item">
-                                <label>
-                                    <input type="radio" name="paymentType" value="credit-card" checked>
-                                    Tarjeta de Crédito
-                                </label>
-                            </div>
-                            <div class="dropdown-item">
-                                <label>
-                                    <input type="radio" name="paymentType" value="debit-card">
-                                    Tarjeta de Débito
-                                </label>
-                            </div>
-                            <div class="dropdown-item">
-                                <label>
-                                    <input type="radio" name="paymentType" value="paypal">
-                                    PayPal
-                                </label>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <script>
-                    function toggleDropdown() {
-                        const dropdownMenu = document.getElementById("dropdownMenu");
-                        dropdownMenu.style.display = dropdownMenu.style.display === "none" || dropdownMenu.style.display === "" ? "block" : "none";
-                    }
-                </script>
-
-                <style>
-                    .payment-method-icons img {
-                        transition: transform 0.2s;
-                    }
-
-                        .payment-method-icons img:hover {
-                            transform: scale(1.1);
-                        }
-
-                    .dropdown-menu {
-                        display: none;
-                    }
-
-                    .dropdown-item {
-                        margin-bottom: 10px;
-                    }
-
-                        .dropdown-item:last-child {
-                            margin-bottom: 0;
-                        }
-
-                        .dropdown-item label {
-                            font-size: 16px;
-                            color: #333;
-                        }
-
-                        .dropdown-item input[type="radio"] {
-                            margin-right: 10px;
-                        }
-                </style>
-
-                <br />
-
-                <button type="submit" class="btn-primary-product">
-                    Confirmar Compra
-                </button>
-            </form>
             <button onclick="hidePaymentOptions()" class="btn-cancel mt-4">
                 Cancelar
             </button>
@@ -282,134 +212,84 @@
     </div>
 </div>
 
-<script >
+@section Scripts {
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('.payment-option').click(function () {
+                var method = $(this).data('method');
+                $('#form-title').text('Datos de ' + method.charAt(0).toUpperCase() + method.slice(1));
+                $('#form-fields').empty();
 
-    const locations = {
-    "san-jose": {
-        "central": ["Carmen", "Merced", "Hospital", "Catedral", "Zapote"],
-        "escazu": ["San Miguel", "San Rafael", "San Antonio"],
-        "desamparados": ["Desamparados", "San Miguel", "San Juan de Dios", "Granadilla"],
-        "puriscal": ["Santiago", "Mercedes Sur", "Barbacoas", "Grifo Alto"],
-        "tarrazu": ["San Marcos", "San Lorenzo", "San Carlos"]
-    },
-    "alajuela": {
-        "central": ["Alajuela", "San Antonio", "Guácima", "Tambor", "La Garita"],
-        "san-ramon": ["San Ramón", "San Juan", "Piedades Norte", "Piedades Sur", "Volio"],
-        "atenas": ["Atenas", "Jesús", "Mercedes", "San Isidro"],
-        "naranjo": ["Naranjo", "San Miguel", "San José", "Cirrí Sur"]
-    },
-    "cartago": {
-        "central": ["Cartago", "Quesada", "San Nicolás", "Aguacaliente"],
-        "paraiso": ["Paraíso", "Orosi", "Cachí", "Santiago"],
-        "la-union": ["Tres Ríos", "San Diego", "San Juan", "Santa Cruz"]
-    },
-    "heredia": {
-        "central": ["Heredia", "Mercedes", "San Francisco", "Ulloa"],
-        "barva": ["Barva", "San Pedro", "San Roque", "Santa Lucía"],
-        "santo-domingo": ["Santo Domingo", "San Vicente", "San Miguel"]
-    },
-    "guanacaste": {
-        "central": ["Liberia", "Cañas", "Tilarán", "Santa Cruz"],
-        "nicoya": ["Nicoya", "Mansión", "San Antonio", "Quebrada Honda"],
-        "santa-cruz": ["Santa Cruz", "Bolsón", "Veintisiete de Abril"]
-    },
-    "puntarenas": {
-        "central": ["Puntarenas", "Chacarita", "El Roble", "Arancibia"],
-        "buenos-aires": ["Buenos Aires", "Volcán", "Potrero Grande"],
-        "osa": ["Puerto Cortés", "Palmar", "Sierpe"]
-    },
-    "limon": {
-        "central": ["Limón", "Matama", "Río Blanco", "Valle La Estrella"],
-        "pococi": ["Guápiles", "Jiménez", "La Rita", "Roxana"],
-        "siquirres": ["Siquirres", "Pacuarit", "Florida"]
-    }
-};
+                switch (method) {
+                    case 'paypal':
+                        $('#form-fields').append('<label>Email de PayPal:</label><input type="email" name="paypalEmail" required />');
+                        break;
+                    case 'card':
+                        $('#form-fields').append('<label>Nombre en la Tarjeta:</label><input type="text" name="cardName" required />');
+                        $('#form-fields').append('<label>Número de Tarjeta:</label><input type="text" name="cardNumber" required />');
+                        $('#form-fields').append('<label>Fecha de Expiración:</label><input type="text" name="expiryDate" required placeholder="MM/AA" />');
+                        $('#form-fields').append('<label>Código de Seguridad:</label><input type="text" name="cvv" required />');
+                        break;
+                    case 'transfer':
+                        $('#form-fields').append('<label>Banco:</label><input type="text" name="bank" required />');
+                        $('#form-fields').append('<label>Número de Cuenta:</label><input type="text" name="accountNumber" required />');
+                        break;
+                    case 'giftcard':
+                        $('#form-fields').append('<label>Código de la Tarjeta de Regalo:</label><input type="text" name="giftCardCode" required />');
+                        break;
+                }
 
-const gamProvinces = ['san-jose', 'alajuela', 'cartago', 'heredia'];
-
-function showPaymentOptions() {
-    document.getElementById("paymentModalProduct").style.display = "flex";
-}
-
-function hidePaymentOptions() {
-    document.getElementById("paymentModalProduct").style.display = "none";
-}
-
-function updateCantons() {
-    const provinceSelect = document.getElementById("provinceSelect");
-    const cantonSelect = document.getElementById("cantonSelect");
-    const districtSelect = document.getElementById("districtSelect");
-    const selectedProvince = provinceSelect.value;
-    cantonSelect.innerHTML = '<option value="">Seleccione un cantón</option>';
-    districtSelect.innerHTML = '<option value="">Seleccione un distrito</option>';
-    if (selectedProvince && locations[selectedProvince]) {
-        Object.keys(locations[selectedProvince]).forEach(canton => {
-            const option = document.createElement("option");
-            option.value = canton;
-            option.textContent = canton.charAt(0).toUpperCase() + canton.slice(1);
-            cantonSelect.appendChild(option);
+                $('#payment-form').show();
+            });
         });
+
+        function showPaymentOptions() {
+            document.getElementById("paymentModalProduct").style.display = "flex";
+        }
+
+        function hidePaymentOptions() {
+            document.getElementById("paymentModalProduct").style.display = "none";
+        }
+    </script>
+}
+
+<style>
+    .payment-methods {
+        margin-bottom: 20px;
     }
-    toggleOptions(selectedProvince);
-}
 
-function updateDistricts() {
-    const cantonSelect = document.getElementById("cantonSelect");
-    const districtSelect = document.getElementById("districtSelect");
-    const provinceSelect = document.getElementById("provinceSelect");
-    const selectedProvince = provinceSelect.value;
-    const selectedCanton = cantonSelect.value;
-    districtSelect.innerHTML = '<option value="">Seleccione un distrito</option>';
-    if (selectedProvince && selectedCanton && locations[selectedProvince][selectedCanton]) {
-        locations[selectedProvince][selectedCanton].forEach(district => {
-            const option = document.createElement("option");
-            option.value = district.toLowerCase();
-            option.textContent = district;
-            districtSelect.appendChild(option);
-        });
+    .payment-option {
+        display: inline-block;
+        padding: 10px 20px;
+        margin: 5px;
+        background-color: #007bff;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
     }
-}
 
-function toggleOptions(province) {
-    const shippingOptions = document.getElementById("shippingOptions");
-    const productTypeOptions = document.getElementById("productTypeOptions");
-    if (gamProvinces.includes(province)) {
-        shippingOptions.style.display = 'block';
-        productTypeOptions.style.display = 'none';
-    } else {
-        shippingOptions.style.display = 'none';
-        productTypeOptions.style.display = 'block';
+        .payment-option:hover {
+            background-color: #0056b3;
+        }
+
+    #payment-form {
+        border: 1px solid #ccc;
+        padding: 20px;
+        border-radius: 5px;
     }
-}
 
-function handleShippingOptionChange(event) {
-    const shippingCostElement = document.getElementById("shippingCost");
-    const option = event.target.value;
-    shippingCostElement.textContent = option === 'personal' ? 0 : 5000;
-}
+    #form-fields label {
+        display: block;
+        margin: 10px 0 5px;
+    }
 
-function handleProductTypeChange(event) {
-    const shippingCostElement = document.getElementById("shippingCost");
-    const type = event.target.value;
-    shippingCostElement.textContent = type === 'light' ? 7500 : 10000;
-}
-
-document.getElementById("orderForm").addEventListener("submit", function (e) {
-    e.preventDefault();
-    const fullName = document.getElementById("fullName").value;
-    const province = document.getElementById("provinceSelect").selectedOptions[0].textContent;
-    const canton = document.getElementById("cantonSelect").selectedOptions[0].textContent;
-    const district = document.getElementById("districtSelect").selectedOptions[0].textContent;
-    const shippingCost = document.getElementById("shippingCost").textContent;
-    alert(`Pedido confirmado por ${fullName} en ${district}, ${canton}, ${province}. Costo de envío: ₡${shippingCost}`);
-    hidePaymentOptions();
-});
-
-function togglePaymentMethods() {
-    const paymentMethods = document.getElementById("paymentMethods");
-    paymentMethods.style.display = paymentMethods.style.display === "none" ? "block" : "none";
-}
-
-
-</script>
-
+    #form-fields input {
+        width: 100%;
+        padding: 8px;
+        margin-bottom: 10px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+    }
+</style>
