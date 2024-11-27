@@ -190,7 +190,35 @@
         <div class="modal-content-product">
             <h2>Métodos de Pago</h2>
 
-            <div class="payment-methods">
+            <div class="shipping-info">
+                <h3>Dirección de Envío</h3>
+                <label for="province">Provincia:</label>
+                <select id="province" class="form-control" required>
+                    <option value="">Seleccione una provincia</option>
+                    <option value="San José">San José</option>
+                    <option value="Cartago">Cartago</option>
+                    <option value="Alajuela">Alajuela</option>
+                    <option value="Heredia">Heredia</option>
+                    <option value="Puntarenas">Puntarenas</option>
+                    <option value="Limón">Limón</option>
+                    <option value="Guanacaste">Guanacaste</option>
+                </select>
+
+                <label for="canton">Cantón:</label>
+                <select id="canton" class="form-control" disabled required>
+                    <option value="">Seleccione un cantón</option>
+                </select>
+
+                <label for="district">Distrito:</label>
+                <select id="district" class="form-control" disabled required>
+                    <option value="">Seleccione un distrito</option>
+                </select>
+
+                <p id="shipping-cost" class="mt-3">Costo de envío: <strong>₡0</strong></p>
+            </div>
+
+            <div class="payment-methods mt-4">
+                <h3>Selecciona un método de pago</h3>
                 <button class="payment-option" data-method="paypal">PayPal</button>
                 <button class="payment-option" data-method="card">Tarjeta</button>
                 <button class="payment-option" data-method="transfer">Transferencia</button>
@@ -210,86 +238,267 @@
             </button>
         </div>
     </div>
-</div>
 
-@section Scripts {
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script>
-        $(document).ready(function () {
-            $('.payment-option').click(function () {
-                var method = $(this).data('method');
-                $('#form-title').text('Datos de ' + method.charAt(0).toUpperCase() + method.slice(1));
-                $('#form-fields').empty();
+    @section Scripts {
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <script>
+            $(document).ready(function () {
+                const cantonesPorProvincia = {
+                    "San José": ["Central", "Escazú", "Desamparados", "Puriscal"],
+                    "Cartago": ["Central", "Paraíso", "La Unión"],
+                    "Alajuela": ["Central", "San Ramón", "Grecia"],
+                    "Heredia": ["Central", "Belén", "Santo Domingo"],
+                    "Puntarenas": ["Central", "Esparza", "Montes de Oro"],
+                    "Limón": ["Central", "Pococí", "Guácimo"],
+                    "Guanacaste": ["Liberia", "Nicoya", "Santa Cruz"]
+                };
 
-                switch (method) {
-                    case 'paypal':
-                        $('#form-fields').append('<label>Email de PayPal:</label><input type="email" name="paypalEmail" required />');
-                        break;
-                    case 'card':
-                        $('#form-fields').append('<label>Nombre en la Tarjeta:</label><input type="text" name="cardName" required />');
-                        $('#form-fields').append('<label>Número de Tarjeta:</label><input type="text" name="cardNumber" required />');
-                        $('#form-fields').append('<label>Fecha de Expiración:</label><input type="text" name="expiryDate" required placeholder="MM/AA" />');
-                        $('#form-fields').append('<label>Código de Seguridad:</label><input type="text" name="cvv" required />');
-                        break;
-                    case 'transfer':
-                        $('#form-fields').append('<label>Banco:</label><input type="text" name="bank" required />');
-                        $('#form-fields').append('<label>Número de Cuenta:</label><input type="text" name="accountNumber" required />');
-                        break;
-                    case 'giftcard':
-                        $('#form-fields').append('<label>Código de la Tarjeta de Regalo:</label><input type="text" name="giftCardCode" required />');
-                        break;
+                const distritosPorCanton = {
+                    "Central": ["Distrito 1", "Distrito 2", "Distrito 3"],
+                    "Escazú": ["San Rafael", "San Antonio"],
+                    "Desamparados": ["San Miguel", "Los Guido"],
+                };
+
+                $("#province").change(function () {
+                    const selectedProvince = $(this).val();
+                    const cantones = cantonesPorProvincia[selectedProvince] || [];
+                    $("#canton").empty().append('<option value="">Seleccione un cantón</option>');
+                    cantones.forEach(canton => {
+                        $("#canton").append(`<option value="${canton}">${canton}</option>`);
+                    });
+                    $("#canton").prop("disabled", cantones.length === 0);
+                    $("#district").empty().append('<option value="">Seleccione un distrito</option>').prop("disabled", true);
+
+                    const freeShipping = ["San José", "Cartago"];
+                    let shippingCost = 0;
+
+                    if (!freeShipping.includes(selectedProvince)) {
+                        shippingCost = selectedProvince ? 5000 : 0;
+                    }
+
+                    $("#shipping-cost strong").text(`₡${shippingCost}`);
+                });
+
+                $("#canton").change(function () {
+                    const selectedCanton = $(this).val();
+                    const distritos = distritosPorCanton[selectedCanton] || [];
+                    $("#district").empty().append('<option value="">Seleccione un distrito</option>');
+                    distritos.forEach(distrito => {
+                        $("#district").append(`<option value="${distrito}">${distrito}</option>`);
+                    });
+                    $("#district").prop("disabled", distritos.length === 0);
+                });
+
+                $('.payment-option').click(function () {
+                    var method = $(this).data('method');
+                    $('#form-title').text('Datos de ' + method.charAt(0).toUpperCase() + method.slice(1));
+                    $('#form-fields').empty();
+
+                    switch (method) {
+                        case 'paypal':
+                            $('#form-fields').append('<label>Email de PayPal:</label><input type="email" name="paypalEmail" required />');
+                            break;
+                        case 'card':
+                            $('#form-fields').append('<label>Nombre en la Tarjeta:</label><input type="text" name="cardName" required />');
+                            $('#form-fields').append('<label>Número de Tarjeta:</label><input type="text" name="cardNumber" required />');
+                            $('#form-fields').append('<label>Fecha de Expiración:</label><input type="text" name="expiryDate" required placeholder="MM/AA" />');
+                            $('#form-fields').append('<label>Código de Seguridad:</label><input type="text" name="cvv" required />');
+                            break;
+                        case 'transfer':
+                            $('#form-fields').append('<label>Banco:</label><input type="text" name="bank" required />');
+                            $('#form-fields').append('<label>Número de Cuenta:</label><input type="text" name="accountNumber" required />');
+                            break;
+                        case 'giftcard':
+                            $('#form-fields').append('<label>Código de la Tarjeta de Regalo:</label><input type="text" name="giftCardCode" required />');
+                            break;
+                    }
+
+                    $('#payment-form').show();
+                });
+            });
+
+            function showPaymentOptions() {
+                document.getElementById("paymentModalProduct").style.display = "flex";
+            }
+
+            function hidePaymentOptions() {
+                document.getElementById("paymentModalProduct").style.display = "none";
+            }
+        </script>
+
+        <style>
+            #paymentModalProduct {
+                max-height: 100vh;
+                overflow-y: auto;
+                display: none;
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background-color: rgba(0, 0, 0, 0.5);
+                z-index: 1000;
+            }
+
+            .modal-content-product {
+                background-color: white;
+                padding: 20px;
+                border-radius: 8px;
+                max-width: 600px;
+                width: 90%;
+                margin: 20px auto;
+                position: relative;
+                max-height: 90vh;
+                overflow-y: auto;
+            }
+
+                .modal-content-product h2 {
+                    position: sticky;
+                    top: 0;
+                    background-color: white;
+                    padding: 10px 0;
+                    margin-top: 0;
+                    z-index: 1;
                 }
 
-                $('#payment-form').show();
-            });
-        });
+                .modal-content-product::-webkit-scrollbar {
+                    width: 8px;
+                }
 
-        function showPaymentOptions() {
-            document.getElementById("paymentModalProduct").style.display = "flex";
-        }
+                .modal-content-product::-webkit-scrollbar-track {
+                    background: #f1f1f1;
+                    border-radius: 4px;
+                }
 
-        function hidePaymentOptions() {
-            document.getElementById("paymentModalProduct").style.display = "none";
-        }
-    </script>
-}
+                .modal-content-product::-webkit-scrollbar-thumb {
+                    background: #888;
+                    border-radius: 4px;
+                }
 
-<style>
-    .payment-methods {
-        margin-bottom: 20px;
+                    .modal-content-product::-webkit-scrollbar-thumb:hover {
+                        background: #555;
+                    }
+
+            .shipping-info,
+            .payment-methods,
+            #payment-form {
+                margin-bottom: 20px;
+            }
+
+            .btn-cancel {
+                position: sticky;
+                bottom: 0;
+                margin-top: 20px;
+                background-color: white;
+                padding: 10px;
+            }
+
+            .payment-methods {
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 10px;
+                margin-bottom: 20px;
+            }
+
+            .payment-option {
+                flex: 1 1 calc(50% - 20px);
+                max-width: 150px;
+                padding: 10px 15px;
+                font-size: 14px;
+                text-align: center;
+                background-color: #007bff;
+                color: white;
+                border: none;
+                border-radius: 8px;
+                cursor: pointer;
+                transition: all 0.3s ease;
+                box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            }
+
+                .payment-option:hover {
+                    background-color: #0056b3;
+                    transform: scale(1.05);
+                    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+                }
+
+            #payment-form {
+                border: 1px solid #ddd;
+                padding: 15px;
+                border-radius: 8px;
+                background-color: #f9f9f9;
+                margin-top: 15px;
+                box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            }
+
+                #payment-form h3 {
+                    font-size: 18px;
+                    margin-bottom: 15px;
+                    color: #333;
+                }
+
+            #form-fields label {
+                display: block;
+                font-size: 14px;
+                color: #555;
+                margin: 8px 0 4px;
+            }
+
+            #form-fields input {
+                width: 100%;
+                padding: 10px;
+                font-size: 14px;
+                border: 1px solid #ccc;
+                border-radius: 5px;
+                outline: none;
+                transition: border-color 0.3s ease;
+            }
+
+                #form-fields input:focus {
+                    border-color: #007bff;
+                    box-shadow: 0 0 4px rgba(0, 123, 255, 0.4);
+                }
+
+            #form button[type="submit"] {
+                display: block;
+                width: 100%;
+                padding: 10px;
+                font-size: 14px;
+                font-weight: bold;
+                color: white;
+                background-color: #28a745;
+                border: none;
+                border-radius: 5px;
+                cursor: pointer;
+                transition: all 0.3s ease;
+                margin-top: 10px;
+            }
+
+                #form button[type="submit"]:hover {
+                    background-color: #218838;
+                    transform: translateY(-2px);
+                    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+                }
+
+            .btn-cancel {
+                display: block;
+                width: 100%;
+                padding: 10px;
+                font-size: 14px;
+                font-weight: bold;
+                color: white;
+                background-color: #dc3545;
+                border: none;
+                border-radius: 5px;
+                cursor: pointer;
+                transition: all 0.3s ease;
+                margin-top: 10px;
+            }
+
+                .btn-cancel:hover {
+                    background-color: #c82333;
+                    transform: translateY(-2px);
+                    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+                }
+        </style>
     }
-
-    .payment-option {
-        display: inline-block;
-        padding: 10px 20px;
-        margin: 5px;
-        background-color: #007bff;
-        color: white;
-        border: none;
-        border-radius: 5px;
-        cursor: pointer;
-    }
-
-        .payment-option:hover {
-            background-color: #0056b3;
-        }
-
-    #payment-form {
-        border: 1px solid #ccc;
-        padding: 20px;
-        border-radius: 5px;
-    }
-
-    #form-fields label {
-        display: block;
-        margin: 10px 0 5px;
-    }
-
-    #form-fields input {
-        width: 100%;
-        padding: 8px;
-        margin-bottom: 10px;
-        border: 1px solid #ccc;
-        border-radius: 4px;
-    }
-</style>
