@@ -7,6 +7,10 @@
       "RelativeMoniker": "D:0:0:{E25BB4B3-480E-4D6B-9D4D-B44AB3E989DE}|GyR\\GyR.csproj|solutionrelative:gyr\\views\\home\\compra.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
+      "AbsoluteMoniker": "D:0:0:{E25BB4B3-480E-4D6B-9D4D-B44AB3E989DE}|GyR\\GyR.csproj|C:\\Users\\Fam. L\u00F3pez Quesada\\Desktop\\JC\\Pr\u00E1ctica profesional GyR\\GyR-GA\\GyR\\gyr\\views\\home\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{E25BB4B3-480E-4D6B-9D4D-B44AB3E989DE}|GyR\\GyR.csproj|solutionrelative:gyr\\views\\home\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{E25BB4B3-480E-4D6B-9D4D-B44AB3E989DE}|GyR\\GyR.csproj|C:\\Users\\Fam. L\u00F3pez Quesada\\Desktop\\JC\\Pr\u00E1ctica profesional GyR\\GyR-GA\\GyR\\gyr\\views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
       "RelativeMoniker": "D:0:0:{E25BB4B3-480E-4D6B-9D4D-B44AB3E989DE}|GyR\\GyR.csproj|solutionrelative:gyr\\views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
@@ -25,10 +29,6 @@
     {
       "AbsoluteMoniker": "D:0:0:{E25BB4B3-480E-4D6B-9D4D-B44AB3E989DE}|GyR\\GyR.csproj|C:\\Users\\Fam. L\u00F3pez Quesada\\Desktop\\JC\\Pr\u00E1ctica profesional GyR\\GyR-GA\\GyR\\gyr\\models\\product.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{E25BB4B3-480E-4D6B-9D4D-B44AB3E989DE}|GyR\\GyR.csproj|solutionrelative:gyr\\models\\product.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{E25BB4B3-480E-4D6B-9D4D-B44AB3E989DE}|GyR\\GyR.csproj|C:\\Users\\Fam. L\u00F3pez Quesada\\Desktop\\JC\\Pr\u00E1ctica profesional GyR\\GyR-GA\\GyR\\gyr\\views\\home\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{E25BB4B3-480E-4D6B-9D4D-B44AB3E989DE}|GyR\\GyR.csproj|solutionrelative:gyr\\views\\home\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{E25BB4B3-480E-4D6B-9D4D-B44AB3E989DE}|GyR\\GyR.csproj|C:\\Users\\Fam. L\u00F3pez Quesada\\Desktop\\JC\\Pr\u00E1ctica profesional GyR\\GyR-GA\\GyR\\gyr\\models\\comment.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -78,7 +78,7 @@
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 6,
               "Title": "Product.cs",
               "DocumentMoniker": "C:\\Users\\Fam. L\u00F3pez Quesada\\Desktop\\JC\\Pr\u00E1ctica profesional GyR\\GyR-GA\\GyR\\GyR\\Models\\Product.cs",
               "RelativeDocumentMoniker": "GyR\\Models\\Product.cs",
@@ -90,7 +90,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 3,
               "Title": "Menu.cshtml",
               "DocumentMoniker": "C:\\Users\\Fam. L\u00F3pez Quesada\\Desktop\\JC\\Pr\u00E1ctica profesional GyR\\GyR-GA\\GyR\\GyR\\Views\\Home\\Menu.cshtml",
               "RelativeDocumentMoniker": "GyR\\Views\\Home\\Menu.cshtml",
@@ -144,7 +144,7 @@
               "RelativeDocumentMoniker": "GyR\\Views\\Home\\compra.cshtml",
               "ToolTip": "C:\\Users\\Fam. L\u00F3pez Quesada\\Desktop\\JC\\Pr\u00E1ctica profesional GyR\\GyR-GA\\GyR\\GyR\\Views\\Home\\compra.cshtml*",
               "RelativeToolTip": "GyR\\Views\\Home\\compra.cshtml*",
-              "ViewState": "AgIAAO0BAAAAAAAAAAAAAPkBAAAKAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAUAAAAdAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
               "WhenOpened": "2024-11-13T14:47:39.789Z",
               "EditorCaption": ""
@@ -163,7 +163,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 4,
               "Title": "bootstrap.css",
               "DocumentMoniker": "C:\\Users\\Fam. L\u00F3pez Quesada\\Desktop\\JC\\Pr\u00E1ctica profesional GyR\\GyR-GA\\GyR\\GyR\\Content\\bootstrap.css",
               "RelativeDocumentMoniker": "GyR\\Content\\bootstrap.css",
@@ -187,7 +187,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 2,
               "Title": "_Layout.cshtml",
               "DocumentMoniker": "C:\\Users\\Fam. L\u00F3pez Quesada\\Desktop\\JC\\Pr\u00E1ctica profesional GyR\\GyR-GA\\GyR\\GyR\\Views\\Shared\\_Layout.cshtml",
               "RelativeDocumentMoniker": "GyR\\Views\\Shared\\_Layout.cshtml",
@@ -199,7 +199,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 5,
               "Title": "HomeController.cs",
               "DocumentMoniker": "C:\\Users\\Fam. L\u00F3pez Quesada\\Desktop\\JC\\Pr\u00E1ctica profesional GyR\\GyR-GA\\GyR\\GyR\\Controllers\\HomeController.cs",
               "RelativeDocumentMoniker": "GyR\\Controllers\\HomeController.cs",
@@ -211,15 +211,16 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 1,
               "Title": "Index.cshtml",
               "DocumentMoniker": "C:\\Users\\Fam. L\u00F3pez Quesada\\Desktop\\JC\\Pr\u00E1ctica profesional GyR\\GyR-GA\\GyR\\GyR\\Views\\Home\\Index.cshtml",
               "RelativeDocumentMoniker": "GyR\\Views\\Home\\Index.cshtml",
               "ToolTip": "C:\\Users\\Fam. L\u00F3pez Quesada\\Desktop\\JC\\Pr\u00E1ctica profesional GyR\\GyR-GA\\GyR\\GyR\\Views\\Home\\Index.cshtml",
               "RelativeToolTip": "GyR\\Views\\Home\\Index.cshtml",
-              "ViewState": "AgIAAJEAAAAAAAAAAAAIwEIBAAAMAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-10-29T14:31:18.763Z"
+              "WhenOpened": "2024-10-29T14:31:18.763Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
