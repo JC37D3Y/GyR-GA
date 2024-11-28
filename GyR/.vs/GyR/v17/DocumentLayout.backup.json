@@ -3,16 +3,16 @@
   "WorkspaceRootPath": "C:\\Users\\Fam. L\u00F3pez Quesada\\Desktop\\JC\\Pr\u00E1ctica profesional GyR\\GyR-GA\\GyR\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{E25BB4B3-480E-4D6B-9D4D-B44AB3E989DE}|GyR\\GyR.csproj|C:\\Users\\Fam. L\u00F3pez Quesada\\Desktop\\JC\\Pr\u00E1ctica profesional GyR\\GyR-GA\\GyR\\gyr\\views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{E25BB4B3-480E-4D6B-9D4D-B44AB3E989DE}|GyR\\GyR.csproj|solutionrelative:gyr\\views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{E25BB4B3-480E-4D6B-9D4D-B44AB3E989DE}|GyR\\GyR.csproj|c:\\users\\fam. l\u00F3pez quesada\\desktop\\jc\\pr\u00E1ctica profesional gyr\\gyr-ga\\gyr\\gyr\\views\\home\\compra.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
       "RelativeMoniker": "D:0:0:{E25BB4B3-480E-4D6B-9D4D-B44AB3E989DE}|GyR\\GyR.csproj|solutionrelative:gyr\\views\\home\\compra.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{E25BB4B3-480E-4D6B-9D4D-B44AB3E989DE}|GyR\\GyR.csproj|C:\\Users\\Fam. L\u00F3pez Quesada\\Desktop\\JC\\Pr\u00E1ctica profesional GyR\\GyR-GA\\GyR\\gyr\\views\\home\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
       "RelativeMoniker": "D:0:0:{E25BB4B3-480E-4D6B-9D4D-B44AB3E989DE}|GyR\\GyR.csproj|solutionrelative:gyr\\views\\home\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{E25BB4B3-480E-4D6B-9D4D-B44AB3E989DE}|GyR\\GyR.csproj|C:\\Users\\Fam. L\u00F3pez Quesada\\Desktop\\JC\\Pr\u00E1ctica profesional GyR\\GyR-GA\\GyR\\gyr\\views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{E25BB4B3-480E-4D6B-9D4D-B44AB3E989DE}|GyR\\GyR.csproj|solutionrelative:gyr\\views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{E25BB4B3-480E-4D6B-9D4D-B44AB3E989DE}|GyR\\GyR.csproj|C:\\Users\\Fam. L\u00F3pez Quesada\\Desktop\\JC\\Pr\u00E1ctica profesional GyR\\GyR-GA\\GyR\\gyr\\views\\home\\menu.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
@@ -74,7 +74,7 @@
       "DocumentGroups": [
         {
           "DockedHeight": 200,
-          "SelectedChildIndex": 5,
+          "SelectedChildIndex": 9,
           "Children": [
             {
               "$type": "Document",
@@ -138,13 +138,13 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 1,
               "Title": "compra.cshtml",
               "DocumentMoniker": "C:\\Users\\Fam. L\u00F3pez Quesada\\Desktop\\JC\\Pr\u00E1ctica profesional GyR\\GyR-GA\\GyR\\GyR\\Views\\Home\\compra.cshtml",
               "RelativeDocumentMoniker": "GyR\\Views\\Home\\compra.cshtml",
               "ToolTip": "C:\\Users\\Fam. L\u00F3pez Quesada\\Desktop\\JC\\Pr\u00E1ctica profesional GyR\\GyR-GA\\GyR\\GyR\\Views\\Home\\compra.cshtml*",
               "RelativeToolTip": "GyR\\Views\\Home\\compra.cshtml*",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAUAAAAdAAAAAAAAAA==",
+              "ViewState": "AgIAAPoBAAAAAAAAAAAiwP4BAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
               "WhenOpened": "2024-11-13T14:47:39.789Z",
               "EditorCaption": ""
@@ -187,15 +187,16 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 0,
               "Title": "_Layout.cshtml",
               "DocumentMoniker": "C:\\Users\\Fam. L\u00F3pez Quesada\\Desktop\\JC\\Pr\u00E1ctica profesional GyR\\GyR-GA\\GyR\\GyR\\Views\\Shared\\_Layout.cshtml",
               "RelativeDocumentMoniker": "GyR\\Views\\Shared\\_Layout.cshtml",
-              "ToolTip": "C:\\Users\\Fam. L\u00F3pez Quesada\\Desktop\\JC\\Pr\u00E1ctica profesional GyR\\GyR-GA\\GyR\\GyR\\Views\\Shared\\_Layout.cshtml",
-              "RelativeToolTip": "GyR\\Views\\Shared\\_Layout.cshtml",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAAAAAAAAAAAAA==",
+              "ToolTip": "C:\\Users\\Fam. L\u00F3pez Quesada\\Desktop\\JC\\Pr\u00E1ctica profesional GyR\\GyR-GA\\GyR\\GyR\\Views\\Shared\\_Layout.cshtml*",
+              "RelativeToolTip": "GyR\\Views\\Shared\\_Layout.cshtml*",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAAuAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-10-29T14:31:05.363Z"
+              "WhenOpened": "2024-10-29T14:31:05.363Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
@@ -211,7 +212,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 2,
               "Title": "Index.cshtml",
               "DocumentMoniker": "C:\\Users\\Fam. L\u00F3pez Quesada\\Desktop\\JC\\Pr\u00E1ctica profesional GyR\\GyR-GA\\GyR\\GyR\\Views\\Home\\Index.cshtml",
               "RelativeDocumentMoniker": "GyR\\Views\\Home\\Index.cshtml",
