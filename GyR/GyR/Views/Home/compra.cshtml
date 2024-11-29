@@ -6,7 +6,6 @@
     ViewBag.Title = "Artículo";
 }
 <link rel="stylesheet" href="~/css/styles.css" />
-
 <style>
     /* Estilo General */
     body.product-page {
@@ -241,270 +240,456 @@
                 Cancelar
             </button>
         </div>
-    </div>
-
-    @section Scripts {
-        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-        <script>
-            $(document).ready(function () {
-                const cantonesPorProvincia = {
-                    "San José": ["Central", "Escazú", "Desamparados", "Puriscal"],
-                    "Cartago": ["Central", "Paraíso", "La Unión"],
-                    "Alajuela": ["Central", "San Ramón", "Grecia"],
-                    "Heredia": ["Central", "Belén", "Santo Domingo"],
-                    "Puntarenas": ["Central", "Esparza", "Montes de Oro"],
-                    "Limón": ["Central", "Pococí", "Guácimo"],
-                    "Guanacaste": ["Liberia", "Nicoya", "Santa Cruz"]
-                };
-
-                const distritosPorCanton = {
-                    "Central": ["Distrito 1", "Distrito 2", "Distrito 3"],
-                    "Escazú": ["San Rafael", "San Antonio"],
-                    "Desamparados": ["San Miguel", "Los Guido"],
-                };
-
-                $("#province").change(function () {
-                    const selectedProvince = $(this).val();
-                    const cantones = cantonesPorProvincia[selectedProvince] || [];
-                    $("#canton").empty().append('<option value="">Seleccione un cantón</option>');
-                    cantones.forEach(canton => {
-                        $("#canton").append(`<option value="${canton}">${canton}</option>`);
-                    });
-                    $("#canton").prop("disabled", cantones.length === 0);
-                    $("#district").empty().append('<option value="">Seleccione un distrito</option>').prop("disabled", true);
-
-                    const freeShipping = ["San José", "Cartago"];
-                    let shippingCost = 0;
-
-                    if (!freeShipping.includes(selectedProvince)) {
-                        shippingCost = selectedProvince ? 5000 : 0;
-                    }
-
-                    $("#shipping-cost strong").text(`₡${shippingCost}`);
-                });
-
-                $("#canton").change(function () {
-                    const selectedCanton = $(this).val();
-                    const distritos = distritosPorCanton[selectedCanton] || [];
-                    $("#district").empty().append('<option value="">Seleccione un distrito</option>');
-                    distritos.forEach(distrito => {
-                        $("#district").append(`<option value="${distrito}">${distrito}</option>`);
-                    });
-                    $("#district").prop("disabled", distritos.length === 0);
-                });
-
-                $('.payment-option').click(function () {
-                    var method = $(this).data('method');
-                    $('#form-title').text('Datos de ' + method.charAt(0).toUpperCase() + method.slice(1));
-                    $('#form-fields').empty();
-
-                    switch (method) {
-                        case 'paypal':
-                            $('#form-fields').append('<label>Email de PayPal:</label><input type="email" name="paypalEmail" required />');
-                            break;
-                        case 'card':
-                            $('#form-fields').append('<label>Nombre en la Tarjeta:</label><input type="text" name="cardName" required />');
-                            $('#form-fields').append('<label>Número de Tarjeta:</label><input type="text" name="cardNumber" required />');
-                            $('#form-fields').append('<label>Fecha de Expiración:</label><input type="text" name="expiryDate" required placeholder="MM/AA" />');
-                            $('#form-fields').append('<label>Código de Seguridad:</label><input type="text" name="cvv" required />');
-                            break;
-                        case 'transfer':
-                            $('#form-fields').append('<label>Banco:</label><input type="text" name="bank" required />');
-                            $('#form-fields').append('<label>Número de Cuenta:</label><input type="text" name="accountNumber" required />');
-                            break;
-                        case 'giftcard':
-                            $('#form-fields').append('<label>Código de la Tarjeta de Regalo:</label><input type="text" name="giftCardCode" required />');
-                            break;
-                    }
-
-                    $('#payment-form').show();
-                });
-            });
-
-            function showPaymentOptions() {
-                document.getElementById("paymentModalProduct").style.display = "flex";
-            }
-
-            function hidePaymentOptions() {
-                document.getElementById("paymentModalProduct").style.display = "none";
-            }
-        </script>
+        <div id="price-calculator">
+            <div class="display-area">
+                <input type="text" id="calculation-display" placeholder="0" disabled />
+            </div>
+            <div class="input-section">
+                <select id="input-type-selector">
+                    <option value="price">Precio ($)</option>
+                    <option value="quantity">Cantidad</option>
+                </select>
+                <input type="number" id="input-value-field" placeholder="Ingrese valor" />
+                <button id="save-value-button">Guardar</button>
+            </div>
+            <div class="button-grid">
+                <button class="calc-button" data-value="1">1</button>
+                <button class="calc-button" data-value="2">2</button>
+                <button class="calc-button" data-value="3">3</button>
+                <button class="calc-button operator-button" data-value="+">+</button>
+                <button class="calc-button" data-value="4">4</button>
+                <button class="calc-button" data-value="5">5</button>
+                <button class="calc-button" data-value="6">6</button>
+                <button class="calc-button operator-button" data-value="-">-</button>
+                <button class="calc-button" data-value="7">7</button>
+                <button class="calc-button" data-value="8">8</button>
+                <button class="calc-button" data-value="9">9</button>
+                <button class="calc-button operator-button" data-value="*">x</button>
+                <button class="calc-button" data-value=".">.</button>
+                <button class="calc-button" data-value="0">0</button>
+                <button id="calculate-button">=</button>
+                <button class="calc-button operator-button" data-value="/">/</button>
+                <button id="clear-last-button">Borrar último</button>
+                <button id="reset-calculator-button">Reiniciar</button>
+            </div>
+            <div id="total-display-area">Total: $<span id="total-amount">0.00</span></div>
+        </div>
 
         <style>
-            #paymentModalProduct {
-                max-height: 100vh;
-                overflow-y: auto;
-                display: none;
-                position: fixed;
-                top: 0;
-                left: 0;
-                width: 100%;
-                height: 100%;
-                background-color: rgba(0, 0, 0, 0.5);
-                z-index: 1000;
-            }
-
-            .modal-content-product {
-                background-color: white;
+            #price-calculator {
+                width: 350px;
+                margin: auto;
                 padding: 20px;
-                border-radius: 8px;
-                max-width: 600px;
-                width: 90%;
-                margin: 20px auto;
-                position: relative;
-                max-height: 90vh;
-                overflow-y: auto;
+                border-radius: 15px;
+                background: #f1f3f6;
+                box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.1), -5px -5px 15px rgba(255, 255, 255, 0.7);
             }
 
-                .modal-content-product h2 {
-                    position: sticky;
-                    top: 0;
-                    background-color: white;
-                    padding: 10px 0;
-                    margin-top: 0;
-                    z-index: 1;
+            .display-area input {
+                width: 100%;
+                height: 60px;
+                border: none;
+                border-radius: 10px;
+                text-align: right;
+                font-size: 1.5rem;
+                padding: 10px;
+                background: #e8e8e8;
+                box-shadow: inset 3px 3px 8px rgba(0, 0, 0, 0.1), inset -3px -3px 8px rgba(255, 255, 255, 0.7);
+            }
+
+            .input-section {
+                display: flex;
+                align-items: center;
+                gap: 10px;
+                margin: 20px 0;
+            }
+
+            #input-type-selector {
+                padding: 10px;
+                border-radius: 5px;
+                border: 1px solid #ccc;
+            }
+
+            #input-value-field {
+                flex: 1;
+                padding: 10px;
+                border-radius: 5px;
+                border: 1px solid #ccc;
+            }
+
+            #save-value-button {
+                padding: 10px 15px;
+                background: #4caf50;
+                border: none;
+                color: white;
+                border-radius: 5px;
+                cursor: pointer;
+            }
+
+            .button-grid {
+                display: grid;
+                grid-template-columns: repeat(4, 1fr);
+                gap: 10px;
+            }
+
+            .calc-button, #calculate-button, #clear-last-button, #reset-calculator-button {
+                height: 60px;
+                border: none;
+                border-radius: 50%;
+                font-size: 1.2rem;
+                background: #e8e8e8;
+                box-shadow: 3px 3px 8px rgba(0, 0, 0, 0.1), -3px -3px 8px rgba(255, 255, 255, 0.7);
+                cursor: pointer;
+            }
+
+                .calc-button :hover, #calculate-button:hover, #clear-last-button:hover, #reset-calculator-button:hover {
+                    background: #d1d1d1;
                 }
 
-                .modal-content-product::-webkit-scrollbar {
-                    width: 8px;
-                }
+            #total-display-area {
+                margin-top: 20px;
+                font-size: 1.5rem;
+                text-align: center;
+            }
+        </style>
 
-                .modal-content-product::-webkit-scrollbar-track {
-                    background: #f1f1f1;
-                    border-radius: 4px;
-                }
+        <script>
+            document.addEventListener("DOMContentLoaded", () => {
+                let total = 0;
+                let itemPrice = 0;
+                let itemQuantity = 0;
+                let calculationHistory = [];
 
-                .modal-content-product::-webkit-scrollbar-thumb {
-                    background: #888;
-                    border-radius: 4px;
-                }
+                const calculationDisplay = document.getElementById("calculation-display");
+                const totalAmountDisplay = document.getElementById("total-amount");
+                const inputTypeSelector = document.getElementById("input-type-selector");
+                const inputValueField = document.getElementById("input-value-field");
+                const saveValueButton = document.getElementById("save-value-button");
+                const clearLastButton = document.getElementById("clear-last-button");
+                const resetCalculatorButton = document.getElementById("reset-calculator-button");
+                const calcButtons = document.querySelectorAll(".calc-button");
 
-                    .modal-content-product::-webkit-scrollbar-thumb:hover {
-                        background: #555;
+                saveValueButton.addEventListener("click", () => {
+                    const value = parseFloat(inputValueField.value);
+
+                    if (!value || value <= 0) {
+                        alert("Por favor, introduce un valor válido.");
+                        return;
                     }
 
-            .shipping-info,
-            .payment-methods,
-            #payment-form {
-                margin-bottom: 20px;
-            }
+                    if (inputTypeSelector.value === "price") {
+                        itemPrice = value;
+                        alert(`Precio guardado: $${itemPrice}`);
+                    } else if (inputTypeSelector.value === "quantity") {
+                        itemQuantity = value;
+                        alert(`Cantidad guardada: ${itemQuantity}`);
+                    }
 
-            .btn-cancel {
-                position: sticky;
-                bottom: 0;
-                margin-top: 20px;
-                background-color: white;
-                padding: 10px;
-            }
+                    inputValueField.value = "";
+                    updateTotal();
+                });
 
-            .payment-methods {
-                display: flex;
-                flex-wrap: wrap;
-                justify-content: center;
-                gap: 10px;
-                margin-bottom: 20px;
-            }
+                const updateTotal = () => {
+                    if (itemPrice > 0 && itemQuantity > 0) {
+                        total = itemPrice * itemQuantity;
+                        totalAmountDisplay.textContent = total.toFixed(2);
+                    }
+                };
 
-            .payment-option {
-                flex: 1 1 calc(50% - 20px);
-                max-width: 150px;
-                padding: 10px 15px;
-                font-size: 14px;
-                text-align: center;
-                background-color: #007bff;
-                color: white;
-                border: none;
-                border-radius: 8px;
-                cursor: pointer;
-                transition: all 0.3s ease;
-                box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-            }
+                calcButtons.forEach(button => {
+                    button.addEventListener("click", () => {
+                        calculationDisplay.value += button.dataset.value;
+                        calculationHistory.push(button.dataset.value);
+                    });
+                });
 
-                .payment-option:hover {
-                    background-color: #0056b3;
-                    transform: scale(1.05);
-                    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+                document.getElementById("calculate-button").addEventListener("click", () => {
+                    try {
+                        const result = eval(calculationDisplay.value);
+                        calculationDisplay.value = result;
+                    } catch {
+                        alert("Expresión inválida");
+                    }
+                });
+
+                clearLastButton.addEventListener("click", () => {
+                    calculationHistory.pop();
+                    calculationDisplay.value = calculationHistory.join('');
+                });
+
+                resetCalculatorButton.addEventListener("click", () => {
+                    calculationDisplay.value = '';
+                    total = 0;
+                    totalAmountDisplay.textContent = '0.00';
+                    itemPrice = 0;
+                    itemQuantity = 0;
+                    calculationHistory = [];
+                });
+            });
+        </script>
+
+
+        @section Scripts {
+            <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+            <script>
+                $(document).ready(function () {
+                    const cantonesPorProvincia = {
+                        "San José": ["Central", "Escazú", "Desamparados", "Puriscal"],
+                        "Cartago": ["Central", "Paraíso", "La Unión"],
+                        "Alajuela": ["Central", "San Ramón", "Grecia"],
+                        "Heredia": ["Central", "Belén", "Santo Domingo"],
+                        "Puntarenas": ["Central", "Esparza", "Montes de Oro"],
+                        "Limón": ["Central", "Pococí", "Guácimo"],
+                        "Guanacaste": ["Liberia", "Nicoya", "Santa Cruz"]
+                    };
+
+                    const distritosPorCanton = {
+                        "Central": ["Distrito 1", "Distrito 2", "Distrito 3"],
+                        "Escazú": ["San Rafael", "San Antonio"],
+                        "Desamparados": ["San Miguel", "Los Guido"],
+                    };
+
+                    $("#province").change(function () {
+                        const selectedProvince = $(this).val();
+                        const cantones = cantonesPorProvincia[selectedProvince] || [];
+                        $("#canton").empty().append('<option value="">Seleccione un cantón</option>');
+                        cantones.forEach(canton => {
+                            $("#canton").append(`<option value="${canton}">${canton}</option>`);
+                        });
+                        $("#canton").prop("disabled", cantones.length === 0);
+                        $("#district").empty().append('<option value="">Seleccione un distrito</option>').prop("disabled", true);
+
+                        const freeShipping = ["San José", "Cartago"];
+                        let shippingCost = 0;
+
+                        if (!freeShipping.includes(selectedProvince)) {
+                            shippingCost = selectedProvince ? 5000 : 0;
+                        }
+
+                        $("#shipping-cost strong").text(`₡${shippingCost}`);
+                    });
+
+                    $("#canton").change(function () {
+                        const selectedCanton = $(this).val();
+                        const distritos = distritosPorCanton[selectedCanton] || [];
+                        $("#district").empty().append('<option value="">Seleccione un distrito</option>');
+                        distritos.forEach(distrito => {
+                            $("#district").append(`<option value="${distrito}">${distrito}</option>`);
+                        });
+                        $("#district").prop("disabled", distritos.length === 0);
+                    });
+
+                    $('.payment-option').click(function () {
+                        var method = $(this).data('method');
+                        $('#form-title').text('Datos de ' + method.charAt(0).toUpperCase() + method.slice(1));
+                        $('#form-fields').empty();
+
+                        switch (method) {
+                            case 'paypal':
+                                $('#form-fields').append('<label>Email de PayPal:</label><input type="email" name="paypalEmail" required />');
+                                break;
+                            case 'card':
+                                $('#form-fields').append('<label>Nombre en la Tarjeta:</label><input type="text" name="cardName" required />');
+                                $('#form-fields').append('<label>Número de Tarjeta:</label><input type="text" name="cardNumber" required />');
+                                $('#form-fields').append('<label>Fecha de Expiración:</label><input type="text" name="expiryDate" required placeholder="MM/AA" />');
+                                $('#form-fields').append('<label>Código de Seguridad:</label><input type="text" name="cvv" required />');
+                                break;
+                            case 'transfer':
+                                $('#form-fields').append('<label>Banco:</label><input type="text" name="bank" required />');
+                                $('#form-fields').append('<label>Número de Cuenta:</label><input type="text" name="accountNumber" required />');
+                                break;
+                            case 'giftcard':
+                                $('#form-fields').append('<label>Código de la Tarjeta de Regalo:</label><input type="text" name="giftCardCode" required />');
+                                break;
+                        }
+
+                        $('#payment-form').show();
+                    });
+                });
+
+                function showPaymentOptions() {
+                    document.getElementById("paymentModalProduct").style.display = "flex";
                 }
 
-            #payment-form {
-                border: 1px solid #ddd;
-                padding: 15px;
-                border-radius: 8px;
-                background-color: #f9f9f9;
-                margin-top: 15px;
-                box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-            }
+                function hidePaymentOptions() {
+                    document.getElementById("paymentModalProduct").style.display = "none";
+                }
+            </script>
 
-                #payment-form h3 {
-                    font-size: 18px;
-                    margin-bottom: 15px;
-                    color: #333;
+            <style>
+                #paymentModalProduct {
+                    max-height: 100vh;
+                    overflow-y: auto;
+                    display: none;
+                    position: fixed;
+                    top: 0;
+                    left: 0;
+                    width: 100%;
+                    height: 100%;
+                    background-color: rgba(0, 0, 0, 0.5);
+                    z-index: 1000;
                 }
 
-            #form-fields label {
-                display: block;
-                font-size: 14px;
-                color: #555;
-                margin: 8px 0 4px;
-            }
-
-            #form-fields input {
-                width: 100%;
-                padding: 10px;
-                font-size: 14px;
-                border: 1px solid #ccc;
-                border-radius: 5px;
-                outline: none;
-                transition: border-color 0.3s ease;
-            }
-
-                #form-fields input:focus {
-                    border-color: #007bff;
-                    box-shadow: 0 0 4px rgba(0, 123, 255, 0.4);
+                .modal-content-product {
+                    background-color: white;
+                    padding: 20px;
+                    border-radius: 8px;
+                    max-width: 600px;
+                    width: 90%;
+                    margin: 20px auto;
+                    position: relative;
+                    max-height: 90vh;
+                    overflow-y: auto;
                 }
 
-            #form button[type="submit"] {
-                display: block;
-                width: 100%;
-                padding: 10px;
-                font-size: 14px;
-                font-weight: bold;
-                color: white;
-                background-color: #28a745;
-                border: none;
-                border-radius: 5px;
-                cursor: pointer;
-                transition: all 0.3s ease;
-                margin-top: 10px;
-            }
+                    .modal-content-product h2 {
+                        position: sticky;
+                        top: 0;
+                        background-color: white;
+                        padding: 10px 0;
+                        margin-top: 0;
+                        z-index: 1;
+                    }
 
-                #form button[type="submit"]:hover {
-                    background-color: #218838;
-                    transform: translateY(-2px);
-                    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+                    .modal-content-product::-webkit-scrollbar {
+                        width: 8px;
+                    }
+
+                    .modal-content-product::-webkit-scrollbar-track {
+                        background: #f1f1f1;
+                        border-radius: 4px;
+                    }
+
+                    .modal-content-product::-webkit-scrollbar-thumb {
+                        background: #888;
+                        border-radius: 4px;
+                    }
+
+                        .modal-content-product::-webkit-scrollbar-thumb:hover {
+                            background: #555;
+                        }
+
+                .shipping-info,
+                .payment-methods,
+                #payment-form {
+                    margin-bottom: 20px;
                 }
 
-            .btn-cancel {
-                display: block;
-                width: 100%;
-                padding: 10px;
-                font-size: 14px;
-                font-weight: bold;
-                color: white;
-                background-color: #dc3545;
-                border: none;
-                border-radius: 5px;
-                cursor: pointer;
-                transition: all 0.3s ease;
-                margin-top: 10px;
-            }
-
-                .btn-cancel:hover {
-                    background-color: #c82333;
-                    transform: translateY(-2px);
-                    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+                .btn-cancel {
+                    position: sticky;
+                    bottom: 0;
+                    margin-top: 20px;
+                    background-color: white;
+                    padding: 10px;
                 }
-        </style>
-    }
 
-</div>
+                .payment-methods {
+                    display: flex;
+                    flex-wrap: wrap;
+                    justify-content: center;
+                    gap: 10px;
+                    margin-bottom: 20px;
+                }
+
+                .payment-option {
+                    flex: 1 1 calc(50% - 20px);
+                    max-width: 150px;
+                    padding: 10px 15px;
+                    font-size: 14px;
+                    text-align: center;
+                    background-color: #007bff;
+                    color: white;
+                    border: none;
+                    border-radius: 8px;
+                    cursor: pointer;
+                    transition: all 0.3s ease;
+                    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+                }
+
+                    .payment-option:hover {
+                        background-color: #0056b3;
+                        transform: scale(1.05);
+                        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+                    }
+
+                #payment-form {
+                    border: 1px solid #ddd;
+                    padding: 15px;
+                    border-radius: 8px;
+                    background-color: #f9f9f9;
+                    margin-top: 15px;
+                    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+                }
+
+                    #payment-form h3 {
+                        font-size: 18px;
+                        margin-bottom: 15px;
+                        color: #333;
+                    }
+
+                #form-fields label {
+                    display: block;
+                    font-size: 14px;
+                    color: #555;
+                    margin: 8px 0 4px;
+                }
+
+                #form-fields input {
+                    width: 100%;
+                    padding: 10px;
+                    font-size: 14px;
+                    border: 1px solid #ccc;
+                    border-radius: 5px;
+                    outline: none;
+                    transition: border-color 0.3s ease;
+                }
+
+                    #form-fields input:focus {
+                        border-color: #007bff;
+                        box-shadow: 0 0 4px rgba(0, 123, 255, 0.4);
+                    }
+
+                #form button[type="submit"] {
+                    display: block;
+                    width: 100%;
+                    padding: 10px;
+                    font-size: 14px;
+                    font-weight: bold;
+                    color: white;
+                    background-color: #28a745;
+                    border: none;
+                    border-radius: 5px;
+                    cursor: pointer;
+                    transition: all 0.3s ease;
+                    margin-top: 10px;
+                }
+
+                    #form button[type="submit"]:hover {
+                        background-color: #218838;
+                        transform: translateY(-2px);
+                        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+                    }
+
+                .btn-cancel {
+                    display: block;
+                    width: 100%;
+                    padding: 10px;
+                    font-size: 14px;
+                    font-weight: bold;
+                    color: white;
+                    background-color: #dc3545;
+                    border: none;
+                    border-radius: 5px;
+                    cursor: pointer;
+                    transition: all 0.3s ease;
+                    margin-top: 10px;
+                }
+
+                    .btn-cancel:hover {
+                        background-color: #c82333;
+                        transform: translateY(-2px);
+                        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+                    }
+            </style>
+        }
+    </div>
